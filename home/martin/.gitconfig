@@ -1,0 +1,11 @@
+[core]
+	editor = vim
+[user]
+	name = Luis Martín Canaval Sánchez
+	email = public01@canaval.info
+[color]
+	ui = true
+	status = auto
+	branch = auto
+[credential]
+	helper = cache --timeout=3600
