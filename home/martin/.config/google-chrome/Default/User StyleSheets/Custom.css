@@ -1,0 +1,25 @@
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+  background-color: #ffffff;
+  border-left: 1px solid #f0f0f0;
+}
+
+.nH .no ::-webkit-scrollbar { /* gmail */
+  background-color: transparent;
+  border-left: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, .4);
+}
+
+::-webkit-scrollbar-button {
+  height: 0;
+  width: 0;
+}
+

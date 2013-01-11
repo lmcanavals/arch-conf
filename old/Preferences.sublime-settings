@@ -1,0 +1,9 @@
+// .config/sublime-text-2/Packages/User/Preferences.sublime-settings
+{
+    "font_face": "Cousine",
+    "font_size": 11,
+    "translate_tabs_to_spaces": true,
+    "trim_trailing_white_space_on_save": true,
+    "fallback_encoding": "UTF-8",
+    "rulers": [80]
+}

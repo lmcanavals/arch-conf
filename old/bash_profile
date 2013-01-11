@@ -1,0 +1,13 @@
+#
+# ~/.bash_profile
+#
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc
+
+export EDITOR=nano
+
+if [ "$(whoami)" != "root" ]
+then
+    startx &
+fi
+
