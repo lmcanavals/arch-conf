@@ -3,36 +3,34 @@ if [[ ${TERM} == "xterm" ]]; then
   export TERM="xterm-256color"
 fi
 
-PATH="/home/martin/Dropbox/Utils:$PATH"
-export PATH
-
 [[ $TERM == "xterm-256color" ]] && M_COOL=0 ||  M_COOL=1
 
 if (( $(tput colors) == 256 )); then
   if (( EUID == 0 )); then
     if [[ M_COOL -eq 0 ]]; then
-      Fusr="[38;5;15;48;5;1m"
-      Fnil="[38;5;1;48;5;15m"
+      Z_C_USR="[38;5;15;48;5;1m"
+      Z_C_NIL="[38;5;1;48;5;15m"
     else
-      Fusr="[38;5;196m"
-      Fnil="[38;5;255m"
+      Z_C_USR="[38;5;1m"
+      Z_C_NIL="[38;5;255m"
     fi
   else
     if [[ M_COOL -eq 0 ]]; then
-      Fusr="[38;5;15;48;5;2m"
-      Fnil="[38;5;2;48;5;15m"
+      Z_C_USR="[38;5;15;48;5;2m"
+      Z_C_NIL="[38;5;2;48;5;15m"
     else
-      Fusr="[38;5;27m"
-      Fnil="[38;5;255m"
+      Z_C_USR="[38;5;2m"
+      Z_C_NIL="[38;5;255m"
     fi
   fi
-  Fdrk="[38;5;10m"
-  Ferr="[38;5;5m"
-  Fmsg="[38;5;9m"
-  Fopt="[38;5;155m"
-  Fpar="[38;5;228m"
-  Fsta="[38;5;159m"
-  Fend="[0m"
+  Z_C_DRK="[38;5;10m"
+  Z_C_ERR="[38;5;1m"
+  Z_C_MSG="[38;5;5m"
+  Z_C_GIT="[38;5;4m"
+  Z_C_OPT="[38;5;3m"
+  Z_C_PAR="[38;5;6m"
+  Z_C_STA="[38;5;14m"
+  Z_C_END="[0m"
 
   GREP_COLORS="mt=38;5;226:ms=38;5;214:mc=38;5;217:sl=:cx=:fn=38;5;228"
   GREP_COLORS+=":ln=38;5;190:bn=38;5;118:se=38;5;123"
@@ -56,22 +54,23 @@ if (( $(tput colors) == 256 )); then
   unset aaa;
 else
   if (( EUID == 0 )); then
-    Fusr="[01;31m"
+    Z_C_USR="[01;31m"
   else
-    Fusr="[01;34m"
+    Z_C_USR="[01;32m"
   fi
-  Fdrk="[1;37m"
-  Ferr="[1;31m"
-  Fmsg="[1;33m"
-  Fopt="[1;36m"
-  Fpar="[1;32m"
-  Fsta="[1;44;33m"
-  Fnil="[1;37m"
-  Fend="[0m"
+  Z_C_DRK="[1;37m"
+  Z_C_ERR="[1;31m"
+  Z_C_MSG="[1;35m"
+  Z_C_GIT="[1;34m"
+  Z_C_OPT="[1;33m"
+  Z_C_PAR="[1;36m"
+  Z_C_STA="[1;44;33m"
+  Z_C_NIL="[1;37m"
+  Z_C_END="[0m"
 
   GREP_COLORS="mt=01;31:ms=01;31:mc=01;31:sl=:cx=:fn=01;35"
   GREP_COLORS+=":ln=01;32:bn=01;32:se=01;36"
-  
+
   # LS_COLORS
   eval $(dircolors -b)
 fi
@@ -96,6 +95,7 @@ setopt noglobdots
 setopt noshwordsplit
 setopt unset
 
+export PATH="/home/martin/Util:$PATH"
 export EDITOR="vim"
 export PAGER="less"
 export SHELL='/bin/zsh'
@@ -103,13 +103,13 @@ export BROWSER="google-chrome"
 
 export GREP_COLORS
 export LS_COLORS
-export LESS_TERMCAP_mb=$Fmsg
-export LESS_TERMCAP_md=$Fopt
-export LESS_TERMCAP_me=$Fend
-export LESS_TERMCAP_se=$Fend
-export LESS_TERMCAP_so=$Fsta
-export LESS_TERMCAP_ue=$Fend
-export LESS_TERMCAP_us=$Fpar
+export LESS_TERMCAP_mb=$Z_C_MSG
+export LESS_TERMCAP_md=$Z_C_OPT
+export LESS_TERMCAP_me=$Z_C_END
+export LESS_TERMCAP_se=$Z_C_END
+export LESS_TERMCAP_so=$Z_C_STA
+export LESS_TERMCAP_ue=$Z_C_END
+export LESS_TERMCAP_us=$Z_C_PAR
 
 REPORTTIME=5
 watch=(notme root)
@@ -498,18 +498,21 @@ fi
 PS2='\`%_> '
 PS3='?# '
 PS4='+%N:%i:%_> '
-NORMAL_RPROMPT="%(?..%{$Ferr%}« %?%1v »%{$Fend%})"
+NORMAL_RPROMPT="%(?..%{$Z_C_ERR%}« %?%1v »%{$Z_C_END%})"
 SEPARATOR1=$'\u2b80'
 SEPARATOR2=$'\u2b81'
 ELLIPSIS=$'\u2026'
+Z_C_MISC="38;5;15"
 PROMPT_PWD_LEN=25
+
 function prompt_begin () {
   if [[ $M_COOL -eq 0 ]]; then
-    print "%{$Fusr%}%n$SEPARATOR2%m%{$Fnil%}$SEPARATOR1"
+    print "%{$Z_C_USR%}%n$SEPARATOR2%m%{$Z_C_NIL%}$SEPARATOR1"
   else
-    print "%{$Fusr%}%n%{$Fnil%}@%{$Fusr%}%m%{$Fend%} "
+    print "%{$Z_C_USR%}%n%{$Z_C_NIL%}@%{$Z_C_USR%}%m%{$Z_C_END%} "
   fi
 }
+
 function prompt_pwd () {
   local tdir tlen
   if [[ $M_COOL -eq 0 ]]; then
@@ -525,27 +528,58 @@ function prompt_pwd () {
   fi
   print "$tdir"
 }
-function prompt_end () {
-  local pfo pfb
-  if [[ "$1" == "c" ]]; then
-    pfo=$Fmsg
-    pfb="[38;5;15;4${Fmsg:3}"
-  else # $1 == n
-    pfo="%(?.$Fdrk.$Ferr)"
-    pfb="[38;5;15;4%(?.${Fdrk:3}.${Ferr:3})"
-  fi
-  if [[ $M_COOL -eq 0 ]]; then
-    print "%{$pfb%}$SEPARATOR1%#%{$Fend$pfo%}$SEPARATOR1%{$Fend%} "
-  else
-    print "%{$pfo%}%#%{$Fend%} "
+
+# Miscelaneus info like git.
+function prompt_misc () {
+  local tbranch tcolor tstatus ttmp
+  if [[ -n $(git branch 2> /dev/null) ]]; then
+    tbranch=$(git branch)
+    tbranch=${tbranch:2}
+    tstatus=""
+    ttmp=$(git status)
+    if [[ -n $(echo $ttmp | grep 'Untracked') ]]; then
+      tstatus+="+"
+    fi
+    if [[ -n $(echo $ttmp | grep 'branch is ahead') ]]; then
+      tstatus+="↑"
+    fi
+    if [[ -n $(echo $ttmp | grep 'branch is behind') ]]; then
+      tstatus+="↓"
+    fi
+    if [[ -n $(echo $ttmp | grep 'nothing to commit') ]]; then
+      tcolor=$Z_C_GIT
+    else
+      tcolor=$Z_C_ERR
+      tstatus+="*"
+    fi
+    print "|%{$tcolor%}$tbranch$tstatus"
   fi
 }
+
+function prompt_end () {
+  local tpfo tpfb
+  if [[ "$1" == "c" ]]; then
+    tpfo=$Z_C_MSG
+    tpfb="[$Z_C_MISC;4${Z_C_MSG:3}"
+  else # $1 == n
+    tpfo="%(?.$Z_C_DRK.$Z_C_ERR)"
+    tpfb="[$Z_C_MISC;4%(?.${Z_C_DRK:3}.${Z_C_ERR:3})"
+  fi
+  if [[ $M_COOL -eq 0 ]]; then
+    print "%{$tpfb%}$SEPARATOR1%#%{$Z_C_END$tpfo%}$SEPARATOR1%{$Z_C_END%} "
+  else
+    print "%{$tpfo%}%#%{$Z_C_END%} "
+  fi
+}
+
 function ESC_print () {
   info_print $'\ek' $'\e\\' "$@"
 }
+
 function set_title () {
   info_print  $'\e]0;' $'\a' "$@"
 }
+
 function info_print () {
   local esc_begin esc_end
   esc_begin="$1"
@@ -555,33 +589,37 @@ function info_print () {
   printf '%s' "$*"
   printf '%s' "${esc_end}"
 }
+
 zle-keymap-select() {
   if [[ $KEYMAP = vicmd ]]; then
-    RPROMPT="%{$Fmsg%}« cmd »%{$Fend%}"
-    PROMPT="$(prompt_begin)$(prompt_pwd)$(prompt_end c)"
+    RPROMPT="%{$Z_C_MSG%}« cmd »%{$Z_C_END%}"
+    PROMPT="$(prompt_begin)$(prompt_pwd)$(prompt_misc)$(prompt_end c)"
   else
     RPROMPT=$NORMAL_RPROMPT
-    PROMPT="$(prompt_begin)$(prompt_pwd)$(prompt_end n)"
+    PROMPT="$(prompt_begin)$(prompt_pwd)$(prompt_misc)$(prompt_end n)"
   fi
   () { return $__prompt_status }
   zle reset-prompt
 }
+
 zle-line-init() {
   typeset -g __prompt_status="$?"
 }
+
 zle -N zle-keymap-select
 zle -N zle-line-init
 
 precmd () {
   (( ${+functions[vcs_info]} )) && vcs_info
   RPROMPT=$NORMAL_RPROMPT
-  PROMPT="$(prompt_begin)$(prompt_pwd)$(prompt_end n)"
+  PROMPT="$(prompt_begin)$(prompt_pwd)$(prompt_misc)$(prompt_end n)"
   case $TERM in
     (xterm*|rxvt*)
       set_title ${(%):-"%n@%m %~"}
       ;;
   esac
 }
+
 preexec () {
   if [[ -n "$HOSTNAME" ]] && [[ "$HOSTNAME" != $(hostname) ]] ; then
     NAME="@$HOSTNAME"
@@ -629,10 +667,11 @@ limit -s
 zstyle ':completion:*:approximate:'    max-errors \
     'reply=( $((($#PREFIX+$#SUFFIX)/3 )) numeric )'
 zstyle ':completion:*:correct:*'       insert-unambiguous true
-zstyle ':completion:*:corrections'     format "%{$Ferr%}%d, errors: %e%{$Fend%}"
+zstyle ':completion:*:corrections'     format \
+    "%{$Z_C_ERR%}%d, errors: %e%{$Z_C_END%}"
 zstyle ':completion:*:correct:*'       original true
 zstyle ':completion:*:default'         list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*:descriptions'    format "%{$Fmsg%}%d%{$Fend%}"
+zstyle ':completion:*:descriptions'    format "%{$Z_C_MSG%}%d%{$Z_C_END%}"
 zstyle ':completion:*:expand:*'        tag-order all-expansions
 zstyle ':completion:*:history-words'   list false
 zstyle ':completion:*:history-words'   menu yes
@@ -642,14 +681,16 @@ zstyle ':completion:*'                 matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*:matches'         group 'yes'
 zstyle ':completion:*'                 group-name ''
 zstyle ':completion:*'                 menu select=5
-zstyle ':completion:*:messages'        format "%{$Fopt%}%d%{$Fend%}"
-zstyle ':completion:*:options'         auto-description "%{$Fpar%}%d%{$Fend%}"
+zstyle ':completion:*:messages'        format "%{$Z_C_OPT%}%d%{$Z_C_END%}"
+zstyle ':completion:*:options'         auto-description \
+    "%{$Z_C_PAR%}%d%{$Z_C_END%}"
 zstyle ':completion:*:options'         description 'yes'
 zstyle ':completion:*:processes'       command 'ps -au$USER'
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 zstyle ':completion:*'                 verbose true
 zstyle ':completion:*:-command-:*:'    verbose false
-zstyle ':completion:*:warnings'        format "%{$Ferr%}No matches:%{$Fend%} %d"
+zstyle ':completion:*:warnings'        format \
+    "%{$Z_C_ERR%}No matches:%{$Z_C_END%} %d"
 zstyle ':completion:*:*:zcompile:*'    ignored-patterns '(*~|*.zwc)'
 zstyle ':completion:correct:'          prompt 'correct to: %e'
 zstyle ':completion::(^approximate*):*:functions' ignored-patterns '_*'
