@@ -141,7 +141,6 @@ Start console session as ``martin``
 Sync, update and install the rest of the good stuff::
 
   packer -Syu
-  packer -S python2-dbus # opcional (systemd-analize blame)
   packer -S ntp xorg-server xorg-xmodmap xorg-xrdb xorg-xprop xdg-user-dirs
   packer -S catalyst grub2-theme-archxion
   packer -S xfce4 xfce4-goodies xfce4-volumed glew gstreamer0.10-plugins
@@ -155,6 +154,7 @@ Sync, update and install the rest of the good stuff::
   packer -S file-roller unrar unzip p7zip
   packer -S gtk-engine-unico gtk-engine-murrine faenza-icon-theme
   packer -S openssh xcursor-vanilla-dmz imagemagick
+  packer -S python2-dbus python2-gobject # opcional (systemd-analize blame)
 
 
 Important
