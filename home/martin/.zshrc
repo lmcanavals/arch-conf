@@ -531,7 +531,7 @@ function prompt_pwd () {
 
 # Miscelaneus info like git.
 function prompt_misc () {
-  local tbranch tcolor tstatus ttmp
+  local tbranch tcolor tstatus ttmp ttl ttr
   if [[ -n $(git branch 2> /dev/null) ]]; then
     tbranch=$(git branch)
     tbranch=${tbranch:2}
@@ -540,17 +540,18 @@ function prompt_misc () {
     if [[ -n $(echo $ttmp | grep 'Untracked') ]]; then
       tstatus+="+"
     fi
-    if [[ -n $(echo $ttmp | grep 'branch is ahead') ]]; then
-      tstatus+="↑"
-    fi
-    if [[ -n $(echo $ttmp | grep 'branch is behind') ]]; then
-      tstatus+="↓"
-    fi
     if [[ -n $(echo $ttmp | grep 'nothing to commit') ]]; then
       tcolor=$Z_C_GIT
     else
       tcolor=$Z_C_ERR
       tstatus+="*"
+    fi
+    ttl=$(git rev-list master | wc -l)
+    ttr=$(git rev-list origin/master | wc -l)
+    if [[ $ttl > $ttr ]]; then
+      tstatus+="↑"
+    elif [[ $ttl < $ttr ]]; then
+      tstatus+="↓"
     fi
     print "|%{$tcolor%}$tbranch$tstatus"
   fi
