@@ -40,6 +40,8 @@ map <leader>q :q!<cr>
 map <leader>n :bn<cr>
 map <leader>p :bp<cr>
 map <leader>d :bd<cr>
+map <leader>- :set paste<cr>
+map <leader>+ :set nopaste<cr>
 map <leader><space> :noh<cr>
 
 "" Auto complete
@@ -63,6 +65,7 @@ set encoding=utf8
 set cursorline
 set colorcolumn=81
 set textwidth=80
+set scrolloff=7
 set laststatus=2
 set statusline=%F%m%=%4b\ %{&ff}%y%r%h%w%5(%l%):%-8(%c%V%)P:%-9(%o%)L:%L\ %P
 set background=dark
@@ -70,8 +73,9 @@ set title
 
 if has('gui_running') || (&term == 'xterm') || (&term =~ 'xterm-256color')
   set t_Co=256
-  colorscheme solarized
 endif
+
+colorscheme solarized
 
 "" Gvim options
 if has('gui_running')

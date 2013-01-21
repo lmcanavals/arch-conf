@@ -8,6 +8,7 @@ else
 fi
 
 export GTK_MODULES
-    
+
+xset s off
 exec startxfce4
 

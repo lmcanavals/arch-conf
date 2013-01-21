@@ -3,6 +3,26 @@ if [[ ${TERM} == "xterm" ]]; then
   export TERM="xterm-256color"
 fi
 
+if [ "$TERM" = "linux" ]; then
+  echo -en "\e]P0073642" #black
+  echo -en "\e]P8002b36" #darkgrey
+  echo -en "\e]P1dc322f" #darkred
+  echo -en "\e]P9cb4b16" #red
+  echo -en "\e]P2859900" #darkgreen
+  echo -en "\e]PA586e75" #green
+  echo -en "\e]P3b58900" #brown
+  echo -en "\e]PB657b83" #yellow
+  echo -en "\e]P4268bd2" #darkblue
+  echo -en "\e]PC839496" #blue
+  echo -en "\e]P5d33682" #darkmagenta
+  echo -en "\e]PD6c71c4" #magenta
+  echo -en "\e]P62aa198" #darkcyan
+  echo -en "\e]PE93a1a1" #cyan
+  echo -en "\e]P7eee8d5" #lightgrey
+  echo -en "\e]PFfdf6e3" #white
+  clear #for background artifacting
+fi
+
 [[ $TERM == "xterm-256color" ]] && M_COOL=0 ||  M_COOL=1
 
 if (( $(tput colors) == 256 )); then
@@ -35,29 +55,28 @@ if (( $(tput colors) == 256 )); then
   GREP_COLORS="mt=38;5;226:ms=38;5;214:mc=38;5;217:sl=:cx=:fn=38;5;228"
   GREP_COLORS+=":ln=38;5;190:bn=38;5;118:se=38;5;123"
 
-  eval $(dircolors /etc/zsh/cool.dircolors)
+  eval $(dircolors /etc/zsh/256.dircolors)
 
 else
   if (( EUID == 0 )); then
-    Z_C_USR="[01;31m"
+    Z_C_USR="[31m"
   else
-    Z_C_USR="[01;32m"
+    Z_C_USR="[32m"
   fi
-  Z_C_DRK="[1;37m"
-  Z_C_ERR="[1;31m"
-  Z_C_MSG="[1;33m"
-  Z_C_GIT="[1;34m"
-  Z_C_OPT="[1;35m"
-  Z_C_PAR="[1;36m"
-  Z_C_STA="[1;44;33m"
+  Z_C_DRK="[1;32m"
+  Z_C_ERR="[31m"
+  Z_C_MSG="[33m"
+  Z_C_GIT="[34m"
+  Z_C_OPT="[35m"
+  Z_C_PAR="[36m"
+  Z_C_STA="[44;33m"
   Z_C_NIL="[1;37m"
   Z_C_END="[0m"
 
-  GREP_COLORS="mt=01;31:ms=01;31:mc=01;31:sl=:cx=:fn=01;35"
-  GREP_COLORS+=":ln=01;32:bn=01;32:se=01;36"
+  GREP_COLORS="mt=31:ms=31:mc=31:sl=:cx=:fn=35:ln=32:bn=32:se=36"
 
   # LS_COLORS
-  eval $(dircolors -b)
+  eval $(dircolors /etc/zsh/16.dircolors)
 fi
 
 setopt append_history

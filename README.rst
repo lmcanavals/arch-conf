@@ -147,7 +147,7 @@ Sync, update and install the rest of the good stuff::
   packer -S pulseaudio pulseaudio-alsa ffmpeg pavucontrol paprefs sox
   packer -S libcanberra libcanberra-pulse libcanberra-gstreamer
   packer -S networkmanager networkmanager-dispatcher-ntpd network-manager-applet
-  packer -S ttf-droid ttf-dejavu ttf-ms-webfonts ttf-chromeos-fonts
+  packer -S ttf-droid ttf-dejavu
   packer -S wqy-microhei ttf-unifont wqy-zenhei wqy-bitmapsong-beta
   packer -S google-chrome-dev google-talkplugin # revisar reemplazo html5
   packer -S dropbox thunar-dropbox gvfs gvfs-afc gvfs-gphoto2 # removable stuff
