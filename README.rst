@@ -2,6 +2,10 @@ My Arch Linux Installation Guide
 ================================
 Starting from installation media
 
+**Git**::
+
+  git://github.com/martincanaval/arch-conf.git
+
 Partitions
 ----------
 https://wiki.archlinux.org/index.php/Partitioning
@@ -66,9 +70,11 @@ Installing grub and zsh::
 
   arch-chroot /mnt pacman -S grub-bios zsh vim jshon git sudo
 
-Create the user ``martin`` make sure it uses ``/bin/zsh`` as shell  and owns
-``/home/martin`` as well as ``/home/martin/archive``::
+Create the user ``martin``::
 
+  useradd -m -g users -s /bin/zsh martin
+  chfn martin
+  passwd martin
   arch-chroot /mnt adduser
   arch-chroot /mnt chown 1000:100 /home/martin/archive
 
@@ -78,7 +84,6 @@ Generate ``fstab``::
 
 Copy files and Chroot into the fresh installation::
 
-  cp /etc/zsh/zshrc /mnt/etc/zsh/ # TODO fix
   arch-chroot /mnt
 
 Set zsh as default shell for root::
@@ -95,19 +100,20 @@ Set locales, uncomment en_DK.UTF8 en_US.UTF8 es_PE.UTF8 on ``/etc/locale.gen``::
 
 Set basic configuration files::
 
-  echo "ivy" >> /etc/hostname
   ln -s /usr/share/zoneinfo/America/Lima /etc/localtime
-  echo "LANG=en_US.UTF-8" >> /etc/locale.conf
-  echo "LC_COLLATE=C" >> /etc/locale.conf
-  echo "LC_TIME=en_DK.UTF-8" >> /etc/locale.conf
-  echo "KEYMAP=dvorak-la2" >> /etc/vconsole.conf
-  echo "FONT=" >> /etc/vconsole.conf
-  echo "FONT_MAP=" >> /etc/vconsole.conf
-  curl https://dl.dropbox.com/u/11788734/dvorak-la2.map.gz > dvorak-la2.map.gz
+  cd /home/martin/Archive/git/arch-conf
+  cp etc/hostname /etc/
+  cp etc/locale.conf /etc/
+  cp etc/vconsole.conf /etc/
+  cp etc/hostname /etc/
+  cp etc/mkinitcpio.conf /ect/
+  cp etc/default/grub /etc/default/
+  cd usr/share
+  cp kbd/keymaps/i386/dvorak/dvorak-la2.map /usr/share/kbd/keymaps/i386/dvorak/
+  cp X11/xkb/symbols/latam /usr/share/X11/xkb/symbols/
 
 Add consolefont keymap at the end of hook to ``/etc/mkinitcpio.conf``::
 
-  sed '/^HOOKS.*\"$/ s|"$| consolefont keymap\"| ' -i /etc/mkinitcpio.conf
   mkinitcpio -p linux
 
 Configure grub::
@@ -126,7 +132,6 @@ before core::
 
 Configure ``sudoers``, add::
 
-  Defaults setenv
   martin ivy= /usr/bin/pacman
 
 Set root password, leave chroot env, unmount and reboot::
@@ -170,8 +175,10 @@ To change base configuration files::
 
 Set ntp time sync and enabling services::
 
+	systemctl disable remote-fs.target
   timedatectl set-ntp 1 # this enables the ntpd daemon
-  systemctl enable NetworkManager.service
+  ##systemctl enable NetworkManager.service
+	
 
 https://wiki.archlinux.org/index.php/Automatic_login_to_virtual_console
 
