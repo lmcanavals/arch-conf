@@ -70,24 +70,24 @@ TERM xterm-debian
 #NORMAL 00 # no color code at all
 #FILE 00 # regular file: use no color at all
 RESET 0 # reset to "normal" color
-DIR 34 # directory
-LINK 36 # symbolic link. (If you set this to 'target' instead of a
+DIR 0;34 # directory
+LINK 0;36 # symbolic link. (If you set this to 'target' instead of a
  # numerical value, the color is as for the file pointed to.)
 MULTIHARDLINK 00 # regular file with more than one link
-FIFO 40;33 # pipe
-SOCK 35 # socket
-DOOR 35 # door
-BLK 40;33 # block device driver
-CHR 40;33 # character device driver
-ORPHAN 40;31 # symlink to nonexistent file, or non-stat'able file
-SETUID 37;41 # file that is setuid (u+s)
-SETGID 30;43 # file that is setgid (g+s)
-CAPABILITY 30;41 # file with capability
-STICKY_OTHER_WRITABLE 30;42 # dir that is sticky and other-writable (+t,o+w)
-OTHER_WRITABLE 34;42 # dir that is other-writable (o+w) and not sticky
-STICKY 37;44 # dir with the sticky bit set (+t) and not other-writable
+FIFO 0;40;33 # pipe
+SOCK 0;35 # socket
+DOOR 0;35 # door
+BLK 0;40;33 # block device driver
+CHR 0;40;33 # character device driver
+ORPHAN 1;40;31 # symlink to nonexistent file, or non-stat'able file
+SETUID 0;37;41 # file that is setuid (u+s)
+SETGID 0;30;43 # file that is setgid (g+s)
+CAPABILITY 0;30;41 # file with capability
+STICKY_OTHER_WRITABLE 0;30;42 # dir that is sticky and other-writable (+t,o+w)
+OTHER_WRITABLE 0;34;42 # dir that is other-writable (o+w) and not sticky
+STICKY 0;37;44 # dir with the sticky bit set (+t) and not other-writable
 # This is for files with execute permission:
-EXEC 32
+EXEC 0;32
 # List any file extensions like '.gz' or '.tar' that you would like ls
 # to colorize below. Put the extension, a space, and the color init string.
 # (and any comments you want to add after a '#')
@@ -102,103 +102,103 @@ EXEC 32
 #.sh 32
 #.csh 32
  # archives or compressed (bright red)
-.tar 31
-.tgz 31
-.arj 31
-.taz 31
-.lzh 31
-.lzma 31
-.tlz 31
-.txz 31
-.zip 31
-.z 31
-.Z 31
-.dz 31
-.gz 31
-.lz 31
-.xz 31
-.bz2 31
-.bz 31
-.tbz 31
-.tbz2 31
-.tz 31
-.deb 31
-.rpm 31
-.jar 31
-.war 31
-.ear 31
-.sar 31
-.rar 31
-.ace 31
-.zoo 31
-.cpio 31
-.7z 31
-.rz 31
+.tar 0;31
+.tgz 0;31
+.arj 0;31
+.taz 0;31
+.lzh 0;31
+.lzma 0;31
+.tlz 0;31
+.txz 0;31
+.zip 0;31
+.z 0;31
+.Z 0;31
+.dz 0;31
+.gz 0;31
+.lz 0;31
+.xz 0;31
+.bz2 0;31
+.bz 0;31
+.tbz 0;31
+.tbz2 0;31
+.tz 0;31
+.deb 0;31
+.rpm 0;31
+.jar 0;31
+.war 0;31
+.ear 0;31
+.sar 0;31
+.rar 0;31
+.ace 0;31
+.zoo 0;31
+.cpio 0;31
+.7z 0;31
+.rz 0;31
 # image formats
-.jpg 35
-.jpeg 35
-.gif 35
-.bmp 35
-.pbm 35
-.pgm 35
-.ppm 35
-.tga 35
-.xbm 35
-.xpm 35
-.tif 35
-.tiff 35
-.png 35
-.svg 35
-.svgz 35
-.mng 35
-.pcx 35
-.mov 35
-.mpg 35
-.mpeg 35
-.m2v 35
-.mkv 35
-.webm 35
-.ogm 35
-.mp4 35
-.m4v 35
-.mp4v 35
-.vob 35
-.qt 35
-.nuv 35
-.wmv 35
-.asf 35
-.rm 35
-.rmvb 35
-.flc 35
-.avi 35
-.fli 35
-.flv 35
-.gl 35
-.dl 35
-.xcf 35
-.xwd 35
-.yuv 35
-.cgm 35
-.emf 35
+.jpg 0;35
+.jpeg 0;35
+.gif 0;35
+.bmp 0;35
+.pbm 0;35
+.pgm 0;35
+.ppm 0;35
+.tga 0;35
+.xbm 0;35
+.xpm 0;35
+.tif 0;35
+.tiff 0;35
+.png 0;35
+.svg 0;35
+.svgz 0;35
+.mng 0;35
+.pcx 0;35
+.mov 0;35
+.mpg 0;35
+.mpeg 0;35
+.m2v 0;35
+.mkv 0;35
+.webm 0;35
+.ogm 0;35
+.mp4 0;35
+.m4v 0;35
+.mp4v 0;35
+.vob 0;35
+.qt 0;35
+.nuv 0;35
+.wmv 0;35
+.asf 0;35
+.rm 0;35
+.rmvb 0;35
+.flc 0;35
+.avi 0;35
+.fli 0;35
+.flv 0;35
+.gl 0;35
+.dl 0;35
+.xcf 0;35
+.xwd 0;35
+.yuv 0;35
+.cgm 0;35
+.emf 0;35
 # http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
-.axv 35
-.anx 35
-.ogv 35
-.ogx 35
+.axv 0;35
+.anx 0;35
+.ogv 0;35
+.ogx 0;35
 # audio formats
-.aac 36
-.au 36
-.flac 36
-.mid 36
-.midi 36
-.mka 36
-.mp3 36
-.mpc 36
-.ogg 36
-.ra 36
-.wav 36
+.aac 0;36
+.au 0;36
+.flac 0;36
+.mid 0;36
+.midi 0;36
+.mka 0;36
+.mp3 0;36
+.mpc 0;36
+.ogg 0;36
+.ra 0;36
+.wav 0;36
 # http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
-.axa 36
-.oga 36
-.spx 36
-.xspf 36
+.axa 0;36
+.oga 0;36
+.spx 0;36
+.xspf 0;36

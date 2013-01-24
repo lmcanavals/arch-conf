@@ -1,0 +1,17 @@
+[Desktop Entry]
+Version=1.0
+Name=Vim
+GenericName=Good ol' Vim
+Comment=Edits your pants off.
+Exec=xfce4-terminal -I vim -x vim %F
+Terminal=false
+Icon=gvim
+Type=Application
+MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text»/x-tex;application/x-shellscript;text/x-c;text/x-c++;
+Categories=Utility;TextEditor;
+X-XClassHintResName=VIM
+Actions=Edit
+
+[Desktop Action Edit]
+Exec=xfce4-terminal -I vim -x vim %F
+Name=Edit

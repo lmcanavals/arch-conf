@@ -63,14 +63,14 @@ else
   else
     Z_C_USR="[32m"
   fi
-  Z_C_DRK="[1;32m"
-  Z_C_ERR="[31m"
+  Z_C_NIL="[1;37m"
+  Z_C_DRK="[1;34m"
+  Z_C_ERR="[1;31m"
   Z_C_MSG="[33m"
   Z_C_GIT="[34m"
   Z_C_OPT="[35m"
   Z_C_PAR="[36m"
   Z_C_STA="[44;33m"
-  Z_C_NIL="[1;37m"
   Z_C_END="[0m"
 
   GREP_COLORS="mt=31:ms=31:mc=31:sl=:cx=:fn=35:ln=32:bn=32:se=36"
@@ -513,7 +513,7 @@ function prompt_begin () {
   if [[ $M_COOL -eq 0 ]]; then
     print "%{$Z_C_USR%}%n$SEPARATOR2%m%{$Z_C_NIL%}$SEPARATOR1"
   else
-    print "%{$Z_C_USR%}%n%{$Z_C_NIL%}@%{$Z_C_USR%}%m%{$Z_C_END%} "
+    print "%{$Z_C_USR%}%n%{$Z_C_END%}@%{$Z_C_USR%}%m%{$Z_C_END%} "
   fi
 }
 

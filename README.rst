@@ -4,7 +4,9 @@ Starting from installation media
 
 **Git**::
 
-  git://github.com/martincanaval/arch-conf.git
+  wget https://raw.github.com/martincanaval/arch-conf/master/usr/share/kbd/keymaps/i386/dvorak/dvorak-la2.map
+  loadkeys dvorak-la2.map
+  setfont LatArCyrHeb-16
 
 Partitions
 ----------
@@ -51,8 +53,7 @@ Format partitions, for example::
 Mount everything te /mnt::
 
   mount -t ext4 /dev/sda7 /mnt
-  mkdir /mnt/boot
-  mkdir /mnt/var
+  mkdir /mnt/{boot,var}
   mkdir -p /mnt/home/martin/archive
   mount -t ext4 /dev/sda6 /mnt/boot
   mount -t ext4 /dev/sda8 /mnt/home
@@ -72,11 +73,17 @@ Installing grub and zsh::
 
 Create the user ``martin``::
 
-  useradd -m -g users -s /bin/zsh martin
-  chfn martin
-  passwd martin
-  arch-chroot /mnt adduser
+  arch-chroot /mnt useradd -m -g users -s /bin/zsh martin
+  arch-chroot /mnt chfn martin
+  arch-chroot /mnt passwd martin
   arch-chroot /mnt chown 1000:100 /home/martin/archive
+
+Create swapfile::
+
+  arch-chroot /mnt fallocate -l 5G /swapfile
+  arch-chroot /mnt chmod 600 /swapfile
+  arch-chroot /mnt mkswap /swapfile
+  arch-chroot /mnt swapon /swapfile
 
 Generate ``fstab``::
 
@@ -147,20 +154,22 @@ Sync, update and install the rest of the good stuff::
 
   packer -Syu
   packer -S ntp xorg-server xorg-xmodmap xorg-xrdb xorg-xprop xdg-user-dirs
-  packer -S catalyst grub2-theme-archxion
-  packer -S xfce4 xfce4-goodies xfce4-volumed glew gstreamer0.10-plugins
+  packer -S grub2-theme-archxion
+  packer -S xfce4 xfce4-goodies glew gstreamer0.10-plugins
   packer -S pulseaudio pulseaudio-alsa ffmpeg pavucontrol paprefs sox
   packer -S libcanberra libcanberra-pulse libcanberra-gstreamer
-  packer -S networkmanager networkmanager-dispatcher-ntpd network-manager-applet
   packer -S ttf-droid ttf-dejavu
   packer -S wqy-microhei ttf-unifont wqy-zenhei wqy-bitmapsong-beta
-  packer -S google-chrome-dev google-talkplugin # revisar reemplazo html5
+  packer -S google-chrome-dev # revisar reemplazo html5
   packer -S dropbox thunar-dropbox gvfs gvfs-afc gvfs-gphoto2 # removable stuff
   packer -S file-roller unrar unzip p7zip
   packer -S gtk-engine-unico gtk-engine-murrine faenza-icon-theme
   packer -S openssh xcursor-vanilla-dmz imagemagick
+
   packer -S python2-dbus python2-gobject # opcional (systemd-analize blame)
 
+  packer -S networkmanager network-manager-applet networkmanager-dispatcher-ntpd
+  packer -S catalyst xfce4-volumed google-talkplugin
 
 Important
 ---------
@@ -175,10 +184,10 @@ To change base configuration files::
 
 Set ntp time sync and enabling services::
 
-	systemctl disable remote-fs.target
+  systemctl disable remote-fs.target
   timedatectl set-ntp 1 # this enables the ntpd daemon
-  ##systemctl enable NetworkManager.service
-	
+  ll /sys/class/net/
+  systemctl enable dhcpcd@enp0s25.service
 
 https://wiki.archlinux.org/index.php/Automatic_login_to_virtual_console
 
@@ -198,6 +207,7 @@ Install only if needed
 * easytag # mp3 metadata editor
 * hexedit # aoeu
 * aria2 # download everything in style
+* cmus # music player
 * v86d # uvesafb, framebuffer text vconsoles
 
   * agregar v86d a HOOKS despues de base y udev en mkinitcpio.conf
@@ -210,11 +220,11 @@ Tweaks and hacks
 
 TTY was taken care with the custom keymap, now for X::
 
-  cp Dropbox/Config/Linux/Xmodmap ~/.Xmodmap
+  cp git/.../home/martin/.Xmodmap ~/.Xmodmap
 
 **Dvorak ES_LA**::
 
-  cp Dropbox/Config/Linux/latam /usr/share/X11/xkb/symbols/
+  cp git/.../latam /usr/share/X11/xkb/symbols/
 
 Set keyboard to ``Español Latino América`` variation ``dvla``
 
@@ -233,7 +243,7 @@ edit the file ``.config/user-dirs.dirs`` as needed.
 
 **Fix fonts for some applications**::
 
-  gconftool-2 --set --type string /desktop/gnome/interface/font_name Arimo
+  gconftool-2 --set --type string /desktop/gnome/interface/font_name Sans
   gconftool-2 --set --type string \
     /desktop/gnome/interface/monospace_font_name Cousine
 
@@ -248,7 +258,7 @@ Make the following changes::
   Type=X-XFCE-Helper
   X-XFCE-Category=WebBrowser
   X-XFCE-Commands=/opt/google/chrome/google-chrome
-  X-XFCE-CommandsWithParameter=/opt/google/chrome/google-chrome “%s”.
+  X-XFCE-CommandsWithParameter=/opt/google/chrome/google-chrome "%s"
 
 **Sound control keys on Xfce**
 

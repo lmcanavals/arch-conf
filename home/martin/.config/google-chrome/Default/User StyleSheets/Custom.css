@@ -23,3 +23,6 @@
   width: 0;
 }
 
+pre, code {
+  font-family: Cousine !important;
+}
