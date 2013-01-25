@@ -152,24 +152,24 @@ Start console session as ``martin``
 
 Sync, update and install the rest of the good stuff::
 
-  packer -Syu
-  packer -S ntp xorg-server xorg-xmodmap xorg-xrdb xorg-xprop xdg-user-dirs
-  packer -S grub2-theme-archxion
-  packer -S xfce4 xfce4-goodies glew gstreamer0.10-plugins
-  packer -S pulseaudio pulseaudio-alsa ffmpeg pavucontrol paprefs sox
-  packer -S libcanberra libcanberra-pulse libcanberra-gstreamer
-  packer -S ttf-droid ttf-dejavu
-  packer -S wqy-microhei ttf-unifont wqy-zenhei wqy-bitmapsong-beta
-  packer -S google-chrome-dev # revisar reemplazo html5
-  packer -S dropbox thunar-dropbox gvfs gvfs-afc gvfs-gphoto2 # removable stuff
-  packer -S file-roller unrar unzip p7zip
-  packer -S gtk-engine-unico gtk-engine-murrine faenza-icon-theme
-  packer -S openssh xcursor-vanilla-dmz imagemagick
+  yaourt -Syua
+  yaourt -S ntp xorg-server xorg-xmodmap xorg-xrdb xorg-xprop xdg-user-dirs
+  yaourt -S grub2-theme-archxion
+  yaourt -S xfce4 xfce4-goodies xfce4-volumed glew gstreamer0.10-plugins
+  yaourt -S pulseaudio pulseaudio-alsa ffmpeg pavucontrol paprefs sox
+  yaourt -S libcanberra libcanberra-pulse libcanberra-gstreamer
+  yaourt -S ttf-droid ttf-dejavu xfce-theme-greybird
+  yaourt -S wqy-microhei ttf-unifont wqy-zenhei wqy-bitmapsong-beta
+  yaourt -S google-chrome-dev # revisar reemplazo html5
+  yaourt -S dropbox thunar-dropbox gvfs gvfs-afc gvfs-gphoto2 # removable stuff
+  yaourt -S file-roller unrar unzip p7zip
+  yaourt -S gtk-engine-unico gtk-engine-murrine faenza-icon-theme
+  yaourt -S openssh xcursor-vanilla-dmz imagemagick
 
-  packer -S python2-dbus python2-gobject # opcional (systemd-analize blame)
+  yaourt -S python2-dbus python2-gobject # opcional (systemd-analize blame)
 
-  packer -S networkmanager network-manager-applet networkmanager-dispatcher-ntpd
-  packer -S catalyst xfce4-volumed google-talkplugin
+  yaourt -S networkmanager network-manager-applet networkmanager-dispatcher-ntpd
+  yaourt -S catalyst google-talkplugin
 
 Important
 ---------
@@ -280,9 +280,9 @@ Settings » Settings Editor » xsettings » net
 
 Needed libs from ``multilib``::
 
-  packer -S lib32-alsa-lib lib32-openal lib32-libstdc++5 lib32-libxv
-  packer -S lib32-ncurses lib32-sdl lib32-zlib lib32-libxrandr lib32-libpulse
-  packer -S lib32-alsa-plugins lib32-catalyst-utils
+  yaourt -S lib32-alsa-lib lib32-openal lib32-libstdc++5 lib32-libxv
+  yaourt -S lib32-ncurses lib32-sdl lib32-zlib lib32-libxrandr lib32-libpulse
+  yaourt -S lib32-alsa-plugins lib32-catalyst-utils
 
 Packages keept locally
 ----------------------
