@@ -4,8 +4,8 @@ if [[ ${TERM} == "xterm" ]]; then
 fi
 
 if [ "$TERM" = "linux" ]; then
-  echo -en "\e]P0073642" #black
-  echo -en "\e]P8002b36" #darkgrey
+  echo -en "\e]P0002b36" #black
+  echo -en "\e]P8073642" #darkgrey
   echo -en "\e]P1dc322f" #darkred
   echo -en "\e]P9cb4b16" #red
   echo -en "\e]P2859900" #darkgreen
@@ -825,7 +825,7 @@ modified() {
 
 source ~/.zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh
 
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 
 ZSH_HIGHLIGHT_STYLES[default]='none'
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'

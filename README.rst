@@ -53,8 +53,7 @@ Format partitions, for example::
 Mount everything te /mnt::
 
   mount -t ext4 /dev/sda7 /mnt
-  mkdir /mnt/{boot,var}
-  mkdir -p /mnt/home/martin/archive
+  mkdir -p /mnt/{boot,home/martin/archive/,var}
   mount -t ext4 /dev/sda6 /mnt/boot
   mount -t ext4 /dev/sda8 /mnt/home
   mount -t ext4 /dev/sdb5 /mnt/var
@@ -88,6 +87,7 @@ Create swapfile::
 Generate ``fstab``::
 
   genfstab -p /mnt >> /mnt/etc/fstab
+  sed '/^\/mnt\/swapfile/ s|mnt/|| ' -i /mnt/etc/fstab
 
 Copy files and Chroot into the fresh installation::
 
@@ -131,15 +131,16 @@ Configure grub::
   cp /usr/share/locale/en@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
   grub-mkconfig -o /boot/grub/grub.cfg
 
-Add repository to ``/etc/pacman.conf`` for *ATI RADEON HD 5xxx series* drivers
-before core::
-
-  [catalyst]
-  Server = http://catalyst.apocalypsus.net/repo/catalyst/$arch
-
 Configure ``sudoers``, add::
 
   martin ivy= /usr/bin/pacman
+
+Add repository for yaourt and install it::
+
+  [archlinuxfr]
+  # The French Arch Linux communities packages.
+  Server = http://repo.archlinux.fr/$arch
+  pacman -S yaourt
 
 Set root password, leave chroot env, unmount and reboot::
 
@@ -154,7 +155,7 @@ Sync, update and install the rest of the good stuff::
 
   yaourt -Syua
   yaourt -S ntp xorg-server xorg-xmodmap xorg-xrdb xorg-xprop xdg-user-dirs
-  yaourt -S grub2-theme-archxion
+  yaourt -S grub2-theme-archxion archlinux-artwork
   yaourt -S xfce4 xfce4-goodies xfce4-volumed glew gstreamer0.10-plugins
   yaourt -S pulseaudio pulseaudio-alsa ffmpeg pavucontrol paprefs sox
   yaourt -S libcanberra libcanberra-pulse libcanberra-gstreamer
@@ -187,9 +188,8 @@ Set ntp time sync and enabling services::
   systemctl disable remote-fs.target
   timedatectl set-ntp 1 # this enables the ntpd daemon
   ll /sys/class/net/
-  systemctl enable dhcpcd@enp0s25.service
-
-https://wiki.archlinux.org/index.php/Automatic_login_to_virtual_console
+  systemctl enable NetworkManager.service
+  # systemctl enable dhcpcd@enp0s25.service
 
 **Updating mirrorlists**
 
@@ -350,6 +350,12 @@ Scrollbar style::
 
 
 **Unused Stuff**
+
+Add repository to ``/etc/pacman.conf`` for *ATI RADEON HD 5xxx series* drivers
+before core::
+
+  [catalyst]
+  Server = http://catalyst.apocalypsus.net/repo/catalyst/$arch
 
 Sync clock::
 

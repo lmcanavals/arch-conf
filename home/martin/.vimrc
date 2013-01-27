@@ -36,7 +36,7 @@ let g:mapleader = ","
 
 "" Leader shortcuts
 map <leader>w :w!<cr>
-map <leader>q :q!<cr>
+map <leader>q :q<cr>
 map <leader>n :bn<cr>
 map <leader>p :bp<cr>
 map <leader>d :bd<cr>
