@@ -1,0 +1,10 @@
+Xft.hinting:    1
+Xft.dpi:        96
+Xft.lcdfilter:  lcddefault
+Xft.antialias:  1
+Xft.hintstyle:  hintslight
+Xft.rgba:       rgb
+
+Xcursor.theme:      Vanilla-DMZ
+Xcursor.size:       0
+Xcursor.theme_core: 1

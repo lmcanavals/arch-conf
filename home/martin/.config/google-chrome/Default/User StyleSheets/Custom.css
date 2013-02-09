@@ -23,6 +23,6 @@
   width: 0;
 }
 
-pre, code {
-  font-family: Cousine !important;
-}
+/*pre, code, textarea {
+ font-family: 'Ubuntu Mono',  monospace !important;
+}*/

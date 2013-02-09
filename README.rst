@@ -154,23 +154,49 @@ Start console session as ``martin``
 Sync, update and install the rest of the good stuff::
 
   yaourt -Syua
-  yaourt -S ntp xorg-server xorg-xmodmap xorg-xrdb xorg-xprop xdg-user-dirs
-  yaourt -S grub2-theme-archxion archlinux-artwork
-  yaourt -S xfce4 xfce4-goodies xfce4-volumed glew gstreamer0.10-plugins
+
+GUI base::
+
+  yaourt -S xorg-server xorg-xmodmap xorg-xrdb xorg-xprop xdg-user-dirs
+  yaourt -S xfce4 xfce4-goodies xfce4-volumed glew xdg-utils libxss xorg-xrandr
+
+Sound stuff::
+
   yaourt -S pulseaudio pulseaudio-alsa ffmpeg pavucontrol paprefs sox
+  yaourt -S gstreamer0.10-plugins
   yaourt -S libcanberra libcanberra-pulse libcanberra-gstreamer
-  yaourt -S ttf-droid ttf-dejavu xfce-theme-greybird
-  yaourt -S wqy-microhei ttf-unifont wqy-zenhei wqy-bitmapsong-beta
-  yaourt -S google-chrome-dev # revisar reemplazo html5
+
+Utilities::
+
+  yaourt -S google-chrome-dev
   yaourt -S dropbox thunar-dropbox gvfs gvfs-afc gvfs-gphoto2 # removable stuff
   yaourt -S file-roller unrar unzip p7zip
+  yaourt -S ntp openssh imagemagick htop
+  yaourt -S networkmanager freetype2-infinality fontconfig-infinality
+
+Themes, fonts,  etc.::
+
+  yaourt -S wqy-microhei terminus-font wqy-zenhei wqy-bitmapsong-beta
+  yaourt -S ttf-droid ttf-dejavu ttf-ubuntu-font-family ttf-monaco
   yaourt -S gtk-engine-unico gtk-engine-murrine faenza-icon-theme
-  yaourt -S openssh xcursor-vanilla-dmz imagemagick
+  yaourt -S oxcursor-vanilla-dmz xfce-theme-greybird
+  yaourt -S grub2-theme-archxion archlinux-artwork
+
+Optional::
 
   yaourt -S python2-dbus python2-gobject # opcional (systemd-analize blame)
 
-  yaourt -S networkmanager network-manager-applet networkmanager-dispatcher-ntpd
+Not installed at the moment::
+
+  yaourt -S network-manager-applet networkmanager-dispatcher-ntpd
   yaourt -S catalyst google-talkplugin
+
+* ext4_utils # ROMs samsung galaxy s ii
+* xvidcap
+* easytag # mp3 metadata editor
+* hexedit # aoeu
+* aria2 # download everything in style
+* cmus # music player
 
 Important
 ---------
@@ -195,23 +221,10 @@ Set ntp time sync and enabling services::
 
 When Pacman mirrorlist is updated, re-generate ``/etc/pacmand.d/mirrorlist``::
 
-  sed '/#Server/ s|#|| ' -i /etc/mirrorlist.pacnew
-  sed '/^#.*$/d' -i /etc/mirrorlist.pacnew
+  sed '/#Server/ s|#|| ' -i /etc/pacman.d/mirrorlist.pacnew
+  sed '/^#.*$/d' -i /etc/pacman.d/mirrorlist.pacnew
   rankmirrors -n 6 /etc/pacman.d/mirrorlist.pacnew > /etc/pacman.d/mirrorlist
   rm /etc/pacman.d/mirrorlist.pacnew
-
-Install only if needed
-
-* ext4_utils # ROMs samsung galaxy s ii
-* xvidcap
-* easytag # mp3 metadata editor
-* hexedit # aoeu
-* aria2 # download everything in style
-* cmus # music player
-* v86d # uvesafb, framebuffer text vconsoles
-
-  * agregar v86d a HOOKS despues de base y udev en mkinitcpio.conf
-  * Agregar /etc/modprobe.d/uvesafb.conf a FILES en mkinitcpio.conf
 
 Tweaks and hacks
 ----------------
