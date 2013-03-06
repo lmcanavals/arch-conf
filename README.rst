@@ -166,21 +166,20 @@ Sound stuff::
   yaourt -S gstreamer0.10-plugins
   yaourt -S libcanberra libcanberra-pulse libcanberra-gstreamer
 
-Utilities::
-
-  yaourt -S google-chrome-dev
-  yaourt -S dropbox thunar-dropbox gvfs gvfs-afc gvfs-gphoto2 # removable stuff
-  yaourt -S file-roller unrar unzip p7zip
-  yaourt -S ntp openssh imagemagick htop
-  yaourt -S networkmanager freetype2-infinality fontconfig-infinality
-
 Themes, fonts,  etc.::
 
-  yaourt -S wqy-microhei terminus-font wqy-zenhei wqy-bitmapsong-beta
-  yaourt -S ttf-droid ttf-dejavu ttf-ubuntu-font-family ttf-monaco
+  yaourt -S wqy-microhei wqy-zenhei wqy-bitmapsong-beta
+  yaourt -S ttf-droid ttf-dejavu ttf-monaco
   yaourt -S gtk-engine-unico gtk-engine-murrine faenza-icon-theme
-  yaourt -S oxcursor-vanilla-dmz xfce-theme-greybird
-  yaourt -S grub2-theme-archxion archlinux-artwork
+  yaourt -S xcursor-vanilla-dmz xfce-theme-greybird
+  yaourt -S grub2-theme-archxion
+
+Utilities::
+
+  yaourt -S file-roller unrar unzip p7zip ntp openssh imagemagick htop
+  yaourt -S networkmanager freetype2-infinality fontconfig-infinality
+  yaourt -S google-chrome-dev
+  yaourt -S dropbox thunar-dropbox gvfs gvfs-afc gvfs-gphoto2 # removable stuff
 
 Optional::
 
@@ -189,7 +188,8 @@ Optional::
 Not installed at the moment::
 
   yaourt -S network-manager-applet networkmanager-dispatcher-ntpd
-  yaourt -S catalyst google-talkplugin
+  yaourt -S catalyst google-talkplugin archlinux-artwork terminus-font
+  yaourt -S ttf-ubuntu-font-family
 
 * ext4_utils # ROMs samsung galaxy s ii
 * xvidcap

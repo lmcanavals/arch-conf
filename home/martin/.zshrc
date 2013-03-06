@@ -490,7 +490,7 @@ fi
 PS2='\`%_> '
 PS3='?# '
 PS4='+%N:%i:%_> '
-Z_RPROMPT_NORM="%(?.« ins ».%{$Z_C_ERR%}« %?%1v »%{$Z_C_END%})"
+Z_RPROMPT_NORM="%(?.-- ins --.%{$Z_C_ERR%}-- %?%1v --%{$Z_C_END%})"
 Z_PROMPT_I1="%{$Z_C_BG$Z_C_USR%}%n@%m:%{$Z_C_PWD%}%25<...<%~%<<"
 
 # Miscelaneus info like git.
@@ -517,7 +517,7 @@ function prompt_misc () {
     elif [[ $ttl < $ttr ]]; then
       tstatus+=" d"
     fi
-    print "%{$tcolor%}«$tbranch$tstatus»"
+    print "%{$tcolor%}<$tbranch$tstatus>"
   fi
 }
 
@@ -553,7 +553,7 @@ function info_print () {
 
 zle-keymap-select() {
   if [[ $KEYMAP = vicmd ]]; then
-    RPROMPT="%{$Z_C_MSG%}« cmd »%{$Z_C_END%}"
+    RPROMPT="%{$Z_C_MSG%}-- cmd --%{$Z_C_END%}"
     PROMPT="$Z_PROMPT_I1$(prompt_misc)$(prompt_end c)"
   else
     RPROMPT=$Z_RPROMPT_NORM

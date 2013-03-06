@@ -28,7 +28,7 @@ set autoindent
 set smartindent
 set showbreak=»
 set list                " show special characters
-set listchars=tab:→\ ,trail:·,nbsp:·
+set listchars=tab:>-,trail:-,nbsp:-
 
 "" Leader
 let mapleader = ","
