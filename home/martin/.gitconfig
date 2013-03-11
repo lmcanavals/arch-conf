@@ -10,3 +10,10 @@
 	branch = auto
 [credential]
 	helper = cache --timeout=3600
+[color "status"]
+	added = 10
+	untracked = 13
+	changed = 11
+	header = 6
+	nobranch = 15
+	updated = 12
