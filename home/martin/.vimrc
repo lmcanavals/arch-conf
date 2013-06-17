@@ -2,7 +2,7 @@
 "" Vim and Gvim config!
 "" by Luis Martín Canaval Sánchez
 ""
-
+scriptencoding utf-8
 set history=700
 
 syntax enable
@@ -26,9 +26,9 @@ set shiftwidth=2        " tab = 2 spaces
 set tabstop=2
 set autoindent
 set smartindent
-set showbreak=»
+set showbreak=«
 set list                " show special characters
-set listchars=tab:>-,trail:-,nbsp:-
+set listchars=tab:»\ ,trail:·,nbsp:·
 
 "" Leader
 let mapleader = ","

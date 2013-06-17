@@ -20,6 +20,8 @@
 *.rar
 *.tar
 *.zip
+*.war
+*.ear
 
 # Logs and databases #
 ######################
@@ -37,4 +39,16 @@
 Icon?
 ehthumbs.db
 Thumbs.db
+
+# Other stuff #
+###############
+*.iml
+
+# Folders #
+###########
+bin/
+gen/
+build/
+target/
+.idea/
 

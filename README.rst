@@ -158,7 +158,7 @@ Sync, update and install the rest of the good stuff::
 GUI base::
 
   yaourt -S xorg-server xorg-xmodmap xorg-xrdb xorg-xprop xdg-user-dirs
-  yaourt -S xfce4 xfce4-goodies xfce4-volumed glew xdg-utils libxss xorg-xrandr
+  yaourt -S xfce4 xfce4-goodies xfce4-volumed xdg-utils libxss xorg-xrandr
 
 Sound stuff::
 
@@ -184,6 +184,7 @@ Utilities::
 Optional::
 
   yaourt -S python2-dbus python2-gobject # opcional (systemd-analize blame)
+  yaourt -S glew glfw glm # for the opengl experience
 
 Not installed at the moment::
 

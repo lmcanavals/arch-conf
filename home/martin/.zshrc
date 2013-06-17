@@ -87,7 +87,8 @@ setopt noglobdots
 setopt noshwordsplit
 setopt unset
 
-export PATH="/home/martin/Util:$PATH"
+export JAVA_HOME="/opt/java"
+export PATH="/home/martin/Util:$JAVA_HOME/bin:$PATH"
 export EDITOR="vim"
 export PAGER="less"
 export SHELL='/bin/zsh'
