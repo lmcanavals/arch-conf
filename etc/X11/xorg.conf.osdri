@@ -1,0 +1,9 @@
+Section "Monitor"
+    Identifier  "DVI-0"
+    Option      "Primary" "true"
+EndSection
+
+Section "Monitor"
+    Identifier  "VGA-0"
+    Option      "LeftOf" "DVI-0"
+EndSection

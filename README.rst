@@ -244,7 +244,7 @@ Set keyboard to ``Español Latino América`` variation ``dvla``
 
 **Icons for thunar plugins**::
 
-  cd .icons/Faience/app/16/
+  cd .local/share/icons/Faience/apps/16/
   ln -s dropbox.png thunar-dropbox.png
   ln -s file-roller.png tap-create.png
   ln -s ../../places/16/folder-download.png tap-extract.png
