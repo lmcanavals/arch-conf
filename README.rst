@@ -68,7 +68,7 @@ Install base system::
 
 Installing grub and zsh::
 
-  arch-chroot /mnt pacman -S grub-bios zsh vim jshon git sudo
+  arch-chroot /mnt pacman -S grub-bios zsh vim git sudo
 
 Create the user ``martin``::
 
