@@ -112,7 +112,7 @@ Set basic configuration files::
   cp etc/hostname /etc/
   cp etc/locale.conf /etc/
   cp etc/vconsole.conf /etc/
-  cp etc/mkinitcpio.conf /ect/
+  cp etc/mkinitcpio.conf /etc/
   cp etc/default/grub /etc/default/
   cd usr/share
   cp kbd/keymaps/i386/dvorak/dvorak-la2.map /usr/share/kbd/keymaps/i386/dvorak/
