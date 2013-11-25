@@ -116,7 +116,6 @@ Set basic configuration files::
   cp etc/default/grub /etc/default/
   cd usr/share
   cp kbd/keymaps/i386/dvorak/dvorak-la2.map /usr/share/kbd/keymaps/i386/dvorak/
-  cp X11/xkb/symbols/latam /usr/share/X11/xkb/symbols/
 
 Add consolefont keymap at the end of hook to ``/etc/mkinitcpio.conf``::
 
@@ -138,7 +137,9 @@ Add repository for yaourt and install it::
 
   [archlinuxfr]
   # The French Arch Linux communities packages.
+  SigLevel = Never
   Server = http://repo.archlinux.fr/$arch
+
   pacman -S yaourt
 
 Set root password, leave chroot env, unmount and reboot::
