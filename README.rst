@@ -112,7 +112,6 @@ Set basic configuration files::
   cp etc/hostname /etc/
   cp etc/locale.conf /etc/
   cp etc/vconsole.conf /etc/
-  cp etc/hostname /etc/
   cp etc/mkinitcpio.conf /ect/
   cp etc/default/grub /etc/default/
   cd usr/share
