@@ -87,8 +87,10 @@ setopt noglobdots
 setopt noshwordsplit
 setopt unset
 
+# TODO: think of a better way to set up some of these paths
 export JAVA_HOME="/opt/java"
-export PATH="/home/martin/Util:$JAVA_HOME/bin:$PATH"
+export CLASSPATH=".:$JAVA_HOME/lib"
+export PATH="/home/martin/Util:$PATH:$JAVA_HOME/bin"
 export EDITOR="vim"
 export PAGER="less"
 export SHELL='/bin/zsh'
@@ -141,7 +143,9 @@ zle -N beginning-of-somewhere beginning-or-end-of-somewhere
 zle -N end-of-somewhere beginning-or-end-of-somewhere
 
 bindkey '\eOH' beginning-of-somewhere  # home
+bindkey '[H' beginning-of-somewhere  # home
 bindkey '\eOF' end-of-somewhere        # end
+bindkey '[F' end-of-somewhere        # end
 
 bindkey '\e[A'  up-line-or-search       # cursor up
 bindkey '\e[B'  down-line-or-search     # <ESC>-

@@ -159,7 +159,7 @@ Sync, update and install the rest of the good stuff::
 
 GUI base::
 
-  yaourt -S kde nvidia xorg-xinit sox
+  yaourt -S kde nvidia xorg-xinit sox yakuake oxygen-gtk2 gtk-theme-switch2
 
 Fonts, utilities, etc::
 
@@ -191,9 +191,7 @@ Important
 To change base configuration files::
 
   hostnamectl set-hostname ivy
-  localectl set-locale LANG="en_US.utf8"
-  localectl set-locale LC_COLLATE="C"
-  localectl set-locale LC_TIME="en_DK.utf8"
+  localectl set-locale LANG="en_US.utf8" LC_COLLATE="C" LC_TIME="en_DK.utf8"
   timedatectl set-timezone America/Lima
 
 Set ntp time sync and enabling services::
@@ -232,6 +230,13 @@ edit the file ``.config/user-dirs.dirs`` as needed.
   gconftool-2 --set --type string /desktop/gnome/interface/font_name Sans
   gconftool-2 --set --type string \
     /desktop/gnome/interface/monospace_font_name Cousine
+
+**Java**
+
+Install preferably on ``~/Archive/usr``, rename from ``jdk-x.x.x`` to ``java``
+then as root::
+
+  ln -s /home/martin/Archive/usr/java /opt/java
 
 **Android-sdk**
 
