@@ -159,7 +159,8 @@ Sync, update and install the rest of the good stuff::
 
 GUI base::
 
-  yaourt -S kde nvidia xorg-xinit sox yakuake oxygen-gtk2 gtk-theme-switch2
+  yaourt -S kde nvidia xorg-xinit sox yakuake oxygen-gtk2
+  yaourt -S oxygen-gtk3 gtk-theme-switch2 kde-gtk-config steam
 
 Fonts, utilities, etc::
 

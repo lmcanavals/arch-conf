@@ -87,10 +87,8 @@ setopt noglobdots
 setopt noshwordsplit
 setopt unset
 
-# TODO: think of a better way to set up some of these paths
-export JAVA_HOME="/opt/java"
-export CLASSPATH=".:$JAVA_HOME/lib"
-export PATH="/home/martin/Util:$PATH:$JAVA_HOME/bin"
+source .zsh/paths.sh
+export PATH="/home/martin/Util:$PATH"
 export EDITOR="vim"
 export PAGER="less"
 export SHELL='/bin/zsh'
