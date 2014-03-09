@@ -24,6 +24,7 @@ set expandtab           " tabs to spaces
 set smarttab
 set shiftwidth=2        " tab = 2 spaces
 set tabstop=2
+set softtabstop=2
 set autoindent
 set smartindent
 set showbreak=«
@@ -86,4 +87,7 @@ if has('gui_running')
   set lines=25
   set guifont=Cousine\ 12
 endif
+
+"" Specific files fixes
+autocmd FileType python setlocal shiftwidth=2 tabstop=2
 

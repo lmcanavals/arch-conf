@@ -41,8 +41,8 @@ if (( $(tput colors) == 256 )); then
   Z_C_STA="[38;5;6m"
   Z_C_END="[0m"
 
-  GREP_COLORS="mt=38;5;226:ms=38;5;214:mc=38;5;217:sl=:cx=:fn=38;5;228"
-  GREP_COLORS+=":ln=38;5;190:bn=38;5;118:se=38;5;123"
+  GREP_COLORS="mt=38;5;14:ms=38;5;214:mc=38;5;217:sl=:cx=:fn=38;5;15"
+  GREP_COLORS+=":ln=38;5;10:bn=38;5;118:se=38;5;12"
   eval $(dircolors ~/.zsh/256.dircolors)
 
 else
@@ -782,6 +782,25 @@ modified() {
   print -l -- *(m-${1:-1})
 }
 
+screenrec() {
+  if (( ARGC == 0 )); then
+    printf 'usage: screenrec <filename> [video dimensions [offset]]\n'
+    return 1;
+  fi
+  l_fn=$1
+  if (( ARGC == 1 )); then
+    l_s='1920x1080'
+    l_os='0,0'
+  else
+    l_s=$2
+    if (( ARGC == 2)); then
+      l_os='0,0'
+    else
+      l_os=$3
+    fi
+  fi
+  ffmpeg -video_size $l_s -f x11grab -i $DISPLAY+$l_os -f alsa -i default $l_fn
+}
 source ~/.zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)

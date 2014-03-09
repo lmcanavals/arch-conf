@@ -164,7 +164,7 @@ GUI base::
 
 Fonts, utilities, etc::
 
-  yaourt -S wqy-microhei wqy-zenhei wqy-bitmapsong-beta ttf-monaco
+  yaourt -S wqy-microhei wqy-zenhei wqy-bitmapsong-beta ttf-symbola
   yaourt -S unrar unzip p7zip ntp openssh imagemagick htop
   yaourt -S freetype2-infinality fontconfig-infinality
   yaourt -S google-chrome-dev dropbox google-talkplugin
@@ -173,12 +173,15 @@ Optional::
 
   yaourt -S python2-dbus python2-gobject # opcional (systemd-analize blame)
   yaourt -S glew glfw glm # for the opengl experience
+  yaourt -S zip # to create stupid zip files
 
 Not installed at the moment::
 
   yaourt -S network-manager-applet networkmanager-dispatcher-ntpd
   yaourt -S catalyst archlinux-artwork terminus-font
 
+* livestreamer # to stream in VLC from twitch.tv and others
+* mupen64plus # nintendo 64 emulator
 * ext4_utils # ROMs samsung galaxy s ii
 * xvidcap
 * easytag # mp3 metadata editor
