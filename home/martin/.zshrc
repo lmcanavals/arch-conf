@@ -31,7 +31,7 @@ if (( $(tput colors) == 256 )); then
   fi
   Z_C_BG="[48;5;4m"
   Z_C_DRK="[48;5;5m"
-  Z_C_NT="[38;5;6m"
+  Z_C_NT="[38;5;2m" # change to 6m on solarized dark.
   Z_C_PWD="[38;5;15m"
   Z_C_ERR="[38;5;8m"
   Z_C_MSG="[38;5;11m"
@@ -525,7 +525,7 @@ function prompt_misc () {
 }
 
 function prompt_end () {
-  local tcolor tsym
+  local tfinal tsym
   if [[ "$1" == "c" ]]; then
     tfinal="${Z_C_MSG}"
     tsym=":"
@@ -801,7 +801,7 @@ screenrec() {
   fi
   ffmpeg -video_size $l_s -f x11grab -i $DISPLAY+$l_os -f alsa -i default $l_fn
 }
-source ~/.zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh
+source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 if [[ $TERM == "xterm-256color" ]]; then
