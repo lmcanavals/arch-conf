@@ -17,3 +17,5 @@
 	header = 6
 	nobranch = 15
 	updated = 12
+[push]
+	default = simple
