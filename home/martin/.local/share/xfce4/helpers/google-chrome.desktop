@@ -1,6 +1,6 @@
 [Desktop Entry]
 Version=1.0
-Name=Google Chrome (unstable)
+Name=Google Chrome (stable)
 # Only KDE 4 seems to use GenericName, so we reuse the KDE strings.
 # From Ubuntu's language-pack-kde-XX-base packages, version 9.04-20090413.
 GenericName=Web Browser
@@ -105,13 +105,13 @@ Comment[vi]=Truy cập Internet
 Comment[zh_CN]=访问互联网
 Comment[zh_HK]=連線到網際網路
 Comment[zh_TW]=連線到網際網路
-Exec=/usr/bin/google-chrome-unstable %U
+Exec=/usr/bin/google-chrome-stable %U
 Terminal=false
 Icon=google-chrome
 Type=X-XFCE-Helper
 X-XFCE-Category=WebBrowser
-X-XFCE-Commands=/usr/bin/google-chrome-unstable
-X-XFCE-CommandsWithParameter=/usr/bin/google-chrome-unstable "%s"
+X-XFCE-Commands=/usr/bin/google-chrome-stable
+X-XFCE-CommandsWithParameter=/usr/bin/google-chrome-stable "%s"
 Categories=Network;WebBrowser;
 MimeType=text/html;text/xml;application/xhtml_xml;image/webp;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;
 X-Ayatana-Desktop-Shortcuts=NewWindow;NewIncognito
@@ -168,7 +168,7 @@ Name[uk]=Нове вікно
 Name[vi]=Cửa sổ Mới
 Name[zh_CN]=新建窗口
 Name[zh_TW]=開新視窗
-Exec=/usr/bin/google-chrome-unstable
+Exec=/usr/bin/google-chrome-stable
 TargetEnvironment=Unity
 
 [NewIncognito Shortcut Group]
@@ -221,5 +221,5 @@ Name[uk]=Нове вікно в режимі анонімного перегля
 Name[vi]=Cửa sổ ẩn danh mới
 Name[zh_CN]=新建隐身窗口
 Name[zh_TW]=新增無痕式視窗
-Exec=/usr/bin/google-chrome-unstable --incognito
+Exec=/usr/bin/google-chrome-stable --incognito
 TargetEnvironment=Unity

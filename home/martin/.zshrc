@@ -87,7 +87,7 @@ setopt noglobdots
 setopt noshwordsplit
 setopt unset
 
-source .zsh/paths.sh
+source $HOME/.zsh/paths.sh
 export PATH="/home/martin/Util:$PATH"
 export EDITOR="vim"
 export PAGER="less"

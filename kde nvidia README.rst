@@ -4,7 +4,8 @@ Starting from installation media
 
 **Git**::
 
-  loadkeys dvorak
+  wget https://raw.github.com/martincanaval/arch-conf/master/usr/share/kbd/keymaps/i386/dvorak/dvorak-la2.map
+  loadkeys dvorak-la2.map
   setfont LatArCyrHeb-16
 
 Partitions
@@ -23,13 +24,15 @@ the format where xx is the size.
 +-----+-------+--------------------------+-------------+-----------------+
 | Dev |  Size | Mount point              | File system | gdisk type code |
 +=====+=======+==========================+=============+=================+
-| SSD |  512M | EFI System Parition      | fat32       | EF00            |
+| SSD |    2M | BIOS Boot partition      | none        | EF02            |
 +-----+-------+--------------------------+-------------+-----------------+
 | SSD |  128M | ``/boot``                | ext4        | 8300            |
 +-----+-------+--------------------------+-------------+-----------------+
 | SSD |   30G | ``/``                    | ext4        | 8300            |
 +-----+-------+--------------------------+-------------+-----------------+
 | SSD | >100G | ``/home``                | ext4        | 8300            |
++-----+-------+--------------------------+-------------+-----------------+
+| SSD |    1M | GPT secondary table      | none        | none            |
 +-----+-------+--------------------------+-------------+-----------------+
 | HDD |   15G | ``/var``                 | ext4        | 8300            |
 +-----+-------+--------------------------+-------------+-----------------+
@@ -41,22 +44,20 @@ be contained in the SSD.
 
 Format partitions, for example::
 
-  mkfs.fat -F32 /dev/sda1
-  mkfs.ext4 /dev/sda2
-  mkfs.ext4 /dev/sda3
-  mkfs.ext4 /dev/sda4
-  mkfs.ext4 /dev/sdb1
-  mkfs.ext4 /dev/sdb2
+  mkfs.ext4 /dev/sda6
+  mkfs.ext4 /dev/sda7
+  mkfs.ext4 /dev/sda8
+  mkfs.ext4 /dev/sdb5
+  mkfs.ext4 /dev/sdb6
 
 Mount everything te /mnt::
 
-  mount -t ext4 /dev/sda3 /mnt
-  mkdir -p /mnt/{boot/efi,home/martin/archive/,var}
-  mount -t ext4 /dev/sda2 /mnt/boot
-  mount -t ext4 /dev/sda1 /mnt/boot/efi
-  mount -t ext4 /dev/sda4 /mnt/home
-  mount -t ext4 /dev/sdb1 /mnt/var
-  mount -t ext4 /dev/sdb2 /mnt/home/martin/archive
+  mount -t ext4 /dev/sda7 /mnt
+  mkdir -p /mnt/{boot,home/martin/archive/,var}
+  mount -t ext4 /dev/sda6 /mnt/boot
+  mount -t ext4 /dev/sda8 /mnt/home
+  mount -t ext4 /dev/sdb5 /mnt/var
+  mount -t ext4 /dev/sdb6 /mnt/home/martin/archive
 
 Installing and setting the base system
 --------------------------------------
@@ -67,8 +68,7 @@ Install base system::
 
 Installing grub and zsh::
 
-  arch-chroot /mnt pacman -S grub dosfstools efibootmgr
-  arch-chroot /mnt pacman -S zsh vim git sudo networkmanager
+  arch-chroot /mnt pacman -S grub-bios zsh vim git sudo networkmanager
 
 Create the user ``martin``::
 
@@ -120,7 +120,7 @@ Building the kernel image::
 
   mkinitcpio -p linux
 
-Configure ``sudoers`` with ``visudo``, add::
+Configure ``sudoers``, add::
 
   martin ivy= /usr/bin/pacman
 
@@ -138,7 +138,8 @@ Installing aur utility and installing needed packages::
 
 Configure grub::
 
-  grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Arch" --recheck --debug
+  modprobe dm-mod
+  grub-install --target=i386-pc --recheck --debug /dev/sda
   mkdir -p /boot/grub/locale
   cp /usr/share/locale/en@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
   grub-mkconfig -o /boot/grub/grub.cfg
@@ -158,7 +159,8 @@ Sync, update and install the rest of the good stuff::
 
 GUI base::
 
-  yaourt -S xfce4 xfce4-goodies xorg-xinit xf86-video-intel sox lxdm pulseaudio
+  yaourt -S kde nvidia xorg-xinit sox yakuake oxygen-gtk2
+  yaourt -S oxygen-gtk3 gtk-theme-switch2 kde-gtk-config steam
 
 Fonts, utilities, etc::
 
@@ -166,22 +168,22 @@ Fonts, utilities, etc::
   yaourt -S unrar unzip p7zip ntp openssh imagemagick htop
   yaourt -S freetype2-infinality fontconfig-infinality
   yaourt -S google-chrome-dev dropbox google-talkplugin
-  yaourt -S redshift python2-gobject vlc xfce4-volumed-pulse
-  yaourt -S xf86-input-synaptics xcursor-vanilla-dmz xfce-theme-greybird
-  yaourt -S faience-icon-theme network-manager-applet pavucontrol
-  yaourt -S gvfs gvfs-mtp gvfs-gphoto2 libcanberra-pulse libcanberra-gstreamer
-  yaourt -S libcanberra gnome-keyring gstreamer0.10-good-plugins
 
 Optional::
 
-  yaourt -S steam # systemd-analize blame and redshift
-  yaourt -S python2-dbus # systemd-analize blame and redshift
+  yaourt -S python2-dbus python2-gobject # opcional (systemd-analize blame)
   yaourt -S glew glfw glm # for the opengl experience
   yaourt -S zip # to create stupid zip files
+
+Not installed at the moment::
+
+  yaourt -S network-manager-applet networkmanager-dispatcher-ntpd
+  yaourt -S catalyst archlinux-artwork terminus-font
 
 * livestreamer # to stream in VLC from twitch.tv and others
 * mupen64plus # nintendo 64 emulator
 * ext4_utils # ROMs samsung galaxy s ii
+* xvidcap
 * easytag # mp3 metadata editor
 * hexedit # aoeu
 * aria2 # download everything in style
