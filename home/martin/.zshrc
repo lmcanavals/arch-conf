@@ -4,12 +4,12 @@ if [[ ${TERM} == "xterm" ]]; then
 fi
 
 if [ "$TERM" = "linux" ]; then
-  echo -en "\e]P0002b36"
-  echo -en "\e]P1073642"
+#  echo -en "\e]P0FDF6E3"
+  echo -en "\e]P1EEE8D5"
   echo -en "\e]P2586E75"
   echo -en "\e]P3657B83"
-  echo -en "\e]P4FDF6E3"
-  echo -en "\e]P5EEE8D5"
+  echo -en "\e]P4002b36"
+  echo -en "\e]P5073642"
   echo -en "\e]P693A1A1"
   echo -en "\e]P7839496"
   echo -en "\e]P8CB4B16"
@@ -20,7 +20,7 @@ if [ "$TERM" = "linux" ]; then
   echo -en "\e]PDD33682"
   echo -en "\e]PE2AA198"
   echo -en "\e]PF6C71C4"
-  clear #for background artifacting
+#  clear #for background artifacting
 fi
 
 if (( $(tput colors) == 256 )); then
@@ -29,12 +29,14 @@ if (( $(tput colors) == 256 )); then
   else
     Z_C_USR="[38;5;10m"
   fi
-  Z_C_BG="[48;5;4m"
-  Z_C_DRK="[48;5;5m"
-  Z_C_NT="[38;5;2m" # change to 6m on solarized dark.
+  Z_C_BG="[48;5;1m"
+  Z_C_NT="[38;5;0m" # change to 6m on solarized dark.
+  Z_B_NT="[48;5;7m" # change to 6m on solarized dark.
   Z_C_PWD="[38;5;15m"
   Z_C_ERR="[38;5;8m"
+  Z_B_ERR="[48;5;8m"
   Z_C_MSG="[38;5;11m"
+  Z_B_MSG="[48;5;11m"
   Z_C_GIT="[38;5;12m"
   Z_C_OPT="[38;5;13m"
   Z_C_PAR="[38;5;14m"
@@ -51,12 +53,14 @@ else
   else
     Z_C_USR="[1;32m"
   fi
-  Z_C_BG="[44m"
-  Z_C_DRK="[45m"
-  Z_C_NT="[1;36m"
+  Z_C_BG="[45m"
+  Z_C_NT="[1;41m"
+  Z_B_NT="[42m"
   Z_C_PWD="[1;37m"
   Z_C_ERR="[1;30m"
+  Z_B_ERR="[43m"
   Z_C_MSG="[1;33m"
+  Z_B_MSG="[42m"
   Z_C_GIT="[1;34m"
   Z_C_OPT="[1;35m"
   Z_C_PAR="[1;36m"
@@ -92,7 +96,7 @@ export PATH="/home/martin/Util:$PATH"
 export EDITOR="vim"
 export PAGER="less"
 export SHELL='/bin/zsh'
-export BROWSER="google-chrome"
+export BROWSER="google-chrome-stable"
 
 export GREP_COLORS
 export LS_COLORS
@@ -363,8 +367,9 @@ zleiab() {
   matched_chars='[.-|_a-zA-Z0-9]#'
   LBUFFER=${LBUFFER%%(#m)[.-|_a-zA-Z0-9]#}
   LBUFFER+=${abk[$MATCH]:-$MATCH}
+  _zsh_highlight # workaround to highlight after autocompleting
 }
-zle -N zleiab && bindkey ",." zleiab
+zle -N zleiab && bindkey "^@" zleiab
 
 autoload -U zmv
 autoload -U history-search-end
@@ -527,13 +532,13 @@ function prompt_misc () {
 function prompt_end () {
   local tfinal tsym
   if [[ "$1" == "c" ]]; then
-    tfinal="${Z_C_MSG}"
+    tfinal="${Z_B_MSG}"
     tsym=":"
   else # $1 == n
-    tfinal="%(?.${Z_C_NT}.${Z_C_ERR})"
+    tfinal="%(?.${Z_B_NT}.${Z_B_ERR})"
     tsym="%(?.%#.!)"
   fi
-  print "%{$Z_C_DRK$tfinal%} $tsym %{$Z_C_END%} "
+  print "%{$tfinal$Z_C_NT%} $tsym %{$Z_C_END%} "
 }
 
 function ESC_print () {
@@ -799,7 +804,7 @@ screenrec() {
       l_os=$3
     fi
   fi
-  ffmpeg -video_size $l_s -f x11grab -i $DISPLAY+$l_os -f alsa -i default $l_fn
+  ffmpeg -video_size $l_s -f x11grab -i $DISPLAY+$l_os -f pulse -i default $l_fn
 }
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
