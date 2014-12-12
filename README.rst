@@ -164,9 +164,9 @@ Sync, update and install the rest of the good stuff::
 
 GUI base::
 
-  yaourt -S xfce4 xfce4-goodies xorg-xinit xf86-video-intel libva-intel-driver
-  yaourt -S pulseaudio sox lightdm-gtk3-greeter # TODO check xorg-server
-  yaourt -S accountsservice lightdm xorg-xmodmap
+  yaourt -S xfce4 xfce4-goodies 
+  yaourt -S pulseaudio sox lightdm lightdm-gtk3-greeter
+  yaourt -S accountsservice xorg-xmodmap
 
 Fonts, utilities, etc::
 
@@ -175,7 +175,7 @@ Fonts, utilities, etc::
   yaourt -S adobe-source-serif-pro-fonts adobe-source-han-sans-otc-fonts
   yaourt -S unrar unzip p7zip ntp openssh imagemagick htop
   yaourt -S google-chrome-dev dropbox
-  yaourt -S redshift python2-gobject vlc
+  yaourt -S redshift python-gobject vlc
   yaourt -S xf86-input-synaptics xcursor-vanilla-dmz numix-themes
   yaourt -S faience-icon-theme network-manager-applet pavucontrol
   yaourt -S gvfs gvfs-mtp gvfs-gphoto2 libcanberra-pulse libcanberra-gstreamer
@@ -195,6 +195,7 @@ Not used anymore (maybe)::
   yaourt -S infinality-bundle ibfonts-meta-base # (1) add repositories
   yaourt -S ttf-wqy-microhei-ibx ttf-roboto-ibx
   yaourt -S xfce4-volumed-pulse xfce-theme-greybird
+  yaourt -S xf86-video-intel libva-intel-driver
   yaourt -S gstreamer0.10-good-plugins # for xfce4-mixer to work with pulse
 
 * livestreamer # to stream in VLC from twitch.tv and others
