@@ -53,7 +53,7 @@ Mount everything te /mnt::
   mount -t ext4 /dev/sda3 /mnt
   mkdir -p /mnt/{boot/efi,home/martin/archive/,var}
   mount -t ext4 /dev/sda2 /mnt/boot
-  mount -t ext4 /dev/sda1 /mnt/boot/efi
+  mount -t vfat /dev/sda1 /mnt/boot/efi
   mount -t ext4 /dev/sda4 /mnt/home
   mount -t ext4 /dev/sdb1 /mnt/var
   mount -t ext4 /dev/sdb2 /mnt/home/martin/archive
