@@ -92,7 +92,6 @@ setopt noshwordsplit
 setopt unset
 
 source $HOME/.zsh/paths.sh
-export PATH="/home/martin/Util:$PATH"
 export EDITOR="vim"
 export PAGER="less"
 export SHELL='/bin/zsh'

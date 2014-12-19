@@ -1,0 +1,24 @@
+# 
+# /etc/fstab: static file system information
+#
+# <file system>	<dir>	<type>	<options>	<dump>	<pass>
+# UUID=32c53f5d-03f2-4d4d-b9f4-3701b2fbe588
+/dev/sda3           	/         	ext4      	defaults,noatime,discard	0 1
+
+# UUID=065ee8aa-adba-49b3-b1fe-8cc235e02a5e
+/dev/sda2           	/boot     	ext4      	defaults,noatime,discard	0 2
+
+# UUID=9744-0306
+/dev/sda1           	/boot/efi 	vfat      	rw,noatime,discard,fmask=0022,dmask=0022,codepage=437,iocharset=utf8,shortname=mixed,errors=remount-ro	0 2
+
+# UUID=b46c11ed-92d2-430b-a5bb-cd163787b6ec
+/dev/sda4           	/home     	ext4      	defaults,noatime,discard	0 2
+
+/home/swapfile  	none      	swap      	defaults  	0 0
+
+# UUID=9c1ce07b-d4f3-4567-8da3-55efac2873a6 LABEL=Storage
+/dev/sdb            	/home/martin/Archive	btrfs     	noatime,autodefrag,compress=no,space_cache,subvol=Archive	0 0
+
+# UUID=9c1ce07b-d4f3-4567-8da3-55efac2873a6 LABEL=Storage
+/dev/sdb            	/var      	btrfs     	noatime,autodefrag,compress=no,space_cache,subvol=var	0 0
+

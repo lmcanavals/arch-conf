@@ -164,7 +164,7 @@ Sync, update and install the rest of the good stuff::
 GUI base::
 
   yaourt -S xfce4 xfce4-goodies pulseaudio sox lightdm lightdm-gtk3-greeter
-  yaourt -S accountsservice xorg-xmodmap
+  yaourt -S accountsservice xorg-xmodmap haveged
 
 Fonts, utilities, etc::
 
@@ -227,6 +227,7 @@ Set ntp time sync and enabling services::
   timedatectl set-ntp 1 # this enables the ntpd daemon
   ll /sys/class/net/
   systemctl enable NetworkManager.service
+  systemctl enable haveged # entrophy daemon for cryptographic awesome.
   # systemctl enable dhcpcd@enp0s25.service
 
 **Updating mirrorlists**
