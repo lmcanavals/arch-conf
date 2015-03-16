@@ -173,10 +173,10 @@ Fonts, utilities, etc::
   yaourt -S adobe-source-serif-pro-fonts adobe-source-han-sans-otc-fonts
   yaourt -S unrar unzip p7zip ntp openssh imagemagick htop
   yaourt -S google-chrome-dev dropbox redshift python-gobject vlc
-  yaourt -S xcursor-vanilla-dmz numix-themes
-  yaourt -S faience-icon-theme network-manager-applet pavucontrol
+  yaourt -S xfce-theme-greybird tango-icon-theme
+  yaourt -S network-manager-applet pavucontrol
   yaourt -S gvfs gvfs-mtp gvfs-gphoto2 libcanberra-pulse libcanberra-gstreamer
-  yaourt -S libcanberra gnome-keyring
+  yaourt -S libcanberra gnome-keyring thunar-dropbox
 
 Optional::
 
@@ -195,6 +195,8 @@ Not used anymore (maybe)::
   yaourt -S xfce4-volumed-pulse xfce-theme-greybird
   yaourt -S xf86-video-intel libva-intel-driver
   yaourt -S gstreamer0.10-good-plugins # for xfce4-mixer to work with pulse
+  yaourt -S xcursor-vanilla-dmz faience-icon-theme
+  yaourt -S numix-themes numix-circle-icon-theme-git
 
 * livestreamer # to stream in VLC from twitch.tv and others
 * mupen64plus # nintendo 64 emulator
