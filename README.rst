@@ -5,6 +5,8 @@ Starting from installation media
   loadkeys dvorak
   setfont LatArCyrHeb-16 # better fonts
 
+  Must check!! http://unix.stackexchange.com/questions/75972/give-default-write-permission-to-group-to-any-newly-created-files-and-folders
+
 Partitions
 ----------
 https://wiki.archlinux.org/index.php/Partitioning
