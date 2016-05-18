@@ -64,7 +64,7 @@ set novisualbell
 set t_vb=
 set encoding=utf8
 set cursorline
-set colorcolumn=81
+"set colorcolumn=81
 set textwidth=80
 set scrolloff=7
 set laststatus=2
@@ -76,8 +76,7 @@ if has('gui_running') || (&term == 'xterm') || (&term =~ 'xterm-256color')
   set t_Co=256
 endif
 
-"colorscheme muxed
-colorscheme github
+colorscheme muxed
 
 "" Gvim options
 if has('gui_running')
