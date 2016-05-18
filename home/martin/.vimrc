@@ -76,7 +76,8 @@ if has('gui_running') || (&term == 'xterm') || (&term =~ 'xterm-256color')
   set t_Co=256
 endif
 
-colorscheme muxed
+"colorscheme muxed
+colorscheme github
 
 "" Gvim options
 if has('gui_running')

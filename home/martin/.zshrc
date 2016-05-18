@@ -22,7 +22,7 @@ if [ "$TERM" = "linux" ]; then
   echo -en "\e]PF6C71C4"
 #  clear #for background artifacting
 fi
-
+# the ^[ is "entered" by typing Ctrl+v and Ctrl+[ 
 if (( $(tput colors) == 256 )); then
   if (( EUID == 0 )); then
     Z_C_USR="[38;5;9m"
