@@ -138,7 +138,7 @@ Add repository for yaourt and install it::
 Installing aur utility and installing needed packages::
 
   pacman -Sy yaourt
-  yaourt -S grub2-theme-archxion
+  yaourt -S grub2-theme-archlinux
 
 Configure grub, copy the ``/etc/default/grub`` from arch-conf.git which adds the
 parameters needed for hibernation support::
