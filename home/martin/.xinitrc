@@ -15,7 +15,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
   done
   unset f
 fi
-play .local/share/sounds/Fresh\ and\ Clean/stereo/desktop-login.ogg &
+play /home/martin/.local/share/sounds/Fresh\ and\ Clean/stereo/desktop-login.ogg &
 xset s off &
 exec startxfce4
 
