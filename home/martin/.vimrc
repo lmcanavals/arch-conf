@@ -63,7 +63,7 @@ set noerrorbells
 set novisualbell
 set t_vb=
 set encoding=utf8
-set cursorline
+"set cursorline
 "set colorcolumn=81
 set textwidth=80
 set scrolloff=7

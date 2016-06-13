@@ -166,16 +166,17 @@ Sync, update and install the rest of the good stuff::
 GUI base::
 
   yaourt -S xfce4 xfce4-goodies pulseaudio sox lightdm lightdm-gtk3-greeter
-  yaourt -S accountsservice xorg-xmodmap haveged
+  yaourt -S slock accountsservice xorg-xmodmap
 
 Fonts, utilities, etc::
 
   yaourt -S ttf-dejavu ttf-liberation ttf-symbola
   yaourt -S adobe-source-code-pro-fonts adobe-source-sans-pro-fonts
   yaourt -S adobe-source-serif-pro-fonts adobe-source-han-sans-otc-fonts
+  yaourt -S numix-themes numix-circle-icon-theme-git
   yaourt -S unrar unzip p7zip ntp openssh imagemagick htop
-  yaourt -S google-chrome-dev dropbox redshift python-gobject vlc
-  yaourt -S xfce-theme-greybird tango-icon-theme
+  yaourt -S google-chrome-dev dropbox redshift python-gobject vlc qt4
+  yaourt -S tango-icon-theme
   yaourt -S network-manager-applet pavucontrol
   yaourt -S gvfs gvfs-mtp gvfs-gphoto2 libcanberra-pulse libcanberra-gstreamer
   yaourt -S libcanberra gnome-keyring thunar-dropbox
@@ -184,6 +185,7 @@ Optional::
 
   yaourt -S steam
   yaourt -S xf86-input-synaptics # duh
+  yaourt -S xf86-video-intel libva-intel-driver
   yaourt -S cdrkit # mkisofs, wodim and stuff
   yaourt -S python2-dbus # systemd-analize blame and redshift
   yaourt -S glew glfw glm # for the opengl experience
@@ -195,11 +197,10 @@ Not used anymore (maybe)::
   yaourt -S infinality-bundle ibfonts-meta-base # (1) add repositories
   yaourt -S ttf-wqy-microhei-ibx ttf-roboto-ibx
   yaourt -S xfce4-volumed-pulse xfce-theme-greybird
-  yaourt -S xf86-video-intel libva-intel-driver
   yaourt -S gstreamer0.10-good-plugins # for xfce4-mixer to work with pulse
   yaourt -S xcursor-vanilla-dmz faience-icon-theme
-  yaourt -S numix-themes numix-circle-icon-theme-git
 
+* haveged # random number generator, can't forget what for
 * livestreamer # to stream in VLC from twitch.tv and others
 * mupen64plus # nintendo 64 emulator
 * ext4_utils # ROMs samsung galaxy s ii
@@ -243,6 +244,11 @@ When Pacman mirrorlist is updated, re-generate ``/etc/pacmand.d/mirrorlist``::
   rankmirrors -n 6 /etc/pacman.d/mirrorlist.pacnew > /etc/pacman.d/mirrorlist
   rm /etc/pacman.d/mirrorlist.pacnew
 
+**Notes**
+
+* .xinitrc needed only for old school desktop managers like slim
+* .xresources needed only when starting stuff by hand (no xfsettingsd)
+
 Tweaks and hacks
 ----------------
 
@@ -272,3 +278,4 @@ then as root::
 **Android-sdk**
 
 Needed libs from ``multilib``::
+

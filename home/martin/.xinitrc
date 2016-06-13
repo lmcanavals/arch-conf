@@ -15,7 +15,11 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
   done
   unset f
 fi
+
+QT_STYLE_OVERRIDE=gtk
+export QT_STYLE_OVERRIDE
+
 play /home/martin/.local/share/sounds/Fresh\ and\ Clean/stereo/desktop-login.ogg &
-xset s off &
+# xset s off & # not needed if using presentation mode on xfce power manager
 exec startxfce4
 
