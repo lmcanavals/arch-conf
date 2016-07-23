@@ -1,6 +1,8 @@
 GRUB_DEFAULT=0
-GRUB_TIMEOUT=3
+GRUB_TIMEOUT=5
 GRUB_DISTRIBUTOR="Arch"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet"
+# for laptop only
 GRUB_CMDLINE_LINUX_DEFAULT="resume=/dev/disk/by-uuid/81e57a2f-b3b7-4fc4-833a-cb5b0ddc7daf resume_offset=34816"
 GRUB_CMDLINE_LINUX=""
 
@@ -39,7 +41,6 @@ GRUB_DISABLE_RECOVERY=true
 
 # Uncomment one of them for the gfx desired, a image background or a gfxtheme
 #GRUB_BACKGROUND="/path/to/wallpaper"
-#GRUB_THEME="/boot/grub/themes/Archxion/theme.txt"
 GRUB_THEME="/boot/grub/themes/Archlinux/theme.txt"
 
 # Uncomment to get a beep at GRUB start
