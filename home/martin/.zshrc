@@ -25,16 +25,17 @@ fi
 # the ^[ is "entered" by typing Ctrl+v and Ctrl+[ 
 if (( $(tput colors) == 256 )); then
   if (( EUID == 0 )); then
+    Z_C_BG="[48;5;1m"
     Z_C_USR="[38;5;9m"
   else
+    Z_C_BG="[48;5;2m"
     Z_C_USR="[38;5;10m"
   fi
-  Z_C_BG="[48;5;1m"
-  Z_C_NT="[38;5;0m" # change to 6m on solarized dark.
-  Z_B_NT="[48;5;7m" # change to 6m on solarized dark.
+  Z_C_NT="[38;5;0m"
+  Z_B_NT="[48;5;7m"
   Z_C_PWD="[38;5;15m"
-  Z_C_ERR="[38;5;8m"
-  Z_B_ERR="[48;5;8m"
+  Z_C_ERR="[38;5;1m"
+  Z_B_ERR="[48;5;9m"
   Z_C_MSG="[38;5;11m"
   Z_B_MSG="[48;5;11m"
   Z_C_GIT="[38;5;12m"

@@ -70,6 +70,7 @@ Installing grub and zsh::
 
   arch-chroot /mnt pacman -S grub dosfstools efibootmgr intel-ucode
   arch-chroot /mnt pacman -S zsh vim git sudo networkmanager
+  arch-chroot /mnt pacman -S powertop tlp # for better power management
 
 Create the user ``martin``::
 
@@ -232,6 +233,7 @@ Set ntp time sync and enabling services::
   timedatectl set-ntp 1 # this enables the ntpd daemon
   ll /sys/class/net/
   systemctl enable NetworkManager.service
+  systemctl enable tlp
   systemctl enable haveged # entrophy daemon for cryptographic awesome.
   # systemctl enable dhcpcd@enp0s25.service
 
