@@ -166,7 +166,7 @@ Sync, update and install the rest of the good stuff::
 
 GUI base::
 
-  yaourt -S xfce4 xfce4-goodies pulseaudio sox lightdm lightdm-gtk3-greeter
+  yaourt -S xfce4 xfce4-goodies pulseaudio sox lightdm lightdm-gtk-greeter
   yaourt -S slock accountsservice xorg-xmodmap
 
 Fonts, utilities, etc::
@@ -177,7 +177,6 @@ Fonts, utilities, etc::
   yaourt -S numix-themes numix-circle-icon-theme-git
   yaourt -S unrar unzip p7zip ntp openssh imagemagick htop
   yaourt -S google-chrome-dev dropbox redshift python-gobject vlc qt4
-  yaourt -S tango-icon-theme
   yaourt -S network-manager-applet pavucontrol
   yaourt -S gvfs gvfs-mtp gvfs-gphoto2 libcanberra-pulse libcanberra-gstreamer
   yaourt -S libcanberra gnome-keyring thunar-dropbox
