@@ -2,10 +2,11 @@ My Arch Linux Installation Guide
 ================================
 Starting from installation media
 
-  loadkeys dvorak
+  # loadkeys dvorak # old
+  loadkeys us
   setfont LatArCyrHeb-16 # better fonts
 
-  Must check!! http://unix.stackexchange.com/questions/75972/give-default-write-permission-to-group-to-any-newly-created-files-and-folders
+Must check!! http://unix.stackexchange.com/questions/75972/give-default-write-permission-to-group-to-any-newly-created-files-and-folders
 
 Partitions
 ----------
@@ -37,7 +38,8 @@ the format where xx is the size.
 +-----+-------+--------------------------+-------------+-----------------+
 
 Swap is a file, instead of a partition, so it can be resized easily. It should
-be contained in the SSD.
+be contained in the SSD. But should only be created or activated when there are
+ram issues.
 
 Format partitions, for example::
 
@@ -88,7 +90,7 @@ Create swapfile::
 
 Generate ``fstab``::
 
-  genfstab -p /mnt >> /mnt/etc/fstab
+  genfstab -pU /mnt >> /mnt/etc/fstab
   sed '/^\/mnt\/home/ s|mnt/|| ' -i /mnt/etc/fstab
 
 Afterwards change to ``defaults,noatime,discard`` all ssd partitions.
@@ -194,7 +196,6 @@ Optional::
 Not used anymore (maybe)::
 
   yaourt -S wqy-microhei wqy-zenhei wqy-bitmapsong-beta
-  yaourt -S infinality-bundle ibfonts-meta-base # (1) add repositories
   yaourt -S ttf-wqy-microhei-ibx ttf-roboto-ibx
   yaourt -S xfce4-volumed-pulse xfce-theme-greybird
   yaourt -S gstreamer0.10-good-plugins # for xfce4-mixer to work with pulse
@@ -211,10 +212,6 @@ Not used anymore (maybe)::
 
 Important
 ---------
-
-For (1) infinality-bundle (unused atm)::
-
-  https://wiki.archlinux.org/index.php/Infinality#Custom_repository
 
 To change avatar on lightdm::
 

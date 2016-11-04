@@ -1,0 +1,5 @@
+[User]
+Language=en_US.utf8
+XSession=xfce
+Icon=/var/lib/AccountsService/icons/martin.png
+SystemAccount=false

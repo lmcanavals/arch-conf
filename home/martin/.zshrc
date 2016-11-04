@@ -26,26 +26,26 @@ fi
 if (( $(tput colors) == 256 )); then
   if (( EUID == 0 )); then
     Z_C_BG="[48;5;1m"
-    Z_C_USR="[38;5;9m"
+    Z_C_USR="[38;5;13m"
   else
     Z_C_BG="[48;5;2m"
-    Z_C_USR="[38;5;10m"
+    Z_C_USR="[38;5;14m"
   fi
   Z_C_NT="[38;5;0m"
   Z_B_NT="[48;5;7m"
   Z_C_PWD="[38;5;15m"
-  Z_C_ERR="[38;5;1m"
+  Z_C_ERR="[38;5;9m"
   Z_B_ERR="[48;5;9m"
   Z_C_MSG="[38;5;11m"
   Z_B_MSG="[48;5;11m"
-  Z_C_GIT="[38;5;12m"
+  Z_C_GIT="[38;5;14m"
   Z_C_OPT="[38;5;13m"
   Z_C_PAR="[38;5;14m"
   Z_C_STA="[38;5;6m"
   Z_C_END="[0m"
 
   GREP_COLORS="mt=38;5;14:ms=38;5;214:mc=38;5;217:sl=:cx=:fn=38;5;15"
-  GREP_COLORS+=":ln=38;5;10:bn=38;5;118:se=38;5;12"
+  GREP_COLORS+=":ln=38;5;10:bn=38;5;118:se=38;5;14"
   eval $(dircolors ~/.zsh/256.dircolors)
 
 else
@@ -820,9 +820,9 @@ if [[ $TERM == "xterm-256color" ]]; then
   ZSH_HIGHLIGHT_STYLES[precommand]='fg=10,underline'
   ZSH_HIGHLIGHT_STYLES[commandseparator]='none'
   ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=10'
-  ZSH_HIGHLIGHT_STYLES[path]='fg=12'
-  ZSH_HIGHLIGHT_STYLES[globbing]='fg=12'
-  ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=12'
+  ZSH_HIGHLIGHT_STYLES[path]='fg=6'
+  ZSH_HIGHLIGHT_STYLES[globbing]='fg=6'
+  ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=6'
   ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='none'
   ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='none'
   ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='none'
@@ -833,7 +833,7 @@ if [[ $TERM == "xterm-256color" ]]; then
   ZSH_HIGHLIGHT_STYLES[assign]='none'
 
   ZSH_HIGHLIGHT_STYLES[bracket-error]='fg=9,bold'
-  ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=12'
+  ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=6'
   ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=10'
   ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=13'
   ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=11'
