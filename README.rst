@@ -173,35 +173,36 @@ GUI base::
 
 Fonts, utilities, etc::
 
-  yaourt -S ttf-dejavu ttf-liberation ttf-symbola
+  yaourt -S ttf-liberation ttf-symbola
   yaourt -S adobe-source-code-pro-fonts adobe-source-sans-pro-fonts
   yaourt -S adobe-source-serif-pro-fonts adobe-source-han-sans-otc-fonts
   yaourt -S numix-themes numix-circle-icon-theme-git
-  yaourt -S unrar unzip p7zip ntp openssh imagemagick htop
-  yaourt -S google-chrome-dev dropbox redshift python-gobject vlc qt4
+  yaourt -S unrar unzip p7zip ntp imagemagick htop
+  yaourt -S google-chrome dropbox redshift
   yaourt -S network-manager-applet pavucontrol
-  yaourt -S gvfs gvfs-mtp gvfs-gphoto2 libcanberra-pulse libcanberra-gstreamer
+  yaourt -S libcanberra-pulse libcanberra-gstreamer
   yaourt -S libcanberra gnome-keyring thunar-dropbox
 
 Optional::
 
-  yaourt -S steam
+  yaourt -S steam openssh python-gobject vlc
   yaourt -S xf86-input-synaptics # duh
   yaourt -S xf86-video-intel libva-intel-driver
   yaourt -S cdrkit # mkisofs, wodim and stuff
   yaourt -S python2-dbus # systemd-analize blame and redshift
   yaourt -S glew glfw glm # for the opengl experience
   yaourt -S zip # to create stupid zip files
+  yaourt -S gvfs gvfs-mtp gvfs-gphoto2
 
-Not used anymore (maybe)::
+Not used anymore (maybe, some come as dependencies)::
 
   yaourt -S wqy-microhei wqy-zenhei wqy-bitmapsong-beta
-  yaourt -S ttf-wqy-microhei-ibx ttf-roboto-ibx
+  yaourt -S ttf-wqy-microhei-ibx ttf-roboto-ibx ttf-dejavu 
   yaourt -S xfce4-volumed-pulse xfce-theme-greybird
   yaourt -S gstreamer0.10-good-plugins # for xfce4-mixer to work with pulse
   yaourt -S xcursor-vanilla-dmz faience-icon-theme
 
-* haveged # random number generator, can't forget what for
+* haveged # random number generator, can't remember what for
 * livestreamer # to stream in VLC from twitch.tv and others
 * mupen64plus # nintendo 64 emulator
 * ext4_utils # ROMs samsung galaxy s ii
