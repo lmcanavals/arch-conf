@@ -185,21 +185,19 @@ Fonts, utilities, etc::
 
 Optional::
 
-  yaourt -S steam openssh python-gobject vlc
+  yaourt -S python-gobject python-xdg # for redshift-gtk
+  yaourt -S steam openssh vlc
   yaourt -S xf86-input-synaptics # duh
   yaourt -S xf86-video-intel libva-intel-driver
   yaourt -S cdrkit # mkisofs, wodim and stuff
-  yaourt -S python2-dbus # systemd-analize blame and redshift
   yaourt -S glew glfw glm # for the opengl experience
   yaourt -S zip # to create stupid zip files
-  yaourt -S gvfs gvfs-mtp gvfs-gphoto2
 
 Not used anymore (maybe, some come as dependencies)::
 
   yaourt -S wqy-microhei wqy-zenhei wqy-bitmapsong-beta
   yaourt -S ttf-wqy-microhei-ibx ttf-roboto-ibx ttf-dejavu 
-  yaourt -S xfce4-volumed-pulse xfce-theme-greybird
-  yaourt -S gstreamer0.10-good-plugins # for xfce4-mixer to work with pulse
+  yaourt -S xfce-theme-greybird
   yaourt -S xcursor-vanilla-dmz faience-icon-theme
 
 * haveged # random number generator, can't remember what for
