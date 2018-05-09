@@ -1,0 +1,8 @@
+ln -sf /home/martin/git/arch-conf/home/martin/.gitconfig ~/
+ln -sf /home/martin/git/arch-conf/home/martin/.gitignore_global ~/
+ln -sf /home/martin/git/arch-conf/home/martin/.zshrc ~/
+ln -sf /home/martin/git/arch-conf/home/martin/.zsh ~/
+#mkdir ~/.zsh/plugins
+ln -sf /home/martin/git/zsh-syntax-highlighting ~/.zsh/plugins/
+ln -sf /home/martin/git/arch-conf/home/martin/.vim ~/
+ln -sf /home/martin/git/arch-conf/home/martin/.vimrc ~/
