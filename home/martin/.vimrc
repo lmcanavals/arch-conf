@@ -65,6 +65,7 @@ set t_vb=
 set encoding=utf8
 "set cursorline
 "set colorcolumn=81
+set number
 set textwidth=80
 set scrolloff=7
 set laststatus=2
@@ -76,7 +77,7 @@ if has('gui_running') || (&term == 'xterm') || (&term =~ 'xterm-256color')
   set t_Co=256
 endif
 
-colorscheme guru
+colorscheme darkspectrum
 hi Normal ctermbg=none
 
 "" Gvim options
@@ -85,8 +86,9 @@ if has('gui_running')
   set guioptions-=T     " hide tool bar
   set guioptions-=r     " hide scroll bar
   set guioptions+=c     " console dialogs
-  set lines=25
-  set guifont=Cousine\ 12
+  set lines=25 columns=100
+  set guifont=Noto\ Sans\ Mono\ 12
+  set colorcolumn=81
 endif
 
 "" Specific files fixes
