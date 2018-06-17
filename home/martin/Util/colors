@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/zsh
 
 function printnum() {
   printf "%4s" "$1"

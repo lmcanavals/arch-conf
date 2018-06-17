@@ -8,4 +8,4 @@
 #export PATH="$JAVA_HOME/bin:$MVN_HOME/bin:$PATH"
 #unset ANDSTUDIO
 #PATH=/home/martin/Util
-export PATH=/home/martin/Archive/usr/go_appengine:$PATH
+export PATH=/home/martin/miniconda3/bin:~/go/bin:$PATH
