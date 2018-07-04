@@ -7,6 +7,7 @@
 *.o
 *.so
 *.pyc
+*.out
 
 # Packages #
 ############
@@ -51,6 +52,7 @@ gen/
 build/
 target/
 .idea/
+.ipynb_checkpoints/
 
 # Workaround #
 ##############
