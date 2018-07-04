@@ -71,12 +71,12 @@ Install base system::
 Installing grub and zsh::
 
   arch-chroot /mnt pacman -S grub dosfstools efibootmgr intel-ucode
-  arch-chroot /mnt pacman -S zsh vim git sudo networkmanager
+  arch-chroot /mnt pacman -S zsh gvim git sudo networkmanager
   arch-chroot /mnt pacman -S powertop tlp # for better power management
 
 Create the user ``martin``::
 
-  arch-chroot /mnt useradd -m -g users -s /bin/zsh martin
+  arch-chroot /mnt useradd -m -s /bin/zsh martin
   arch-chroot /mnt chfn martin
   arch-chroot /mnt passwd martin
   arch-chroot /mnt chown -R martin:users /home/martin/Archive
@@ -131,24 +131,27 @@ Configure ``sudoers`` with ``visudo``, add::
 
   martin stella= /usr/bin/pacman
 
-Add repository for yaourt and install it::
+Download and install aurman as user:
 
-  [archlinuxfr]
-  # The French Arch Linux communities packages.
-  SigLevel = Never
-  Server = http://repo.archlinux.fr/$arch
+  curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/aurman.tar.gz
+  tar xvzpf aurman.tar.gz
+  cd aurman
+  makepgk -Acs
+
+Then as root or with sudo:
+
+  pacman -U aur<TAB>
 
 Installing aur utility and installing needed packages::
 
-  pacman -Sy yaourt
-  yaourt -S grub2-theme-archlinux
+  aurman -S deepin-grub2-theme
 
 Configure grub, copy the ``/etc/default/grub`` from arch-conf.git which adds the
 parameters needed for hibernation support::
 
   grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Arch" --recheck --debug
-  mkdir -p /boot/grub/locale
-  cp /usr/share/locale/en@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
+  # mkdir -p /boot/grub/locale
+  # cp /usr/share/locale/en@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
   grub-mkconfig -o /boot/grub/grub.cfg
 
 Enabling Intel Microcode updates is done automatically now.
@@ -164,41 +167,41 @@ Start console session as ``martin``
 
 Sync, update and install the rest of the good stuff::
 
-  yaourt -Syua
+  aurman -Syua
 
 GUI base::
 
-  yaourt -S xfce4 xfce4-goodies pulseaudio sox lightdm lightdm-gtk-greeter
-  yaourt -S slock accountsservice xorg-xmodmap
+  aurman -S xfce4 xfce4-goodies pulseaudio sox lightdm lightdm-gtk-greeter
+  aurman -S slock accountsservice xorg-xmodmap
 
 Fonts, utilities, etc::
 
-  yaourt -S ttf-liberation ttf-symbola
-  yaourt -S adobe-source-code-pro-fonts adobe-source-sans-pro-fonts
-  yaourt -S adobe-source-serif-pro-fonts adobe-source-han-sans-otc-fonts
-  yaourt -S numix-themes numix-circle-icon-theme-git
-  yaourt -S unrar unzip p7zip ntp imagemagick htop
-  yaourt -S google-chrome dropbox redshift
-  yaourt -S network-manager-applet pavucontrol
-  yaourt -S libcanberra-pulse libcanberra-gstreamer
-  yaourt -S libcanberra gnome-keyring thunar-dropbox
+  aurman -S ttf-liberation
+  aurman -S adobe-source-code-pro-fonts adobe-source-sans-pro-fonts
+  aurman -S adobe-source-serif-pro-fonts adobe-source-han-sans-otc-fonts
+  aurman -S arc-solid-gtk-theme deepin-icon-theme
+  aurman -S unrar unzip p7zip ntp imagemagick htop
+  aurman -S google-chrome dropbox redshift
+  aurman -S network-manager-applet pavucontrol
+  aurman -S libcanberra-pulse libcanberra-gstreamer
+  aurman -S libcanberra gnome-keyring thunar-dropbox
 
 Optional::
 
-  yaourt -S python-gobject python-xdg # for redshift-gtk
-  yaourt -S steam openssh vlc
-  yaourt -S xf86-input-synaptics # duh
-  yaourt -S xf86-video-intel libva-intel-driver
-  yaourt -S cdrkit # mkisofs, wodim and stuff
-  yaourt -S glew glfw glm # for the opengl experience
-  yaourt -S zip # to create stupid zip files
+  aurman -S python-gobject python-xdg # for redshift-gtk
+  aurman -S steam openssh vlc
+  aurman -S xf86-input-synaptics # duh
+  aurman -S xf86-video-intel libva-intel-driver
+  aurman -S cdrkit # mkisofs, wodim and stuff
+  aurman -S glew glfw glm # for the opengl experience
+  aurman -S zip # to create stupid zip files
 
 Not used anymore (maybe, some come as dependencies)::
 
-  yaourt -S wqy-microhei wqy-zenhei wqy-bitmapsong-beta
-  yaourt -S ttf-wqy-microhei-ibx ttf-roboto-ibx ttf-dejavu 
-  yaourt -S xfce-theme-greybird
-  yaourt -S xcursor-vanilla-dmz faience-icon-theme
+  aurman -S wqy-microhei wqy-zenhei wqy-bitmapsong-beta
+  aurman -S ttf-wqy-microhei-ibx ttf-roboto-ibx ttf-dejavu 
+  aurman -S xfce-theme-greybird
+  aurman -S xcursor-vanilla-dmz faience-icon-theme
 
 * haveged # random number generator, can't remember what for
 * livestreamer # to stream in VLC from twitch.tv and others
@@ -262,8 +265,8 @@ edit the file ``.config/user-dirs.dirs`` as needed.
 
 **Fix fonts for some applications**::
 
-  gconftool-2 --set --type string /desktop/gnome/interface/font_name "Source Sans Pro"
-  gconftool-2 --set --type string /desktop/gnome/interface/monospace_font_name "Source Code Pro"
+  gconftool-2 --set --type string /desktop/gnome/interface/font_name "Noto Sans"
+  gconftool-2 --set --type string /desktop/gnome/interface/monospace_font_name "Noto Sans Mono"
 
 **Java**
 

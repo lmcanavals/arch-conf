@@ -77,18 +77,19 @@ if has('gui_running') || (&term == 'xterm') || (&term =~ 'xterm-256color')
   set t_Co=256
 endif
 
-colorscheme darkspectrum
+"colorscheme darkspectrum
+colorscheme xoria256
 hi Normal ctermbg=none
 
 "" Gvim options
 if has('gui_running')
   set guioptions-=m     " hide menu
   set guioptions-=T     " hide tool bar
-  set guioptions-=r     " hide scroll bar
+"  set guioptions-=r     " hide scroll bar
   set guioptions+=c     " console dialogs
   set lines=25 columns=100
-  set guifont=Noto\ Sans\ Mono\ 12
   set colorcolumn=81
+  set guifont=Hack\ 12
 endif
 
 "" Specific files fixes
