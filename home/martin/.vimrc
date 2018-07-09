@@ -77,8 +77,9 @@ if has('gui_running') || (&term == 'xterm') || (&term =~ 'xterm-256color')
   set t_Co=256
 endif
 
-"colorscheme darkspectrum
-colorscheme xoria256
+"colorscheme xoria256
+"colorscheme PaperColor
+colorscheme base16-google-dark
 hi Normal ctermbg=none
 
 "" Gvim options

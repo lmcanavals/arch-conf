@@ -70,135 +70,135 @@ TERM xterm-debian
 #NORMAL 00 # no color code at all
 #FILE 00 # regular file: use no color at all
 RESET 0 # reset to "normal" color
-DIR 1;34 # directory
-LINK 1;36 # symbolic link. (If you set this to 'target' instead of a
+DIR 94 # directory
+LINK 96 # symbolic link. (If you set this to 'target' instead of a
  # numerical value, the color is as for the file pointed to.)
-MULTIHARDLINK 00 # regular file with more than one link
-FIFO 1;40;33 # pipe
-SOCK 1;35 # socket
-DOOR 1;35 # door
-BLK 1;40;33 # block device driver
-CHR 1;40;33 # character device driver
-ORPHAN 1;40;30 # symlink to nonexistent file, or non-stat'able file
-SETUID 1;37;41 # file that is setuid (u+s)
-SETGID 1;30;43 # file that is setgid (g+s)
-CAPABILITY 1;30;41 # file with capability
-STICKY_OTHER_WRITABLE 1;30;42 # dir that is sticky and other-writable (+t,o+w)
-OTHER_WRITABLE 1;34;42 # dir that is other-writable (o+w) and not sticky
-STICKY 1;37;44 # dir with the sticky bit set (+t) and not other-writable
+MULTIHARDLINK 1;96 # regular file with more than one link
+FIFO 100;95 # pipe
+SOCK 100;35 # socket
+DOOR 47;35 # door
+BLK 100;94 # block device driver
+CHR 100;33 # character device driver
+ORPHAN 30;41 # symlink to nonexistent file, or non-stat'able file
+SETUID 1;100;92 # file that is setuid (u+s)
+SETGID 1;47;92 # file that is setgid (g+s)
+CAPABILITY 1;100;32 # file with capability
+STICKY_OTHER_WRITABLE 1;47;94 # dir sticky and other-writable (+t,o+w)
+OTHER_WRITABLE 47;94 # dir is other-writable (o+w) and not sticky
+STICKY 1;100;94 # dir with sticky bit set (+t) and not other-writable
 # This is for files with execute permission:
-EXEC 1;32
+EXEC 1;92
 # List any file extensions like '.gz' or '.tar' that you would like ls
 # to colorize below. Put the extension, a space, and the color init string.
 # (and any comments you want to add after a '#')
 # If you use DOS-style suffixes, you may want to uncomment the following:
-#.cmd 32 # executables (bright green)
-#.exe 32
-#.com 32
-#.btm 32
-#.bat 32
+#.cmd 01;32 # executables (bright green)
+#.exe 01;32
+#.com 01;32
+#.btm 01;32
+#.bat 01;32
 # Or if you want to colorize scripts even if they do not have the
 # executable bit actually set.
-#.sh 32
-#.csh 32
- # archives or compressed (bright red)
-.tar 1;31
-.tgz 1;31
-.arj 1;31
-.taz 1;31
-.lzh 1;31
-.lzma 1;31
-.tlz 1;31
-.txz 1;31
-.zip 1;31
-.z 1;31
-.Z 1;31
-.dz 1;31
-.gz 1;31
-.lz 1;31
-.xz 1;31
-.bz2 1;31
-.bz 1;31
-.tbz 1;31
-.tbz2 1;31
-.tz 1;31
-.deb 1;31
-.rpm 1;31
-.jar 1;31
-.war 1;31
-.ear 1;31
-.sar 1;31
-.rar 1;31
-.ace 1;31
-.zoo 1;31
-.cpio 1;31
-.7z 1;31
-.rz 1;31
+#.sh 01;32
+#.csh 01;32
+# archives or compressed (bright red)
+.tar 1;94
+.tgz 1;94
+.arj 1;94
+.taz 1;94
+.lzh 1;94
+.lzma 1;94
+.tlz 1;94
+.txz 1;94
+.zip 1;94
+.z 1;94
+.Z 1;94
+.dz 1;94
+.gz 1;94
+.lz 1;94
+.xz 1;94
+.bz2 1;94
+.bz 1;94
+.tbz 1;94
+.tbz2 1;94
+.tz 1;94
+.deb 1;94
+.rpm 1;94
+.jar 1;94
+.war 1;94
+.ear 1;94
+.sar 1;94
+.rar 1;94
+.ace 1;94
+.zoo 1;94
+.cpio 1;94
+.7z 1;94
+.rz 1;94
 # image formats
-.jpg 1;35
-.jpeg 1;35
-.gif 1;35
-.bmp 1;35
-.pbm 1;35
-.pgm 1;35
-.ppm 1;35
-.tga 1;35
-.xbm 1;35
-.xpm 1;35
-.tif 1;35
-.tiff 1;35
-.png 1;35
-.svg 1;35
-.svgz 1;35
-.mng 1;35
-.pcx 1;35
-.mov 1;35
-.mpg 1;35
-.mpeg 1;35
-.m2v 1;35
-.mkv 1;35
-.webm 1;35
-.ogm 1;35
-.mp4 1;35
-.m4v 1;35
-.mp4v 1;35
-.vob 1;35
-.qt 1;35
-.nuv 1;35
-.wmv 1;35
-.asf 1;35
-.rm 1;35
-.rmvb 1;35
-.flc 1;35
-.avi 1;35
-.fli 1;35
-.flv 1;35
-.gl 1;35
-.dl 1;35
-.xcf 1;35
-.xwd 1;35
-.yuv 1;35
-.cgm 1;35
-.emf 1;35
+.jpg 93
+.jpeg 93
+.gif 93
+.bmp 93
+.pbm 93
+.pgm 93
+.ppm 93
+.tga 93
+.xbm 93
+.xpm 93
+.tif 93
+.tiff 93
+.png 93
+.svg 93
+.svgz 93
+.mng 93
+.pcx 93
+.mov 93
+.mpg 93
+.mpeg 93
+.m2v 93
+.mkv 93
+.webm 93
+.ogm 93
+.mp4 93
+.m4v 93
+.mp4v 93
+.vob 93
+.qt 93
+.nuv 93
+.wmv 93
+.asf 93
+.rm 93
+.rmvb 93
+.flc 93
+.avi 93
+.fli 93
+.flv 93
+.gl 93
+.dl 93
+.xcf 93
+.xwd 93
+.yuv 93
+.cgm 93
+.emf 93
 # http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
-.axv 1;35
-.anx 1;35
-.ogv 1;35
-.ogx 1;35
+.axv 93
+.anx 93
+.ogv 93
+.ogx 93
 # audio formats
-.aac 1;36
-.au 1;36
-.flac 1;36
-.mid 1;36
-.midi 1;36
-.mka 1;36
-.mp3 1;36
-.mpc 1;36
-.ogg 1;36
-.ra 1;36
-.wav 1;36
+.aac 93
+.au 93
+.flac 93
+.mid 93
+.midi 93
+.mka 93
+.mp3 93
+.mpc 93
+.ogg 93
+.ra 93
+.wav 93
 # http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
-.axa 1;36
-.oga 1;36
-.spx 1;36
-.xspf 1;36
+.axa 93
+.oga 93
+.spx 93
+.xspf 93

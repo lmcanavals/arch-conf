@@ -3,74 +3,47 @@ if [[ ${TERM} == "xterm" ]]; then
   export TERM="xterm-256color"
 fi
 
-if [ "$TERM" = "linux" ]; then
-#  echo -en "\e]P0FDF6E3"
-  echo -en "\e]P1EEE8D5"
-  echo -en "\e]P2586E75"
-  echo -en "\e]P3657B83"
-  echo -en "\e]P4002b36"
-  echo -en "\e]P5073642"
-  echo -en "\e]P693A1A1"
-  echo -en "\e]P7839496"
-  echo -en "\e]P8CB4B16"
-  echo -en "\e]P9DC322F"
-  echo -en "\e]PA719E07"
-  echo -en "\e]PBB58900"
-  echo -en "\e]PC268BD2"
-  echo -en "\e]PDD33682"
-  echo -en "\e]PE2AA198"
-  echo -en "\e]PF6C71C4"
-#  clear #for background artifacting
-fi
+#if [ "$TERM" = "linux" ]; then
+##  echo -en "\e]P0FDF6E3"
+#  echo -en "\e]P1EEE8D5"
+#  echo -en "\e]P2586E75"
+#  echo -en "\e]P3657B83"
+#  echo -en "\e]P4002b36"
+#  echo -en "\e]P5073642"
+#  echo -en "\e]P693A1A1"
+#  echo -en "\e]P7839496"
+#  echo -en "\e]P8CB4B16"
+#  echo -en "\e]P9DC322F"
+#  echo -en "\e]PA719E07"
+#  echo -en "\e]PBB58900"
+#  echo -en "\e]PC268BD2"
+#  echo -en "\e]PDD33682"
+#  echo -en "\e]PE2AA198"
+#  echo -en "\e]PF6C71C4"
+##  clear #for background artifacting
+#fi
+
+eval $(dircolors ~/.zsh/16.dircolors)
 # the ^[ is "entered" by typing Ctrl+v and Ctrl+[ 
-if (( $(tput colors) == 256 )); then
-  if (( EUID == 0 )); then
-    Z_C_BG="[48;5;1m"
-    Z_C_USR="[38;5;13m"
-  else
-    Z_C_BG="[48;5;2m"
-    Z_C_USR="[38;5;14m"
-  fi
-  Z_C_NT="[38;5;0m"
-  Z_B_NT="[48;5;7m"
-  Z_C_PWD="[38;5;15m"
-  Z_C_ERR="[38;5;9m"
-  Z_B_ERR="[48;5;9m"
-  Z_C_MSG="[38;5;11m"
-  Z_B_MSG="[48;5;11m"
-  Z_C_GIT="[38;5;14m"
-  Z_C_OPT="[38;5;13m"
-  Z_C_PAR="[38;5;14m"
-  Z_C_STA="[38;5;6m"
-  Z_C_END="[0m"
-
-  GREP_COLORS="mt=38;5;14:ms=38;5;214:mc=38;5;217:sl=:cx=:fn=38;5;15"
-  GREP_COLORS+=":ln=38;5;10:bn=38;5;118:se=38;5;14"
-  eval $(dircolors ~/.zsh/256.dircolors)
-
+if (( EUID == 0 )); then
+  Z_C_BG="[41m"
+  Z_C_USR="[92m"
 else
-  if (( EUID == 0 )); then
-    Z_C_USR="[1;31m"
-  else
-    Z_C_USR="[1;32m"
-  fi
-  Z_C_BG="[45m"
-  Z_C_NT="[1;41m"
-  Z_B_NT="[42m"
-  Z_C_PWD="[1;37m"
-  Z_C_ERR="[1;30m"
-  Z_B_ERR="[43m"
-  Z_C_MSG="[1;33m"
-  Z_B_MSG="[42m"
-  Z_C_GIT="[1;34m"
-  Z_C_OPT="[1;35m"
-  Z_C_PAR="[1;36m"
-  Z_C_STA="[1;44;33m"
-  Z_C_END="[0m"
-
-  GREP_COLORS="mt=1;31:ms=1;31:mc=1;31:sl=:cx=:fn=1;35:ln=1;32:bn=1;32:se=1;36"
-  eval $(dircolors ~/.zsh/16.dircolors)
+  Z_C_BG="[42m"
+  Z_C_USR="[93m"
 fi
+Z_C_NT="[90m"
+Z_B_NT="[47m"
+Z_C_PWD="[97m"
+Z_C_ERR="[91m"
+Z_B_ERR="[101m"
+Z_C_MSG="[93m"
+Z_B_MSG="[103m"
+Z_C_GIT="[96m"
+Z_C_OPT="[95m"
+Z_C_PAR="[96m"
+Z_C_STA="[36m"
+Z_C_END="[0m"
 
 setopt append_history
 setopt share_history
@@ -98,7 +71,7 @@ export PAGER="less"
 export SHELL='/bin/zsh'
 export BROWSER="google-chrome-stable"
 
-export GREP_COLORS
+#export GREP_COLORS
 export LS_COLORS
 export LESS_TERMCAP_mb=$Z_C_MSG
 export LESS_TERMCAP_md=$Z_C_OPT
