@@ -3,47 +3,47 @@ if [[ ${TERM} == "xterm" ]]; then
   export TERM="xterm-256color"
 fi
 
-#if [ "$TERM" = "linux" ]; then
-##  echo -en "\e]P0FDF6E3"
-#  echo -en "\e]P1EEE8D5"
-#  echo -en "\e]P2586E75"
-#  echo -en "\e]P3657B83"
-#  echo -en "\e]P4002b36"
-#  echo -en "\e]P5073642"
-#  echo -en "\e]P693A1A1"
-#  echo -en "\e]P7839496"
-#  echo -en "\e]P8CB4B16"
-#  echo -en "\e]P9DC322F"
-#  echo -en "\e]PA719E07"
-#  echo -en "\e]PBB58900"
-#  echo -en "\e]PC268BD2"
-#  echo -en "\e]PDD33682"
-#  echo -en "\e]PE2AA198"
-#  echo -en "\e]PF6C71C4"
-##  clear #for background artifacting
-#fi
+if [ "$TERM" = "linux" ]; then
+  echo -en "\e]P0000000"
+  echo -en "\e]P1cc0000"
+  echo -en "\e]P24e9a06"
+  echo -en "\e]P3c4a000"
+  echo -en "\e]P43465a4"
+  echo -en "\e]P575507b"
+  echo -en "\e]P606989a"
+  echo -en "\e]P7d3d7cf"
+  echo -en "\e]P8555753"
+  echo -en "\e]P9ef2929"
+  echo -en "\e]PA8ae234"
+  echo -en "\e]PBfce94f"
+  echo -en "\e]PC739fcf"
+  echo -en "\e]PDad7fa8"
+  echo -en "\e]PE34e2e2"
+  echo -en "\e]PFeeeeec"
+#  clear #for background artifacting
+fi
 
 eval $(dircolors ~/.zsh/16.dircolors)
 # the ^[ is "entered" by typing Ctrl+v and Ctrl+[ 
 if (( EUID == 0 )); then
-  Z_C_BG="[41m"
-  Z_C_USR="[92m"
+  bgp="[41m"
+  fgu="[92m"
 else
-  Z_C_BG="[42m"
-  Z_C_USR="[93m"
+  bgp="[42m"
+  fgu="[93m"
 fi
-Z_C_NT="[90m"
-Z_B_NT="[47m"
-Z_C_PWD="[97m"
-Z_C_ERR="[91m"
-Z_B_ERR="[101m"
-Z_C_MSG="[93m"
-Z_B_MSG="[103m"
-Z_C_GIT="[96m"
-Z_C_OPT="[95m"
-Z_C_PAR="[96m"
-Z_C_STA="[36m"
-Z_C_END="[0m"
+fgnt="[90m"
+bgnt="[47m"
+fgpwd="[97m"
+fgerr="[91m"
+bgerr="[41m"
+fgmsg="[93m"
+bgmsg="[103m"
+fggit="[96m"
+fgopt="[95m"
+fgpar="[96m"
+fgst="[36m"
+vend="[0m"
 
 setopt append_history
 setopt share_history
@@ -68,18 +68,18 @@ setopt unset
 source $HOME/.zsh/paths.sh
 export EDITOR="vim"
 export PAGER="less"
-export SHELL='/bin/zsh'
+export SHELL="/bin/zsh"
 export BROWSER="google-chrome-stable"
 
 #export GREP_COLORS
 export LS_COLORS
-export LESS_TERMCAP_mb=$Z_C_MSG
-export LESS_TERMCAP_md=$Z_C_OPT
-export LESS_TERMCAP_me=$Z_C_END
-export LESS_TERMCAP_se=$Z_C_END
-export LESS_TERMCAP_so=$Z_C_STA
-export LESS_TERMCAP_ue=$Z_C_END
-export LESS_TERMCAP_us=$Z_C_PAR
+export LESS_TERMCAP_mb=$fgmsg
+export LESS_TERMCAP_md=$fgopt
+export LESS_TERMCAP_me=$vend
+export LESS_TERMCAP_se=$vend
+export LESS_TERMCAP_so=$fgst
+export LESS_TERMCAP_ue=$vend
+export LESS_TERMCAP_us=$fgpar
 
 REPORTTIME=5
 watch=(notme root)
@@ -117,31 +117,31 @@ beginning-or-end-of-somewhere() {
 zle -N beginning-of-somewhere beginning-or-end-of-somewhere
 zle -N end-of-somewhere beginning-or-end-of-somewhere
 
-bindkey '\eOH' beginning-of-somewhere  # home
-bindkey '[H' beginning-of-somewhere  # home
-bindkey '\eOF' end-of-somewhere        # end
-bindkey '[F' end-of-somewhere        # end
+bindkey "\eOH" beginning-of-somewhere  # home
+bindkey "[H" beginning-of-somewhere  # home
+bindkey "\eOF" end-of-somewhere        # end
+bindkey "[F" end-of-somewhere        # end
 
-bindkey '\e[A'  up-line-or-search       # cursor up
-bindkey '\e[B'  down-line-or-search     # <ESC>-
+bindkey "\e[A"  up-line-or-search       # cursor up
+bindkey "\e[B"  down-line-or-search     # <ESC>-
 
 ## use Ctrl <- and Ctrl -> for jumping to word-beginnings on the CL
 bindkey "\e[1;5C" forward-word
 bindkey "\e[1;5D" backward-word
 ## the same for alt-left-arrow and alt-right-arrow
-bindkey '^[[1;3C' forward-word
-bindkey '^[[1;3D' backward-word
+bindkey "[1;3C" forward-word
+bindkey "[1;3D" backward-word
 
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end  history-search-end
-bindkey '^xp'   history-beginning-search-backward-end
-bindkey '^xP'   history-beginning-search-forward-end
+bindkey "^xp"   history-beginning-search-backward-end
+bindkey "^xP"   history-beginning-search-forward-end
 bindkey "\e[5~" history-beginning-search-backward-end # PageUp
 bindkey "\e[6~" history-beginning-search-forward-end  # PageDown
 
 autoload -U insert-unicode-char
 zle -N insert-unicode-char
-bindkey '^xi' insert-unicode-char
+bindkey "^xi" insert-unicode-char
 
 bindkey "$terminfo[kcbt]" reverse-menu-complete
 
@@ -154,7 +154,7 @@ grml_toggle_abbrev() {
   fi
 }
 zle -N grml_toggle_abbrev
-bindkey '^xA' grml_toggle_abbrev
+bindkey "^xA" grml_toggle_abbrev
 
 commit-to-history() {
   print -s ${(z)BUFFER}
@@ -170,14 +170,14 @@ slash-backward-kill-word() {
 }
 zle -N slash-backward-kill-word
 
-bindkey '\ev' slash-backward-kill-word
-bindkey '\e^h' slash-backward-kill-word
-bindkey '\e^?' slash-backward-kill-word
+bindkey "\ev" slash-backward-kill-word
+bindkey "\e^h" slash-backward-kill-word
+bindkey "\e^?" slash-backward-kill-word
 
-bindkey '^r' history-incremental-pattern-search-backward
-bindkey '^s' history-incremental-pattern-search-forward
+bindkey "^r" history-incremental-pattern-search-backward
+bindkey "^s" history-incremental-pattern-search-forward
 
-zstyle ':acceptline:*' rehash true
+zstyle ":acceptline:*" rehash true
 function Accept-Line() {
   setopt localoptions noksharrays
   local -a subs
@@ -191,7 +191,7 @@ function Accept-Line() {
 
   (( aldone = 0 ))
   for sub in ${subs} ; do
-    [[ ${sub} == 'accept-line' ]] && sub='.accept-line'
+    [[ ${sub} == "accept-line" ]] && sub=".accept-line"
     zle ${sub}
     (( aldone > 0 )) && break
   done
@@ -223,13 +223,13 @@ function accept-line() {
   local -x alcontext
   local buf com fname format msg default_action
 
-  alcontext='default'
+  alcontext="default"
   buf="${BUFFER}"
   cmdline=(${(z)BUFFER})
   com="${cmdline[1]}"
   fname="_${com}"
 
-  Accept-Line 'preprocess'
+  Accept-Line "preprocess"
 
   zstyle -t ":acceptline:${alcontext}" rehash \
     && [[ -z ${commands[$com]} ]]           \
@@ -243,7 +243,7 @@ function accept-line() {
     || [[ -n ${commands[$com]}    ]] ; then
 
     # there is something sensible to execute, just do it.
-    alcontext='normal'
+    alcontext="normal"
     Accept-Line-HandleContext
 
     return
@@ -253,15 +253,15 @@ function accept-line() {
     || [[ -o correctall           ]] \
     && [[ -n ${functions[$fname]} ]] ; then
 
-    if [[ ${LASTWIDGET} == 'accept-line' ]] ; then
-      alcontext='force'
+    if [[ ${LASTWIDGET} == "accept-line" ]] ; then
+      alcontext="force"
       Accept-Line-HandleContext
 
       return
     fi
 
     if zstyle -t ":acceptline:${alcontext}" nocompwarn ; then
-      alcontext='normal'
+      alcontext="normal"
       Accept-Line-HandleContext
     else
     # prepare warning message for the user, configurable via zstyle.
@@ -277,14 +277,14 @@ function accept-line() {
     fi
     return
   elif [[ -n ${buf//[$' \t\n']##/} ]] ; then
-    alcontext='misc'
+    alcontext="misc"
     Accept-Line-HandleContext
 
     return
   fi
 
   # If we got this far, the commandline only contains whitespace, or is empty.
-  alcontext='empty'
+  alcontext="empty"
   Accept-Line-HandleContext
 }
 zle -N accept-line
@@ -295,36 +295,36 @@ declare -A abk
 setopt extendedglob
 setopt interactivecomments
 abk=(
-  '...'  '../..'
-  '....' '../../..'
-  'BG'   '& exit'
-  'C'    '| wc -l'
-  'G'    '|& grep '
-  'H'    '| head'
-  'Hl'   ' --help |& less -r'
-  'L'    '| less'
-  'LL'   '|& less -r'
-  'M'    '| most'
-  'N'    '&>/dev/null'
-  'R'    '| tr A-z N-za-m'
-  'SL'   '| sort | less'
-  'S'    '| sort -u'
-  'T'    '| tail'
-  'V'    '|& vim -'
-  'co'   './configure && make && sudo make install'
-  'syu'  'aurman -Syu'
-  'ss'   'aurman -Ss '
-  'si'   'aurman -Si '
-  's'    'aurman -S '
-  'sc'   'aurman -Sc'
-  'qs'   'aurman -Qs '
-  'qi'   'aurman -Qi '
-  'qo'   'aurman -Qo '
-  'ql'   'aurman -Ql '
-  'qm'   'aurman -Qm'
-  'qet'  'aurman -Qet'
-  'qdt'  'aurman -Qdt'
-  'rncs' 'aurman -Rncs '
+  "..."  "../.."
+  "...." "../../.."
+  "BG"   "& exit"
+  "C"    "| wc -l"
+  "G"    "|& grep "
+  "H"    "| head"
+  "Hl"   " --help |& less -r"
+  "L"    "| less"
+  "LL"   "|& less -r"
+  "M"    "| most"
+  "N"    "&>/dev/null"
+  "R"    "| tr A-z N-za-m"
+  "SL"   "| sort | less"
+  "S"    "| sort -u"
+  "T"    "| tail"
+  "V"    "|& vim -"
+  "co"   "./configure && make && sudo make install"
+  "syu"  "aurman -Syu"
+  "ss"   "aurman -Ss "
+  "si"   "aurman -Si "
+  "s"    "aurman -S "
+  "sc"   "aurman -Sc"
+  "qs"   "aurman -Qs "
+  "qi"   "aurman -Qi "
+  "qo"   "aurman -Qo "
+  "ql"   "aurman -Ql "
+  "qm"   "aurman -Qm"
+  "qet"  "aurman -Qet"
+  "qdt"  "aurman -Qdt"
+  "rncs" "aurman -Rncs "
 )
 
 zleiab() {
@@ -337,7 +337,7 @@ zleiab() {
     return 0
   fi
 
-  matched_chars='[.-|_a-zA-Z0-9]#'
+  matched_chars="[.-|_a-zA-Z0-9]#"
   LBUFFER=${LBUFFER%%(#m)[.-|_a-zA-Z0-9]#}
   LBUFFER+=${abk[$MATCH]:-$MATCH}
   _zsh_highlight # workaround to highlight after autocompleting
@@ -367,22 +367,22 @@ zmodload -ap zsh/mapfile mapfile
 
 autoload -U insert-files && zle -N insert-files && bindkey "^xf" insert-files
 
-bindkey ' '   magic-space
-bindkey '\ei' menu-complete
+bindkey " "   magic-space
+bindkey "\ei" menu-complete
 
 autoload -U edit-command-line && zle -N edit-command-line \
-    && bindkey '\ee' edit-command-line
+    && bindkey "\ee" edit-command-line
 
 if [[ -n ${(k)modules[zsh/complist]} ]] ; then
-  bindkey -M menuselect '\e^M' accept-and-menu-complete
+  bindkey -M menuselect "\e^M" accept-and-menu-complete
   bindkey -M menuselect "+" accept-and-menu-complete
   bindkey -M menuselect "^[[2~" accept-and-menu-complete
-  bindkey -M menuselect '^o' accept-and-infer-next-history
+  bindkey -M menuselect "^o" accept-and-infer-next-history
 fi
 
-insert-datestamp() { LBUFFER+=${(%):-'%D{%Y-%m-%d}'}; }
+insert-datestamp() { LBUFFER+=${(%):-"%D{%Y-%m-%d}"}; }
 zle -N insert-datestamp
-bindkey '^ed' insert-datestamp
+bindkey "^ed" insert-datestamp
 
 insert-last-typed-word() { zle insert-last-word -- 0 -1 };
 zle -N insert-last-typed-word;
@@ -391,15 +391,15 @@ bindkey "\em" insert-last-typed-word
 function grml-zsh-fg() {
   if (( ${#jobstates} )); then
     zle .push-input
-    [[ -o hist_ignore_space ]] && BUFFER=' ' || BUFFER=''
+    [[ -o hist_ignore_space ]] && BUFFER=" " || BUFFER=""
     BUFFER="${BUFFER}fg"
     zle .accept-line
   else
-    zle -M 'No background jobs. Doing nothing.'
+    zle -M "No background jobs. Doing nothing."
   fi
 }
 zle -N grml-zsh-fg
-bindkey '^z' grml-zsh-fg
+bindkey "^z" grml-zsh-fg
 
 function jump_after_first_word() {
   local words
@@ -411,10 +411,10 @@ function jump_after_first_word() {
   fi
 }
 zle -N jump_after_first_word
-bindkey '^x1' jump_after_first_word
+bindkey "^x1" jump_after_first_word
 
 zle -C hist-complete complete-word _generic
-zstyle ':completion:hist-complete:*' completer _history
+zstyle ":completion:hist-complete:*" completer _history
 bindkey "^x^x" hist-complete
 
 ZSHDIR=$HOME/.zsh
@@ -440,7 +440,7 @@ function chpwd_profiles() {
   local -i reexecute
 
   context=":chpwd:profiles:$PWD"
-  zstyle -s "$context" profile profile || profile='default'
+  zstyle -s "$context" profile profile || profile="default"
   zstyle -T "$context" re-execute && reexecute=1 || reexecute=0
   if (( ${+parameters[CHPWD_PROFILE]} == 0 )); then
     typeset -g CHPWD_PROFILE
@@ -460,19 +460,19 @@ function chpwd_profiles() {
 chpwd_functions=( ${chpwd_functions} chpwd_profiles )
 
 if autoload -U vcs_info; then
-  zstyle ':vcs_info:*' max-exports 2
+  zstyle ":vcs_info:*" max-exports 2
   if [[ -o restricted ]]; then
-    zstyle ':vcs_info:*' enable NONE
+    zstyle ":vcs_info:*" enable NONE
   fi
 fi
 
 #setopt transient_rprompt
 
-PS2='\`%_> '
-PS3='?# '
-PS4='+%N:%i:%_> '
-Z_RPROMPT_NORM="%(?.-- ins --.%{$Z_C_ERR%}-- %?%1v --%{$Z_C_END%})"
-Z_PROMPT_I1="%{$Z_C_BG$Z_C_USR%}%n@%m:%{$Z_C_PWD%}%25<...<%~%<<"
+PS2="\`%_> "
+PS3="?# "
+PS4="+%N:%i:%_> "
+Z_RPROMPT_NORM="%(?.-- ins --.%{$fgerr%}-- %?%1v --%{$vend%})"
+Z_PROMPT_I1="%{$bgp$fgu%}%n@%m:%{$fgpwd%}%25<...<%~%<<"
 
 # Miscelaneus info like git.
 function prompt_misc () {
@@ -482,13 +482,13 @@ function prompt_misc () {
     tbranch=${tbranch:2}
     tstatus=""
     ttmp=$(git status)
-    if [[ -n $(echo $ttmp | grep 'Untracked') ]]; then
+    if [[ -n $(echo $ttmp | grep "Untracked") ]]; then
       tstatus+="+"
     fi
-    if [[ -n $(echo $ttmp | grep 'nothing to commit') ]]; then
-      tcolor=$Z_C_GIT
+    if [[ -n $(echo $ttmp | grep "nothing to commit") ]]; then
+      tcolor=$fggit
     else
-      tcolor=$Z_C_ERR
+      tcolor=$fgerr
       tstatus+="*"
     fi
     ttl=$(git rev-list master | wc -l)
@@ -505,13 +505,13 @@ function prompt_misc () {
 function prompt_end () {
   local tfinal tsym
   if [[ "$1" == "c" ]]; then
-    tfinal="${Z_B_MSG}"
+    tfinal="${bgmsg}"
     tsym=":"
   else # $1 == n
-    tfinal="%(?.${Z_B_NT}.${Z_B_ERR})"
+    tfinal="%(?.${bgnt}.${bgerr})"
     tsym="%(?.%#.!)"
   fi
-  print "%{$tfinal$Z_C_NT%} $tsym %{$Z_C_END%} "
+  print "%{$tfinal$fgnt%} $tsym %{$vend%} "
 }
 
 function ESC_print () {
@@ -527,14 +527,14 @@ function info_print () {
   esc_begin="$1"
   esc_end="$2"
   shift 2
-  printf '%s' ${esc_begin}
-  printf '%s' "$*"
-  printf '%s' "${esc_end}"
+  printf "%s" ${esc_begin}
+  printf "%s" "$*"
+  printf "%s" "${esc_end}"
 }
 
 zle-keymap-select() {
   if [[ $KEYMAP = vicmd ]]; then
-    RPROMPT="%{$Z_C_MSG%}-- cmd --%{$Z_C_END%}"
+    RPROMPT="%{$fgmsg%}-- cmd --%{$vend%}"
     PROMPT="$Z_PROMPT_I1$(prompt_misc)$(prompt_end c)"
   else
     RPROMPT=$Z_RPROMPT_NORM
@@ -574,74 +574,74 @@ preexec () {
 }
 
 export COLORTERM="yes"
-alias grep='grep --color=auto '
-alias ls='ls -b -CF --color=auto --group-directories-first '
-alias la='ls -la '
-alias ll='ls -l '
-alias lh='ls -hAl '
-alias l='ls -lF '
-alias mdstat='cat /proc/mdstat'
-alias ...='cd ../../'
-alias da='du -sch'
-alias j='jobs -l'
+alias grep="grep --color=auto "
+alias ls="ls -b -CF --color=auto --group-directories-first "
+alias la="ls -la "
+alias ll="ls -l "
+alias lh="ls -hAl "
+alias l="ls -lF "
+alias mdstat="cat /proc/mdstat"
+alias ...="cd ../../"
+alias da="du -sch"
+alias j="jobs -l"
 alias dir="ls -lSrah"
-alias lad='ls -d .*(/)'
-alias lsa='ls -a .*(.)'
-alias lss='ls -l *(s,S,t)'
-alias lsl='ls -l *(@)'
-alias lsx='ls -l *(*)'
-alias lsw='ls -ld *(R,W,X.^ND/)'
+alias lad="ls -d .*(/)"
+alias lsa="ls -a .*(.)"
+alias lss="ls -l *(s,S,t)"
+alias lsl="ls -l *(@)"
+alias lsx="ls -l *(*)"
+alias lsw="ls -ld *(R,W,X.^ND/)"
 alias lsbig="ls -flh *(.OL[1,10])"
-alias lsd='ls -d *(/)'
-alias lse='ls -d *(/^F)'
+alias lsd="ls -d *(/)"
+alias lse="ls -d *(/^F)"
 alias lsnew="ls -rtlh *(D.om[1,10])"
 alias lsold="ls -rtlh *(D.Om[1,10])"
 alias lssmall="ls -Srl *(.oL[1,10])"
 alias lsnewdir="ls -rthdl *(/om[1,10]) .*(D/om[1,10])"
 alias lsolddir="ls -rthdl *(/Om[1,10]) .*(D/Om[1,10])"
-alias rmcdir='cd ..; rmdir $OLDPWD || cd $OLDPWD'
+alias rmcdir="cd ..; rmdir $OLDPWD || cd $OLDPWD"
 
 # Use hard limits, except for a smaller stack and no core dumps
 unlimit
 limit stack 8192
 limit -s
 
-zstyle ':completion:*:approximate:'    max-errors \
-    'reply=( $((($#PREFIX+$#SUFFIX)/3 )) numeric )'
-zstyle ':completion:*:correct:*'       insert-unambiguous true
-zstyle ':completion:*:corrections'     format \
-    "%{$Z_C_ERR%}%d, errors: %e%{$Z_C_END%}"
-zstyle ':completion:*:correct:*'       original true
-zstyle ':completion:*:default'         list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*:descriptions'    format "%{$Z_C_MSG%}%d%{$Z_C_END%}"
-zstyle ':completion:*:expand:*'        tag-order all-expansions
-zstyle ':completion:*:history-words'   list false
-zstyle ':completion:*:history-words'   menu yes
-zstyle ':completion:*:history-words'   remove-all-dups yes
-zstyle ':completion:*:history-words'   stop yes
-zstyle ':completion:*'                 matcher-list 'm:{a-z}={A-Z}'
-zstyle ':completion:*:matches'         group 'yes'
-zstyle ':completion:*'                 group-name ''
-zstyle ':completion:*'                 menu select=5
-zstyle ':completion:*:messages'        format "%{$Z_C_OPT%}%d%{$Z_C_END%}"
-zstyle ':completion:*:options'         auto-description \
-    "%{$Z_C_PAR%}%d%{$Z_C_END%}"
-zstyle ':completion:*:options'         description 'yes'
-zstyle ':completion:*:processes'       command 'ps -au$USER'
-zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
-zstyle ':completion:*'                 verbose true
-zstyle ':completion:*:-command-:*:'    verbose false
-zstyle ':completion:*:warnings'        format \
-    "%{$Z_C_ERR%}No matches:%{$Z_C_END%} %d"
-zstyle ':completion:*:*:zcompile:*'    ignored-patterns '(*~|*.zwc)'
-zstyle ':completion:correct:'          prompt 'correct to: %e'
-zstyle ':completion::(^approximate*):*:functions' ignored-patterns '_*'
-zstyle ':completion:*:processes-names' command \
-    'ps c -u ${USER} -o command | uniq'
-zstyle ':completion:*:manuals'         separate-sections true
-zstyle ':completion:*:manuals.*'       insert-sections   true
-zstyle ':completion:*:man:*'           menu yes select
-zstyle ':completion:*'                 special-dirs ..
+zstyle ":completion:*:approximate:"    max-errors \
+    "reply=( $((($#PREFIX+$#SUFFIX)/3 )) numeric )"
+zstyle ":completion:*:correct:*"       insert-unambiguous true
+zstyle ":completion:*:corrections"     format \
+    "%{$fgerr%}%d, errors: %e%{$vend%}"
+zstyle ":completion:*:correct:*"       original true
+zstyle ":completion:*:default"         list-colors ${(s.:.)LS_COLORS}
+zstyle ":completion:*:descriptions"    format "%{$fgmsg%}%d%{$vend%}"
+zstyle ":completion:*:expand:*"        tag-order all-expansions
+zstyle ":completion:*:history-words"   list false
+zstyle ":completion:*:history-words"   menu yes
+zstyle ":completion:*:history-words"   remove-all-dups yes
+zstyle ":completion:*:history-words"   stop yes
+zstyle ":completion:*"                 matcher-list "m:{a-z}={A-Z}"
+zstyle ":completion:*:matches"         group "yes"
+zstyle ":completion:*"                 group-name ""
+zstyle ":completion:*"                 menu select=5
+zstyle ":completion:*:messages"        format "%{$fgopt%}%d%{$vend%}"
+zstyle ":completion:*:options"         auto-description \
+    "%{$fgpar%}%d%{$vend%}"
+zstyle ":completion:*:options"         description "yes"
+zstyle ":completion:*:processes"       command "ps -au$USER"
+zstyle ":completion:*:*:-subscript-:*" tag-order indexes parameters
+zstyle ":completion:*"                 verbose true
+zstyle ":completion:*:-command-:*:"    verbose false
+zstyle ":completion:*:warnings"        format \
+    "%{$fgerr%}No matches:%{$vend%} %d"
+zstyle ":completion:*:*:zcompile:*"    ignored-patterns "(*~|*.zwc)"
+zstyle ":completion:correct:"          prompt "correct to: %e"
+zstyle ":completion::(^approximate*):*:functions" ignored-patterns "_*"
+zstyle ":completion:*:processes-names" command \
+    "ps c -u ${USER} -o command | uniq"
+zstyle ":completion:*:manuals"         separate-sections true
+zstyle ":completion:*:manuals.*"       insert-sections   true
+zstyle ":completion:*:man:*"           menu yes select
+zstyle ":completion:*"                 special-dirs ..
 
 # run rehash on completion so new installed program are found automatically:
 _force_rehash() {
@@ -650,20 +650,20 @@ _force_rehash() {
 }
 
 setopt correct
-zstyle -e ':completion:*' completer '
-  if [[ $_last_try != "$HISTNO$BUFFER$CURSOR" ]] ; then
-    _last_try="$HISTNO$BUFFER$CURSOR"
-    reply=(_complete _match _ignored _prefix _files)
+zstyle -e ":completion:*" completer '
+if [[ $_last_try != "$HISTNO$BUFFER$CURSOR" ]] ; then
+  _last_try="$HISTNO$BUFFER$CURSOR"
+  reply=(_complete _match _ignored _prefix _files)
+else
+  if [[ $words[1] == (rm|mv) ]] ; then
+    reply=(_complete _files)
   else
-    if [[ $words[1] == (rm|mv) ]] ; then
-      reply=(_complete _files)
-    else
-      reply=(_oldlist _expand _force_rehash _complete _ignored _correct _approximate _files)
-    fi
-  fi'
+    reply=(_oldlist _expand _force_rehash _complete _ignored _correct _approximate _files)
+  fi
+fi'
 
-[[ -d $ZSHDIR/cache ]] && zstyle ':completion:*' use-cache yes && \
-    zstyle ':completion::complete:*' cache-path $ZSHDIR/cache/
+[[ -d $ZSHDIR/cache ]] && zstyle ":completion:*" use-cache yes && \
+    zstyle ":completion::complete:*" cache-path $ZSHDIR/cache/
 
 nt() {
   if [[ -n $1 ]] ; then
@@ -673,7 +673,7 @@ nt() {
 }
 
 sll() {
-  [[ -z "$1" ]] && printf 'Usage: %s <file(s)>\n' "$0" && return 1
+  [[ -z "$1" ]] && printf "Usage: %s <file(s)>\n" "$0" && return 1
   for file in "$@" ; do
     while [[ -h "$file" ]] ; do
       ls -l $file
@@ -699,13 +699,13 @@ cd() {
 
 mkcd() {
   if (( ARGC != 1 )); then
-    printf 'usage: mkcd <new-directory>\n'
+    printf "usage: mkcd <new-directory>\n"
     return 1;
   fi
   if [[ ! -d "$1" ]]; then
     command mkdir -p "$1"
   else
-    printf '`%s'\'' already exists: cd-ing.\n' "$1"
+    printf "'%s' already exists: cd-ing.\n" "$1"
   fi
   builtin cd "$1"
 }
@@ -743,7 +743,7 @@ inplaceMkDirs() {
     zle end-of-line
   fi
 }
-zle -N inplaceMkDirs && bindkey '^xM' inplaceMkDirs
+zle -N inplaceMkDirs && bindkey "^xM" inplaceMkDirs
 
 accessed() {
   emulate -L zsh
@@ -762,17 +762,17 @@ modified() {
 
 screenrec() {
   if (( ARGC == 0 )); then
-    printf 'usage: screenrec <filename> [video dimensions [offset]]\n'
+    printf "usage: screenrec <filename> [video dimensions [offset]]\n"
     return 1;
   fi
   l_fn=$1
   if (( ARGC == 1 )); then
-    l_s='1920x1080'
-    l_os='0,0'
+    l_s="1920x1080"
+    l_os="0,0"
   else
     l_s=$2
     if (( ARGC == 2)); then
-      l_os='0,0'
+      l_os="0,0"
     else
       l_os=$3
     fi
@@ -783,65 +783,65 @@ source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 if [[ $TERM == "xterm-256color" ]]; then
-  ZSH_HIGHLIGHT_STYLES[default]='none'
-  ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=9'
-  ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=11'
-  ZSH_HIGHLIGHT_STYLES[alias]='fg=10'
-  ZSH_HIGHLIGHT_STYLES[builtin]='fg=10'
-  ZSH_HIGHLIGHT_STYLES[function]='fg=10'
-  ZSH_HIGHLIGHT_STYLES[command]='fg=10'
-  ZSH_HIGHLIGHT_STYLES[precommand]='fg=10,underline'
-  ZSH_HIGHLIGHT_STYLES[commandseparator]='none'
-  ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=10'
-  ZSH_HIGHLIGHT_STYLES[path]='fg=6'
-  ZSH_HIGHLIGHT_STYLES[globbing]='fg=6'
-  ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=6'
-  ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='none'
-  ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='none'
-  ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='none'
-  ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=14'
-  ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=14'
-  ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=9'
-  ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=14'
-  ZSH_HIGHLIGHT_STYLES[assign]='none'
+  ZSH_HIGHLIGHT_STYLES[default]="none"
+  ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=9"
+  ZSH_HIGHLIGHT_STYLES[reserved-word]="fg=11"
+  ZSH_HIGHLIGHT_STYLES[alias]="fg=10"
+  ZSH_HIGHLIGHT_STYLES[builtin]="fg=10"
+  ZSH_HIGHLIGHT_STYLES[function]="fg=10"
+  ZSH_HIGHLIGHT_STYLES[command]="fg=10"
+  ZSH_HIGHLIGHT_STYLES[precommand]="fg=10,underline"
+  ZSH_HIGHLIGHT_STYLES[commandseparator]="none"
+  ZSH_HIGHLIGHT_STYLES[hashed-command]="fg=10"
+  ZSH_HIGHLIGHT_STYLES[path]="fg=6"
+  ZSH_HIGHLIGHT_STYLES[globbing]="fg=6"
+  ZSH_HIGHLIGHT_STYLES[history-expansion]="fg=6"
+  ZSH_HIGHLIGHT_STYLES[single-hyphen-option]="none"
+  ZSH_HIGHLIGHT_STYLES[double-hyphen-option]="none"
+  ZSH_HIGHLIGHT_STYLES[back-quoted-argument]="none"
+  ZSH_HIGHLIGHT_STYLES[single-quoted-argument]="fg=14"
+  ZSH_HIGHLIGHT_STYLES[double-quoted-argument]="fg=14"
+  ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]="fg=9"
+  ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]="fg=14"
+  ZSH_HIGHLIGHT_STYLES[assign]="none"
 
-  ZSH_HIGHLIGHT_STYLES[bracket-error]='fg=9,bold'
-  ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=6'
-  ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=10'
-  ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=13'
-  ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=11'
-  ZSH_HIGHLIGHT_STYLES[bracket-level-5]='fg=14'
-  ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]='standout'
+  ZSH_HIGHLIGHT_STYLES[bracket-error]="fg=9,bold"
+  ZSH_HIGHLIGHT_STYLES[bracket-level-1]="fg=6"
+  ZSH_HIGHLIGHT_STYLES[bracket-level-2]="fg=10"
+  ZSH_HIGHLIGHT_STYLES[bracket-level-3]="fg=13"
+  ZSH_HIGHLIGHT_STYLES[bracket-level-4]="fg=11"
+  ZSH_HIGHLIGHT_STYLES[bracket-level-5]="fg=14"
+  ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]="standout"
 else
-  ZSH_HIGHLIGHT_STYLES[default]='none'
-  ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=black,bold'
-  ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=yellow,bold'
-  ZSH_HIGHLIGHT_STYLES[alias]='fg=green,bold'
-  ZSH_HIGHLIGHT_STYLES[builtin]='fg=green,bold'
-  ZSH_HIGHLIGHT_STYLES[function]='fg=green,bold'
-  ZSH_HIGHLIGHT_STYLES[command]='fg=green,bold'
-  ZSH_HIGHLIGHT_STYLES[precommand]='fg=green,bold'
-  ZSH_HIGHLIGHT_STYLES[commandseparator]='none'
-  ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=green,bold'
-  ZSH_HIGHLIGHT_STYLES[path]='fg=blue,bold'
-  ZSH_HIGHLIGHT_STYLES[globbing]='fg=blue,bold'
-  ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=blue,bold'
-  ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='none'
-  ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='none'
-  ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='none'
-  ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=cyan,bold'
-  ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=cyan,bold'
-  ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=red,bold'
-  ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=cyan,bold'
-  ZSH_HIGHLIGHT_STYLES[assign]='none'
+  ZSH_HIGHLIGHT_STYLES[default]="none"
+  ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=black,bold"
+  ZSH_HIGHLIGHT_STYLES[reserved-word]="fg=yellow,bold"
+  ZSH_HIGHLIGHT_STYLES[alias]="fg=green,bold"
+  ZSH_HIGHLIGHT_STYLES[builtin]="fg=green,bold"
+  ZSH_HIGHLIGHT_STYLES[function]="fg=green,bold"
+  ZSH_HIGHLIGHT_STYLES[command]="fg=green,bold"
+  ZSH_HIGHLIGHT_STYLES[precommand]="fg=green,bold"
+  ZSH_HIGHLIGHT_STYLES[commandseparator]="none"
+  ZSH_HIGHLIGHT_STYLES[hashed-command]="fg=green,bold"
+  ZSH_HIGHLIGHT_STYLES[path]="fg=blue,bold"
+  ZSH_HIGHLIGHT_STYLES[globbing]="fg=blue,bold"
+  ZSH_HIGHLIGHT_STYLES[history-expansion]="fg=blue,bold"
+  ZSH_HIGHLIGHT_STYLES[single-hyphen-option]="none"
+  ZSH_HIGHLIGHT_STYLES[double-hyphen-option]="none"
+  ZSH_HIGHLIGHT_STYLES[back-quoted-argument]="none"
+  ZSH_HIGHLIGHT_STYLES[single-quoted-argument]="fg=cyan,bold"
+  ZSH_HIGHLIGHT_STYLES[double-quoted-argument]="fg=cyan,bold"
+  ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]="fg=red,bold"
+  ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]="fg=cyan,bold"
+  ZSH_HIGHLIGHT_STYLES[assign]="none"
 
-  ZSH_HIGHLIGHT_STYLES[bracket-error]='fg=black,bold'
-  ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=blue,bold'
-  ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=green,bold'
-  ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=magenta,bold'
-  ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=yellow,bold'
-  ZSH_HIGHLIGHT_STYLES[bracket-level-5]='fg=cyan,bold'
-  ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]='standout'
+  ZSH_HIGHLIGHT_STYLES[bracket-error]="fg=black,bold"
+  ZSH_HIGHLIGHT_STYLES[bracket-level-1]="fg=blue,bold"
+  ZSH_HIGHLIGHT_STYLES[bracket-level-2]="fg=green,bold"
+  ZSH_HIGHLIGHT_STYLES[bracket-level-3]="fg=magenta,bold"
+  ZSH_HIGHLIGHT_STYLES[bracket-level-4]="fg=yellow,bold"
+  ZSH_HIGHLIGHT_STYLES[bracket-level-5]="fg=cyan,bold"
+  ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]="standout"
 fi
 # TODO: define some pattern to highlight.
 

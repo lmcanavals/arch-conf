@@ -27,10 +27,11 @@ set tabstop=2
 set softtabstop=2
 set autoindent
 set smartindent
-set showbreak=«
+set showbreak='↓ '
 set list                " show special characters
-set listchars=tab:»\ ,trail:·,nbsp:·
-
+set listchars=tab:→\ ,trail:•,extends:→,precedes:←,nbsp:‼
+"«»
+"•↑►
 "" Leader
 let mapleader = ","
 let g:mapleader = ","
@@ -64,8 +65,7 @@ set novisualbell
 set t_vb=
 set encoding=utf8
 "set cursorline
-"set colorcolumn=81
-set number
+"set number
 set textwidth=80
 set scrolloff=7
 set laststatus=2
@@ -78,8 +78,7 @@ if has('gui_running') || (&term == 'xterm') || (&term =~ 'xterm-256color')
 endif
 
 "colorscheme xoria256
-"colorscheme PaperColor
-colorscheme base16-google-dark
+colorscheme trompis
 hi Normal ctermbg=none
 
 "" Gvim options
