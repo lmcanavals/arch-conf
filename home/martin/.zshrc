@@ -1,3 +1,8 @@
+# Special chars between 
+# ⌠┌─┬┐╒╤╕╓╥╖╔═╦╗▄
+# │├─┼┤╞╪╡╟╫╢║ ║║█▓▒░▐▌▬
+# ││ ││╞╪╡╟╫╢╠═╬╣▀
+# ⌡└─┴┘╘╧╛╙╨╜╚═╩╝ƒΓΘΣΦΩαβδεμπστφ•‼ⁿ₧ΩKÅ←↑→↓↔↕↨∈∙√∞∟∩≈≡≤≥⌂⌐▲▶►▼◀◄◆○◘◙☺☻☼♀♂♠♣♥♦♪♫
 # Workaround for vte overriding $TERM
 if [[ ${TERM} == "xterm" ]]; then
   export TERM="xterm-256color"
@@ -27,18 +32,18 @@ eval $(dircolors ~/.zsh/16.dircolors)
 # the ^[ is "entered" by typing Ctrl+v and Ctrl+[ 
 if (( EUID == 0 )); then
   bgp="[41m"
-  fgu="[92m"
+  fgu="[91m"
 else
   bgp="[42m"
-  fgu="[93m"
+  fgu="[92m"
 fi
 fgnt="[90m"
 bgnt="[47m"
-fgpwd="[97m"
+fgpwd="[94m"
 fgerr="[91m"
 bgerr="[41m"
 fgmsg="[93m"
-bgmsg="[103m"
+bgmsg="[43m"
 fggit="[96m"
 fgopt="[95m"
 fgpar="[96m"
@@ -342,7 +347,8 @@ zleiab() {
   LBUFFER+=${abk[$MATCH]:-$MATCH}
   _zsh_highlight # workaround to highlight after autocompleting
 }
-zle -N zleiab && bindkey "^@" zleiab
+#zle -N zleiab && bindkey "^@" zleiab
+zle -N zleiab && bindkey ",." zleiab
 
 autoload -U zmv
 autoload -U history-search-end
@@ -468,11 +474,9 @@ fi
 
 #setopt transient_rprompt
 
-PS2="\`%_> "
+PS2="\`%_» "
 PS3="?# "
-PS4="+%N:%i:%_> "
-Z_RPROMPT_NORM="%(?.-- ins --.%{$fgerr%}-- %?%1v --%{$vend%})"
-Z_PROMPT_I1="%{$bgp$fgu%}%n@%m:%{$fgpwd%}%25<...<%~%<<"
+PS4="+%N:%i:%_» "
 
 # Miscelaneus info like git.
 function prompt_misc () {
@@ -483,35 +487,23 @@ function prompt_misc () {
     tstatus=""
     ttmp=$(git status)
     if [[ -n $(echo $ttmp | grep "Untracked") ]]; then
-      tstatus+="+"
+      tstatus+="•"
     fi
     if [[ -n $(echo $ttmp | grep "nothing to commit") ]]; then
-      tcolor=$fggit
+      tcolor=""
     else
-      tcolor=$fgerr
-      tstatus+="*"
+      tcolor=$fggit
+      tstatus+="☼"
     fi
     ttl=$(git rev-list master | wc -l)
     ttr=$(git rev-list origin/master | wc -l)
     if [[ $ttl > $ttr ]]; then
-      tstatus+=" u"
+      tstatus+="▲"
     elif [[ $ttl < $ttr ]]; then
-      tstatus+=" d"
+      tstatus+="▼"
     fi
-    print "%{$tcolor%}<$tbranch$tstatus>"
+    print "%{$tcolor%}[$tbranch$tstatus]"
   fi
-}
-
-function prompt_end () {
-  local tfinal tsym
-  if [[ "$1" == "c" ]]; then
-    tfinal="${bgmsg}"
-    tsym=":"
-  else # $1 == n
-    tfinal="%(?.${bgnt}.${bgerr})"
-    tsym="%(?.%#.!)"
-  fi
-  print "%{$tfinal$fgnt%} $tsym %{$vend%} "
 }
 
 function ESC_print () {
@@ -534,11 +526,9 @@ function info_print () {
 
 zle-keymap-select() {
   if [[ $KEYMAP = vicmd ]]; then
-    RPROMPT="%{$fgmsg%}-- cmd --%{$vend%}"
-    PROMPT="$Z_PROMPT_I1$(prompt_misc)$(prompt_end c)"
+    PROMPT="%{$bgmsg%} : %{$vend%} "
   else
-    RPROMPT=$Z_RPROMPT_NORM
-    PROMPT="$Z_PROMPT_I1$(prompt_misc)$(prompt_end n)"
+    PROMPT="%{$bgp%} %(?.%#.‼) %{$vend%} "
   fi
   () { return $__prompt_status }
   zle reset-prompt
@@ -553,8 +543,10 @@ zle -N zle-line-init
 
 precmd () {
   (( ${+functions[vcs_info]} )) && vcs_info
-  RPROMPT=$Z_RPROMPT_NORM
-  PROMPT="$Z_PROMPT_I1$(prompt_misc)$(prompt_end n)"
+#  ZLE_RPROMPT_INDENT=0
+  RPROMPT="%(?.♪.%{$fgerr%}%?%1v) %{$fgu%}%n@%m%{$vend%}"
+  RPROMPT+=":%{$fgpwd%}%20<«<%~%<<$(prompt_misc)%{$vend%}"
+  PROMPT="%{$bgp%} %(?.%#.‼) %{$vend%} "
   case $TERM in
     (xterm*|rxvt*)
       set_title ${(%):-"%n@%m %~"}
@@ -779,8 +771,8 @@ screenrec() {
   fi
   ffmpeg -video_size $l_s -f x11grab -i $DISPLAY+$l_os -f pulse -i default $l_fn
 }
-source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 if [[ $TERM == "xterm-256color" ]]; then
   ZSH_HIGHLIGHT_STYLES[default]="none"

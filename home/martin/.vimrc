@@ -27,7 +27,7 @@ set tabstop=2
 set softtabstop=2
 set autoindent
 set smartindent
-set showbreak='↓ '
+set showbreak=↓
 set list                " show special characters
 set listchars=tab:→\ ,trail:•,extends:→,precedes:←,nbsp:‼
 "«»
