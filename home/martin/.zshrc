@@ -1,8 +1,4 @@
-# Special chars between 
-# ⌠┌─┬┐╒╤╕╓╥╖╔═╦╗▄
-# │├─┼┤╞╪╡╟╫╢║ ║║█▓▒░▐▌▬
-# ││ ││╞╪╡╟╫╢╠═╬╣▀
-# ⌡└─┴┘╘╧╛╙╨╜╚═╩╝ƒΓΘΣΦΩαβδεμπστφ•‼ⁿ₧ΩKÅ←↑→↓↔↕↨∈∙√∞∟∩≈≡≤≥⌂⌐▲▶►▼◀◄◆○◘◙☺☻☼♀♂♠♣♥♦♪♫
+# Special chars between https://en.wikipedia.org/wiki/Code_page_437
 # Workaround for vte overriding $TERM
 if [[ ${TERM} == "xterm" ]]; then
   export TERM="xterm-256color"
@@ -37,11 +33,8 @@ else
   bgp="[42m"
   fgu="[92m"
 fi
-fgnt="[90m"
-bgnt="[47m"
 fgpwd="[94m"
 fgerr="[91m"
-bgerr="[41m"
 fgmsg="[93m"
 bgmsg="[43m"
 fggit="[96m"
@@ -487,7 +480,7 @@ function prompt_misc () {
     tstatus=""
     ttmp=$(git status)
     if [[ -n $(echo $ttmp | grep "Untracked") ]]; then
-      tstatus+="•"
+      tstatus+="±"
     fi
     if [[ -n $(echo $ttmp | grep "nothing to commit") ]]; then
       tcolor=""
@@ -544,7 +537,7 @@ zle -N zle-line-init
 precmd () {
   (( ${+functions[vcs_info]} )) && vcs_info
 #  ZLE_RPROMPT_INDENT=0
-  RPROMPT="%(?.♪.%{$fgerr%}%?%1v) %{$fgu%}%n@%m%{$vend%}"
+  RPROMPT="%(?.§.%{$fgerr%}%?%1v) %{$fgu%}%n@%m%{$vend%}"
   RPROMPT+=":%{$fgpwd%}%20<«<%~%<<$(prompt_misc)%{$vend%}"
   PROMPT="%{$bgp%} %(?.%#.‼) %{$vend%} "
   case $TERM in

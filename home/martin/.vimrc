@@ -2,6 +2,7 @@
 "" Vim and Gvim config!
 "" by Luis Martín Canaval Sánchez
 ""
+
 scriptencoding utf-8
 set history=700
 
@@ -22,16 +23,15 @@ set noswapfile
 "" Tabs, indents, etc.
 set expandtab           " tabs to spaces
 set smarttab
-set shiftwidth=2        " tab = 2 spaces
-set tabstop=2
-set softtabstop=2
+set shiftwidth=4        " tab = 2 spaces
+set tabstop=4
+set softtabstop=4
 set autoindent
 set smartindent
-set showbreak=↓
+set showbreak=▲∙
 set list                " show special characters
-set listchars=tab:→\ ,trail:•,extends:→,precedes:←,nbsp:‼
-"«»
-"•↑►
+set listchars=tab:►∙,trail:•,extends:→,precedes:←,nbsp:‼
+
 "" Leader
 let mapleader = ","
 let g:mapleader = ","
@@ -69,7 +69,8 @@ set encoding=utf8
 set textwidth=80
 set scrolloff=7
 set laststatus=2
-set statusline=%F%m%=%4b\ %{&ff}%y%r%h%w%5(%l%):%-8(%c%V%)P:%-9(%o%)L:%L\ %P
+"set statusline=%F%m%=%4b\ %{&ff}%y%r%h%w%5(%l%):%-8(%c%V%)P:%-9(%o%)L:%L\ %P
+set statusline=%f%M%Y%R%H%W\ %{&ff}%=%-10(%l,%c%V%)%P
 set background=dark
 set title
 

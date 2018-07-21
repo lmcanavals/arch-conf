@@ -39,7 +39,7 @@ elseif &t_Co >= 16
   let s:m = " cterm="
   let s:b = " ctermbg="
   let s:f = " ctermfg="
-  let s:c0 = "NONE"
+  let s:c0 = "0"
   let s:c1 = "1"
   let s:c2 = "2"
   let s:c3 = "3"
@@ -76,58 +76,62 @@ else
   let s:ce = "LightCyan"
   let s:cf = "White"
 endif
+let s:no = "none"
+let s:bo = "bold"
+let s:re = "reverse"
+let s:un = "underline"
 
-exe "hi! Normal"        .s:f.s:cf     .s:b.s:c0     .s:m."none"
-exe "hi! ColorColumn"                 .s:b.s:c8
-"exe "hi! Cursor"                                    .s:m."reverse"
-exe "hi! CursorColumn"                .s:b.s:c8     .s:m."none"
-exe "hi! CursorLine"                  .s:b.s:c8     .s:m."none"
-exe "hi! FoldColumn"    .s:f.s:c7     .s:b.s:c8
-exe "hi! Folded"        .s:f.s:cf     .s:b.s:cc
-exe "hi! IncSearch"     .s:f.s:c8     .s:b.s:c7     .s:m."none"
-exe "hi! NonText"       .s:f.s:c7                   .s:m."bold"
-exe "hi! Pmenu"         .s:f.s:c0     .s:b.s:c8
-exe "hi! PmenuSbar"                   .s:b.s:c8
-exe "hi! PmenuSel"      .s:f.s:c0     .s:b.s:c8
-exe "hi! PmenuThumb"                  .s:b.s:c7
-exe "hi! Search"        .s:f."none"   .s:b."none"   .s:m."reverse"
+exe "hi! Normal"        .s:f.s:cf .s:b.s:c0 .s:m.s:no
+exe "hi! ColorColumn"             .s:b.s:c8
+exe "hi! CursorColumn"            .s:b.s:c8 .s:m.s:no
+exe "hi! CursorLine"              .s:b.s:c8 .s:m.s:no
+exe "hi! FoldColumn"    .s:f.s:c7 .s:b.s:c8
+exe "hi! Folded"        .s:f.s:cf .s:b.s:cc
+exe "hi! IncSearch"     .s:f.s:c8 .s:b.s:c7 .s:m.s:no
+exe "hi! NonText"       .s:f.s:c7           .s:m.s:bo
+exe "hi! Pmenu"         .s:f.s:c0 .s:b.s:c8
+exe "hi! PmenuSbar"               .s:b.s:c8
+exe "hi! PmenuSel"      .s:f.s:c0 .s:b.s:c8
+exe "hi! PmenuThumb"              .s:b.s:c7
+exe "hi! Search"        .s:f.s:no .s:b.s:no .s:m.s:re
 exe "hi! SignColumn"    .s:f.s:c7
 exe "hi! SpecialKey"    .s:f.s:c8
-exe "hi! StatusLine"    .s:f.s:cf     .s:b.s:c4     .s:m."bold"
-exe "hi! StatusLineNC"  .s:f.s:c4     .s:b.s:cf     .s:m."none"
-exe "hi! TabLine"       .s:f.s:c8     .s:b.s:c7     .s:m."underline"
-exe "hi! TabLineFill"   .s:f.s:c8     .s:b.s:c7     .s:m."underline"
-exe "hi! VertSplit"     .s:f.s:c8     .s:b.s:c7     .s:m."none"
-exe "hi! Visual"                      .s:b.s:c6
-exe "hi! VIsualNOS"                   .s:b.s:c6     .s:m."none"
-exe "hi! WildMenu"      .s:f.s:c4     .s:b.s:c7     .s:m."none"
+exe "hi! StatusLine"    .s:f.s:cf .s:b.s:c4 .s:m.s:bo
+exe "hi! StatusLineNC"  .s:f.s:c4 .s:b.s:cf .s:m.s:no
+exe "hi! TabLine"       .s:f.s:c8 .s:b.s:c7 .s:m.s:no
+exe "hi! TabLineSel"    .s:f.s:cf .s:b.s:no .s:m.s:bo
+exe "hi! TabLineFill"   .s:f.s:c9 .s:b.s:c7 .s:m.s:no
+exe "hi! VertSplit"     .s:f.s:c8 .s:b.s:c7 .s:m.s:no
+exe "hi! Visual"                  .s:b.s:c6
+exe "hi! VIsualNOS"               .s:b.s:c6 .s:m.s:no
+exe "hi! WildMenu"      .s:f.s:c4 .s:b.s:c7 .s:m.s:no
 
 "" Syntax highlighting
 exe "hi! Comment"       .s:f.s:c8
 exe "hi! Constant"      .s:f.s:cb
-exe "hi! Error"         .s:f.s:cf     .s:b.s:c1
-exe "hi! ErrorMsg"      .s:f.s:cf     .s:b.s:c1
-exe "hi! Identifier"    .s:f.s:c9                   .s:m."none"
+exe "hi! Error"         .s:f.s:cf .s:b.s:c1
+exe "hi! ErrorMsg"      .s:f.s:cf .s:b.s:c1
+exe "hi! Identifier"    .s:f.s:c9           .s:m.s:no
 exe "hi! Ignore"        .s:f.s:c7
-exe "hi! LineNr"        .s:f.s:c7     .s:b.s:c4
-exe "hi! MatchParen"    .s:f.s:ce     .s:b.s:c4     .s:m."bold"
+exe "hi! LineNr"        .s:f.s:c7 .s:b.s:c4
+exe "hi! MatchParen"    .s:f.s:ce .s:b.s:c4 .s:m .s:bo
 exe "hi! Number"        .s:f.s:cb
 exe "hi! PreProc"       .s:f.s:c2
 exe "hi! Special"       .s:f.s:c9
-exe "hi! Statement"     .s:f.s:cc                   .s:m."none"
-exe "hi! Todo"          .s:f.s:c0     .s:b.s:c6
-exe "hi! Type"          .s:f.s:ce                   .s:m."none"
-exe "hi! Underlined"    .s:f.s:c4                   .s:m."underline"
+exe "hi! Statement"     .s:f.s:cc           .s:m.s:no
+exe "hi! Todo"          .s:f.s:c0 .s:b.s:c6
+exe "hi! Type"          .s:f.s:ce           .s:m.s:no
+exe "hi! Underlined"    .s:f.s:c4           .s:m.s:un
 
 "" Special
 """ .diff
 exe "hi! diffAdded"     .s:f.s:ca
 exe "hi! diffRemoved"   .s:f.s:c9
 """ vimdiff
-exe "hi! diffAdd"       .s:f.s:c0     .s:b.s:c2
-exe "hi! diffDelete"    .s:f.s:c0     .s:b.s:c1     .s:m."none"
-exe "hi! diffChange"    .s:f.s:c0     .s:b.s:c5
-exe "hi! diffText"      .s:f.s:c0     .s:b.s:c6     .s:m."none"
+exe "hi! diffAdd"       .s:f.s:c0 .s:b.s:c2
+exe "hi! diffDelete"    .s:f.s:c0 .s:b.s:c1 .s:m.s:no
+exe "hi! diffChange"    .s:f.s:c0 .s:b.s:c5
+exe "hi! diffText"      .s:f.s:c0 .s:b.s:c6 .s:m.s:no
 
 unlet s:m
 unlet s:b
@@ -148,5 +152,9 @@ unlet s:cc
 unlet s:cd
 unlet s:ce
 unlet s:cf
+unlet s:no
+unlet s:bo
+unlet s:re
+unlet s:un
 
 " vim: set expandtab tabstop=2 shiftwidth=2 smarttab softtabstop=2:
