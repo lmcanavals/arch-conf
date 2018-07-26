@@ -5,7 +5,8 @@
 " Maintainer: Luis Canaval (uno@canaval.org)
 "
 
-set background=dark
+"set background=dark
+set background=light
 
 hi clear
 
@@ -81,14 +82,14 @@ let s:bo = "bold"
 let s:re = "reverse"
 let s:un = "underline"
 
-exe "hi! Normal"        .s:f.s:cf .s:b.s:c0 .s:m.s:no
+exe "hi! Normal"        .s:f.s:no .s:b.s:c0 .s:m.s:no
 exe "hi! ColorColumn"             .s:b.s:c8
 exe "hi! CursorColumn"            .s:b.s:c8 .s:m.s:no
 exe "hi! CursorLine"              .s:b.s:c8 .s:m.s:no
 exe "hi! FoldColumn"    .s:f.s:c7 .s:b.s:c8
 exe "hi! Folded"        .s:f.s:cf .s:b.s:cc
 exe "hi! IncSearch"     .s:f.s:c8 .s:b.s:c7 .s:m.s:no
-exe "hi! NonText"       .s:f.s:c7           .s:m.s:bo
+exe "hi! NonText"       .s:f.s:c8           .s:m.s:bo
 exe "hi! Pmenu"         .s:f.s:c0 .s:b.s:c8
 exe "hi! PmenuSbar"               .s:b.s:c8
 exe "hi! PmenuSel"      .s:f.s:c0 .s:b.s:c8
@@ -99,7 +100,7 @@ exe "hi! SpecialKey"    .s:f.s:c8
 exe "hi! StatusLine"    .s:f.s:cf .s:b.s:c4 .s:m.s:bo
 exe "hi! StatusLineNC"  .s:f.s:c4 .s:b.s:cf .s:m.s:no
 exe "hi! TabLine"       .s:f.s:c8 .s:b.s:c7 .s:m.s:no
-exe "hi! TabLineSel"    .s:f.s:cf .s:b.s:no .s:m.s:bo
+exe "hi! TabLineSel"    .s:f.s:c1 .s:b.s:no .s:m.s:bo
 exe "hi! TabLineFill"   .s:f.s:c9 .s:b.s:c7 .s:m.s:no
 exe "hi! VertSplit"     .s:f.s:c8 .s:b.s:c7 .s:m.s:no
 exe "hi! Visual"                  .s:b.s:c6

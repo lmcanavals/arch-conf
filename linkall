@@ -1,9 +1,22 @@
-ln -sf /home/martin/git/arch-conf/home/martin/.gitconfig ~/
-ln -sf /home/martin/git/arch-conf/home/martin/.gitignore_global ~/
-ln -sf /home/martin/git/arch-conf/home/martin/.zshrc ~/
-ln -sf /home/martin/git/arch-conf/home/martin/.zsh ~/
-ln -sf /home/martin/git/arch-conf/home/martin/.profile ~/
-ln -sf /home/martin/git/arch-conf/home/martin/.config/fontconfig ~/.config/
-ln -sf /home/martin/git/zsh-syntax-highlighting ~/.zsh/plugins/
-ln -sf /home/martin/git/arch-conf/home/martin/.vim ~/
-ln -sf /home/martin/git/arch-conf/home/martin/.vimrc ~/
+#!/bin/sh
+
+linkall() {
+    local githome
+    githome="/home/martin/git"
+    archome="/arch-conf/home/martin"
+    ln -sf $githome$archome/.gitconfig ~/
+    ln -sf $githome$archome/.gitignore_global ~/
+    ln -sf $githome$archome/.zshrc ~/
+    ln -sf $githome$archome/.zsh ~/
+    ln -sf $githome$archome/.profile ~/
+    ln -sf $githome$archome/.config/fontconfig ~/.config/
+    ln -sf $githome/zsh-syntax-highlighting ~/.zsh/plugins/
+    ln -sf $githome$archome/.vim ~/
+    ln -sf $githome$archome/.vimrc ~/
+
+    if (( EUID != 0 )); then
+        mkdir -p ~/.local/share/xfce4
+        ln -sf $githome$archome/.local/share/xfce4/terminal \
+            ~/.local/share/xfce4/
+    fi
+}

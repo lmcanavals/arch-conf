@@ -5,22 +5,22 @@ if [[ ${TERM} == "xterm" ]]; then
 fi
 
 if [ "$TERM" = "linux" ]; then
-  echo -en "\e]P0000000"
-  echo -en "\e]P1cc0000"
-  echo -en "\e]P24e9a06"
-  echo -en "\e]P3c4a000"
-  echo -en "\e]P43465a4"
-  echo -en "\e]P575507b"
-  echo -en "\e]P606989a"
-  echo -en "\e]P7d3d7cf"
-  echo -en "\e]P8555753"
-  echo -en "\e]P9ef2929"
-  echo -en "\e]PA8ae234"
-  echo -en "\e]PBfce94f"
-  echo -en "\e]PC739fcf"
-  echo -en "\e]PDad7fa8"
-  echo -en "\e]PE34e2e2"
-  echo -en "\e]PFeeeeec"
+  echo -en "\e]P00C1E20"
+  echo -en "\e]P1C0392B"
+  echo -en "\e]P227AE60"
+  echo -en "\e]P3F39C12"
+  echo -en "\e]P42980B9"
+  echo -en "\e]P58E44AD"
+  echo -en "\e]P616A085"
+  echo -en "\e]P7BDC3C7"
+  echo -en "\e]P848494A"
+  echo -en "\e]P9F76C5C"
+  echo -en "\e]PA4EEC91"
+  echo -en "\e]PBF1E42F"
+  echo -en "\e]PC54B8FB"
+  echo -en "\e]PDBB79D6"
+  echo -en "\e]PE4AC1B8"
+  echo -en "\e]PFECF0F1"
 #  clear #for background artifacting
 fi
 
@@ -472,7 +472,7 @@ PS3="?# "
 PS4="+%N:%i:%_» "
 
 # Miscelaneus info like git.
-function prompt_misc () {
+function prompt_misc() {
   local tbranch tcolor tstatus ttmp ttl ttr
   if [[ -n $(git branch 2> /dev/null) ]]; then
     tbranch=$(git branch)
@@ -499,15 +499,15 @@ function prompt_misc () {
   fi
 }
 
-function ESC_print () {
+function ESC_print() {
   info_print $'\ek' $'\e\\' "$@"
 }
 
-function set_title () {
+function set_title() {
   info_print  $'\e]0;' $'\a' "$@"
 }
 
-function info_print () {
+function info_print() {
   local esc_begin esc_end
   esc_begin="$1"
   esc_end="$2"
@@ -534,7 +534,7 @@ zle-line-init() {
 zle -N zle-keymap-select
 zle -N zle-line-init
 
-precmd () {
+precmd() {
   (( ${+functions[vcs_info]} )) && vcs_info
 #  ZLE_RPROMPT_INDENT=0
   RPROMPT="%(?.§.%{$fgerr%}%?%1v) %{$fgu%}%n@%m%{$vend%}"
@@ -547,7 +547,7 @@ precmd () {
   esac
 }
 
-preexec () {
+preexec() {
   if [[ -n "$HOSTNAME" ]] && [[ "$HOSTNAME" != $(hostname) ]] ; then
     NAME="@$HOSTNAME"
   fi
@@ -743,6 +743,15 @@ changed() {
 modified() {
   emulate -L zsh
   print -l -- *(m-${1:-1})
+}
+
+testcolors() {
+    local line
+    line="\e[40m   \e[41m   \e[42m   \e[43m   "
+    line+="\e[44m   \e[45m   \e[46m   \e[47m   \n"
+    line+="\e[100m   \e[101m   \e[102m   \e[103m   "
+    line+="\e[104m   \e[105m   \e[106m   \e[107m   \e[0m"
+    echo -e $line
 }
 
 screenrec() {
