@@ -104,7 +104,7 @@ exe "hi! TabLineSel"    .s:f.s:c1 .s:b.s:no .s:m.s:bo
 exe "hi! TabLineFill"   .s:f.s:c9 .s:b.s:c7 .s:m.s:no
 exe "hi! VertSplit"     .s:f.s:c8 .s:b.s:c7 .s:m.s:no
 exe "hi! Visual"                  .s:b.s:c6
-exe "hi! VIsualNOS"               .s:b.s:c6 .s:m.s:no
+exe "hi! VisualNOS"               .s:b.s:c6 .s:m.s:no
 exe "hi! WildMenu"      .s:f.s:c4 .s:b.s:c7 .s:m.s:no
 
 "" Syntax highlighting

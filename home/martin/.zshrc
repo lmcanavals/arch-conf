@@ -746,12 +746,22 @@ modified() {
 }
 
 testcolors() {
-    local line
-    line="\e[40m   \e[41m   \e[42m   \e[43m   "
-    line+="\e[44m   \e[45m   \e[46m   \e[47m   \n"
-    line+="\e[100m   \e[101m   \e[102m   \e[103m   "
-    line+="\e[104m   \e[105m   \e[106m   \e[107m   \e[0m"
-    echo -e $line
+    local t1 t2 i j
+    t1="0aα"
+    t2="1Bß"
+    printf "        "
+    for i in {0..7}; do printf "  4%d 10%d" $i $i; done
+    for i in {0..7}; do
+        printf "\n3%d \e[3%dm%s%s \e[0m" $i $i $t1 $t2
+        for j in {0..7}; do
+            printf "\e[4%d;3%dm %s\e[10%d;3%dm%s \e[0m" $j $i $t1 $j $i $t2
+        done
+        printf "\n9%d \e[9%dm%s%s \e[0m" $i $i $t1 $t2
+        for j in {0..7}; do
+            printf "\e[4%d;9%dm %s\e[10%d;9%dm%s \e[0m" $j $i $t1 $j $i $t2
+        done
+    done
+    printf "\n"
 }
 
 screenrec() {
