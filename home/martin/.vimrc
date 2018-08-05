@@ -64,13 +64,13 @@ set noerrorbells
 set novisualbell
 set t_vb=
 set encoding=utf8
-"set cursorline
-"set number
+set cursorline
+set number
 set textwidth=80
 set scrolloff=7
 set laststatus=2
 "set statusline=%F%m%=%4b\ %{&ff}%y%r%h%w%5(%l%):%-8(%c%V%)P:%-9(%o%)L:%L\ %P
-set statusline=%f%M%Y%R%H%W\ %{&ff}%=%-10(%l,%c%V%)%P
+set statusline=%f%M%Y%R%H%W,%{&ff}%=%-10(%l,%c%V%)%P
 set background=dark
 set title
 
@@ -90,7 +90,7 @@ if has('gui_running')
   set guioptions+=c     " console dialogs
   set lines=25 columns=100
   set colorcolumn=81
-  set guifont=Hack\ 12
+  set guifont=Hack\ 10
 endif
 
 "" Specific files fixes

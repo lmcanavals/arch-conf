@@ -12,8 +12,8 @@ if [ "$TERM" = "linux" ]; then
   echo -en "\e]P42980B9"
   echo -en "\e]P58E44AD"
   echo -en "\e]P616A085"
-  echo -en "\e]P7BDC3C7"
-  echo -en "\e]P848494A"
+  echo -en "\e]P79DA3A7"
+  echo -en "\e]P868696A"
   echo -en "\e]P9F76C5C"
   echo -en "\e]PA4EEC91"
   echo -en "\e]PBF1E42F"
@@ -33,14 +33,15 @@ else
   bgp="[42m"
   fgu="[92m"
 fi
-fgpwd="[94m"
-fgerr="[91m"
-fgmsg="[93m"
-bgmsg="[43m"
-fggit="[96m"
-fgopt="[95m"
-fgpar="[96m"
-fgst="[36m"
+bg3="[43m"
+fg2="[32m"
+fg6="[36m"
+fg9="[91m"
+fga="[92m"
+fgb="[93m"
+fgc="[94m"
+fgd="[95m"
+fge="[96m"
 vend="[0m"
 
 setopt append_history
@@ -71,13 +72,13 @@ export BROWSER="google-chrome-stable"
 
 #export GREP_COLORS
 export LS_COLORS
-export LESS_TERMCAP_mb=$fgmsg
-export LESS_TERMCAP_md=$fgopt
+export LESS_TERMCAP_mb=$fgb
+export LESS_TERMCAP_md=$fgd
 export LESS_TERMCAP_me=$vend
 export LESS_TERMCAP_se=$vend
-export LESS_TERMCAP_so=$fgst
+export LESS_TERMCAP_so=$fg6
 export LESS_TERMCAP_ue=$vend
-export LESS_TERMCAP_us=$fgpar
+export LESS_TERMCAP_us=$fga
 
 REPORTTIME=5
 watch=(notme root)
@@ -485,7 +486,7 @@ function prompt_misc() {
     if [[ -n $(echo $ttmp | grep "nothing to commit") ]]; then
       tcolor=""
     else
-      tcolor=$fggit
+      tcolor=$fge
       tstatus+="☼"
     fi
     ttl=$(git rev-list master | wc -l)
@@ -519,10 +520,14 @@ function info_print() {
 
 zle-keymap-select() {
   if [[ $KEYMAP = vicmd ]]; then
-    PROMPT="%{$bgmsg%} : %{$vend%} "
+    RPROMPT="%{$fg9%}•%{$fgb%}☻%{$fg2%}• "
+    PROMPT="%{$bg3%} : %{$vend%} "
   else
-    PROMPT="%{$bgp%} %(?.%#.‼) %{$vend%} "
+    RPROMPT="%(?.%{$fg9%}•%{$fgb%}•%{$fg2%}☻.%{$fg9%}☻%{$fgb%}•%{$fg2%}•%1v) "
+    PROMPT="%{$bgp%} %(?.%#.%{$fg9%}%?‼) %{$vend%} "
   fi
+  RPROMPT+="%{$fgu%}%n@%m%{$vend%}"
+  RPROMPT+=":%{$fgc%}%20<«<%~%<<$(prompt_misc)%{$vend%}"
   () { return $__prompt_status }
   zle reset-prompt
 }
@@ -537,9 +542,10 @@ zle -N zle-line-init
 precmd() {
   (( ${+functions[vcs_info]} )) && vcs_info
 #  ZLE_RPROMPT_INDENT=0
-  RPROMPT="%(?.§.%{$fgerr%}%?%1v) %{$fgu%}%n@%m%{$vend%}"
-  RPROMPT+=":%{$fgpwd%}%20<«<%~%<<$(prompt_misc)%{$vend%}"
-  PROMPT="%{$bgp%} %(?.%#.‼) %{$vend%} "
+  RPROMPT="%(?.%{$fg9%}•%{$fgb%}•%{$fg2%}☻.%{$fg9%}☻%{$fgb%}•%{$fg2%}•%1v) "
+  RPROMPT+="%{$fgu%}%n@%m%{$vend%}"
+  RPROMPT+=":%{$fgc%}%20<«<%~%<<$(prompt_misc)%{$vend%}"
+  PROMPT="%{$bgp%} %(?.%#.%{$fg9%}%?‼) %{$vend%} "
   case $TERM in
     (xterm*|rxvt*)
       set_title ${(%):-"%n@%m %~"}
@@ -595,10 +601,10 @@ zstyle ":completion:*:approximate:"    max-errors \
     "reply=( $((($#PREFIX+$#SUFFIX)/3 )) numeric )"
 zstyle ":completion:*:correct:*"       insert-unambiguous true
 zstyle ":completion:*:corrections"     format \
-    "%{$fgerr%}%d, errors: %e%{$vend%}"
+    "%{$fg9%}%d, errors: %e%{$vend%}"
 zstyle ":completion:*:correct:*"       original true
 zstyle ":completion:*:default"         list-colors ${(s.:.)LS_COLORS}
-zstyle ":completion:*:descriptions"    format "%{$fgmsg%}%d%{$vend%}"
+zstyle ":completion:*:descriptions"    format "%{$fgb%}%d%{$vend%}"
 zstyle ":completion:*:expand:*"        tag-order all-expansions
 zstyle ":completion:*:history-words"   list false
 zstyle ":completion:*:history-words"   menu yes
@@ -608,16 +614,16 @@ zstyle ":completion:*"                 matcher-list "m:{a-z}={A-Z}"
 zstyle ":completion:*:matches"         group "yes"
 zstyle ":completion:*"                 group-name ""
 zstyle ":completion:*"                 menu select=5
-zstyle ":completion:*:messages"        format "%{$fgopt%}%d%{$vend%}"
+zstyle ":completion:*:messages"        format "%{$fgd%}%d%{$vend%}"
 zstyle ":completion:*:options"         auto-description \
-    "%{$fgpar%}%d%{$vend%}"
+    "%{$fga%}%d%{$vend%}"
 zstyle ":completion:*:options"         description "yes"
 zstyle ":completion:*:processes"       command "ps -au$USER"
 zstyle ":completion:*:*:-subscript-:*" tag-order indexes parameters
 zstyle ":completion:*"                 verbose true
 zstyle ":completion:*:-command-:*:"    verbose false
 zstyle ":completion:*:warnings"        format \
-    "%{$fgerr%}No matches:%{$vend%} %d"
+    "%{$fg9%}No matches:%{$vend%} %d"
 zstyle ":completion:*:*:zcompile:*"    ignored-patterns "(*~|*.zwc)"
 zstyle ":completion:correct:"          prompt "correct to: %e"
 zstyle ":completion::(^approximate*):*:functions" ignored-patterns "_*"
