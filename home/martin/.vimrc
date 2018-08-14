@@ -56,41 +56,35 @@ set wildignore+=*~,*.o,*.tmp
 "  set mouse=a
 "endif
 set completeopt=menu,menuone,longest,preview
-set spelllang=en_us
-set spellsuggest=fast,20
+"set spelllang=en_us
+"set spellsuggest=fast,20
 "set spell
 set showcmd
 set noerrorbells
 set novisualbell
 set t_vb=
 set encoding=utf8
-set cursorline
-set number
+"set cursorline
+"set number
 set textwidth=80
 set scrolloff=7
 set laststatus=2
-"set statusline=%F%m%=%4b\ %{&ff}%y%r%h%w%5(%l%):%-8(%c%V%)P:%-9(%o%)L:%L\ %P
 set statusline=%f%M%Y%R%H%W,%{&ff}%=%-10(%l,%c%V%)%P
 set background=dark
 set title
 
 if has('gui_running') || (&term == 'xterm') || (&term =~ 'xterm-256color')
-  set t_Co=256
+    set t_Co=256
 endif
 
-"colorscheme xoria256
 colorscheme trompis
-hi Normal ctermbg=none
 
 "" Gvim options
 if has('gui_running')
-  set guioptions-=m     " hide menu
-  set guioptions-=T     " hide tool bar
-"  set guioptions-=r     " hide scroll bar
-  set guioptions+=c     " console dialogs
-  set lines=25 columns=100
-  set colorcolumn=81
-  set guifont=Hack\ 10
+    set guioptions=acegit
+    "set lines=25 columns=100
+    set colorcolumn=81
+    set guifont=Hack\ 10
 endif
 
 "" Specific files fixes

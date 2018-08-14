@@ -3,13 +3,11 @@
 	excludesfile = /home/martin/.gitignore_global
 [user]
 	name = Luis Martín Canaval Sánchez
-	email = public01@canaval.info
+	email = uno@canaval.org
 [color]
 	ui = true
 	status = auto
 	branch = auto
-[credential]
-	helper = cache --timeout=3600
 [color "status"]
 	added = 10
 	untracked = 13

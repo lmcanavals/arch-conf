@@ -77,14 +77,18 @@ else
     let s:ce = "LightCyan"
     let s:cf = "White"
 endif
-let s:no = "none"
-let s:bo = "bold"
+let s:no = "NONE"
+let s:bo = "BOLD"
 let s:re = "reverse"
 let s:un = "underline"
 
 " __Normal__ __Underlined__ __EndOfBuffer__ __NonText__
 " __Special__ __SpecialChar__ __SpecialComment__ __SpecialKey__
-exe 'hi! Normal'        .s:f.s:no .s:b.s:no .s:m.s:no
+if has('gui_running')
+    exe 'hi! Normal'        .s:f.s:c7 .s:b.s:c0 .s:m.s:no
+else
+    exe 'hi! Normal'        .s:f.s:c7 .s:b.s:no .s:m.s:no
+endif
 exe 'hi! Underlined'    .s:f.s:c4           .s:m.s:un
 exe 'hi! NonText'       .s:f.s:c8           .s:m.s:no
 exe 'hi! Special'       .s:f.s:c9
@@ -92,10 +96,10 @@ exe 'hi! SpecialKey'    .s:f.s:c8
 
 " __ColorColumn__ __CursorColumn__ __CursorLine__ __CursorLineNr__ __LineNr__
 " __FoldColumn__ __Folded__
-exe 'hi! ColorColumn'             .s:b.s:c7
+exe 'hi! ColorColumn'   .s:f.s:c1 .s:b.s:c7
 exe 'hi! CursorColumn'            .s:b.s:no .s:m.s:no
-exe 'hi! CursorLine'                        .s:m.s:no
-exe 'hi! CursorLineNr'  .s:f.s:cf .s:b.s:c0 .s:m.s:no
+exe 'hi! CursorLine'              .s:b.s:no .s:m.s:no
+exe 'hi! CursorLineNr'  .s:f.s:c9           .s:m.s:no
 exe 'hi! LineNr'        .s:f.s:c7 .s:b.s:no
 exe 'hi! FoldColumn'    .s:f.s:cf .s:b.s:c4
 exe 'hi! Folded'        .s:f.s:c7 .s:b.s:c4
