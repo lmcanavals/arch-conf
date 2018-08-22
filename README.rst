@@ -131,13 +131,13 @@ Configure ``sudoers`` with ``visudo``, add::
 
   martin stella= /usr/bin/pacman
 
-Download and install yay as user:
+Download and install yay as user::
 
   git clone https://aur.archlinux.org/yay-bin.git
   cd yay-bin
   makepgk -Acs
 
-Then as root or with sudo:
+Then as root or with sudo::
 
   pacman -U yay<TAB>
 
