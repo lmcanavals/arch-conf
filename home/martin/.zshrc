@@ -4,7 +4,7 @@ if [[ ${TERM} == "xterm" ]]; then
   export TERM="xterm-256color"
 fi
 
-if [ "$TERM" = "linux" ]; then
+if [ "$TERM" != "xterm-256color" ]; then
   echo -en "\e]P00C1E20"
   echo -en "\e]P1C0392B"
   echo -en "\e]P227AE60"
@@ -33,7 +33,9 @@ else
   bgp="[42m"
   fgu="[92m"
 fi
+bg1="[41m"
 bg3="[43m"
+bg6="[46m"
 fg2="[32m"
 fg6="[36m"
 fg9="[91m"
@@ -42,6 +44,7 @@ fgb="[93m"
 fgc="[94m"
 fgd="[95m"
 fge="[96m"
+fgf="[97m"
 vend="[0m"
 
 setopt append_history
@@ -524,7 +527,7 @@ zle-keymap-select() {
     PROMPT="%{$bg3%} : %{$vend%} "
   else
     RPROMPT="%(?.%{$fg9%}•%{$fgb%}•%{$fg2%}☻.%{$fg9%}☻%{$fgb%}•%{$fg2%}•%1v) "
-    PROMPT="%{$bgp%} %(?.%#.%{$fg9%}%?‼) %{$vend%} "
+    PROMPT="%{$bgp%} %(?.%{$fgf%}%#.%{$fgb%}%?‼) %{$vend%} "
   fi
   RPROMPT+="%{$fgu%}%n@%m%{$vend%}"
   RPROMPT+=":%{$fgc%}%20<«<%~%<<$(prompt_misc)%{$vend%}"
@@ -545,7 +548,7 @@ precmd() {
   RPROMPT="%(?.%{$fg9%}•%{$fgb%}•%{$fg2%}☻.%{$fg9%}☻%{$fgb%}•%{$fg2%}•%1v) "
   RPROMPT+="%{$fgu%}%n@%m%{$vend%}"
   RPROMPT+=":%{$fgc%}%20<«<%~%<<$(prompt_misc)%{$vend%}"
-  PROMPT="%{$bgp%} %(?.%#.%{$fg9%}%?‼) %{$vend%} "
+  PROMPT="%{$bgp%} %(?.%{$fgf%}%#.%{$fgb%}%?‼) %{$vend%} "
   case $TERM in
     (xterm*|rxvt*)
       set_title ${(%):-"%n@%m %~"}
@@ -565,6 +568,7 @@ preexec() {
 }
 
 export COLORTERM="yes"
+alias diff="diff --color=auto "
 alias grep="grep --color=auto "
 alias ls="ls -b -CF --color=auto --group-directories-first "
 alias la="ls -la "
