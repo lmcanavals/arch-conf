@@ -131,20 +131,19 @@ Configure ``sudoers`` with ``visudo``, add::
 
   martin stella= /usr/bin/pacman
 
-Download and install aurman as user:
+Download and install yay as user:
 
-  curl -O https://aur.archlinux.org/cgit/aur.git/snapshot/aurman.tar.gz
-  tar xvzpf aurman.tar.gz
-  cd aurman
+  git clone https://aur.archlinux.org/yay-bin.git
+  cd yay-bin
   makepgk -Acs
 
 Then as root or with sudo:
 
-  pacman -U aur<TAB>
+  pacman -U yay<TAB>
 
 Installing aur utility and installing needed packages::
 
-  aurman -S deepin-grub2-theme
+  yay -S deepin-grub2-theme
 
 Configure grub, copy the ``/etc/default/grub`` from arch-conf.git which adds the
 parameters needed for hibernation support::
@@ -167,41 +166,41 @@ Start console session as ``martin``
 
 Sync, update and install the rest of the good stuff::
 
-  aurman -Syua
+  yay -Syua
 
 GUI base::
 
-  aurman -S xfce4 xfce4-goodies pulseaudio sox lightdm lightdm-gtk-greeter
-  aurman -S slock accountsservice xorg-xmodmap
+  yay -S xfce4 xfce4-goodies pulseaudio sox lightdm lightdm-gtk-greeter
+  yay -S slock accountsservice xorg-xmodmap
 
 Fonts, utilities, etc::
 
-  aurman -S ttf-liberation
-  aurman -S adobe-source-code-pro-fonts adobe-source-sans-pro-fonts
-  aurman -S adobe-source-serif-pro-fonts adobe-source-han-sans-otc-fonts
-  aurman -S arc-solid-gtk-theme deepin-icon-theme
-  aurman -S unrar unzip p7zip ntp imagemagick htop
-  aurman -S google-chrome dropbox redshift
-  aurman -S network-manager-applet pavucontrol
-  aurman -S libcanberra-pulse libcanberra-gstreamer
-  aurman -S libcanberra gnome-keyring thunar-dropbox
+  yay -S ttf-liberation
+  yay -S adobe-source-code-pro-fonts adobe-source-sans-pro-fonts
+  yay -S adobe-source-serif-pro-fonts adobe-source-han-sans-otc-fonts
+  yay -S arc-solid-gtk-theme deepin-icon-theme
+  yay -S unrar unzip p7zip ntp imagemagick htop
+  yay -S google-chrome dropbox redshift
+  yay -S network-manager-applet pavucontrol
+  yay -S libcanberra-pulse libcanberra-gstreamer
+  yay -S libcanberra gnome-keyring thunar-dropbox
 
 Optional::
 
-  aurman -S python-gobject python-xdg # for redshift-gtk
-  aurman -S steam openssh vlc
-  aurman -S xf86-input-synaptics # duh
-  aurman -S xf86-video-intel libva-intel-driver
-  aurman -S cdrkit # mkisofs, wodim and stuff
-  aurman -S glew glfw glm # for the opengl experience
-  aurman -S zip # to create stupid zip files
+  yay -S python-gobject python-xdg # for redshift-gtk
+  yay -S steam openssh vlc
+  yay -S xf86-input-synaptics # duh
+  yay -S xf86-video-intel libva-intel-driver
+  yay -S cdrkit # mkisofs, wodim and stuff
+  yay -S glew glfw glm # for the opengl experience
+  yay -S zip # to create stupid zip files
 
 Not used anymore (maybe, some come as dependencies)::
 
-  aurman -S wqy-microhei wqy-zenhei wqy-bitmapsong-beta
-  aurman -S ttf-wqy-microhei-ibx ttf-roboto-ibx ttf-dejavu 
-  aurman -S xfce-theme-greybird
-  aurman -S xcursor-vanilla-dmz faience-icon-theme
+  yay -S wqy-microhei wqy-zenhei wqy-bitmapsong-beta
+  yay -S ttf-wqy-microhei-ibx ttf-roboto-ibx ttf-dejavu 
+  yay -S xfce-theme-greybird
+  yay -S xcursor-vanilla-dmz faience-icon-theme
 
 * haveged # random number generator, can't remember what for
 * livestreamer # to stream in VLC from twitch.tv and others

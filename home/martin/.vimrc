@@ -33,8 +33,9 @@ set list                " show special characters
 set listchars=tab:►∙,trail:•,extends:→,precedes:←,nbsp:‼
 
 "" Leader
-let mapleader = ","
-let g:mapleader = ","
+"let mapleader = " "
+"let g:mapleader = " "
+map <Space> \
 
 "" Leader shortcuts
 map <leader>w :w!<cr>
@@ -53,7 +54,7 @@ set wildignore+=*~,*.o,*.tmp
 
 "" Misc
 "if has('mouse')
-"  set mouse=a
+"    set mouse=a
 "endif
 set completeopt=menu,menuone,longest,preview
 "set spelllang=en_us
