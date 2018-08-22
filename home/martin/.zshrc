@@ -790,6 +790,11 @@ screenrec() {
   ffmpeg -video_size $l_s -f x11grab -i $DISPLAY+$l_os -f pulse -i default $l_fn
 }
 
+vexe() {
+    g++ -std=c++17 $1 && ./a.out
+}
+
+
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 if [[ $TERM == "xterm-256color" ]]; then
