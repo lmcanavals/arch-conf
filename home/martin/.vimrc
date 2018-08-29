@@ -3,6 +3,12 @@
 "" by Luis Martín Canaval Sánchez
 ""
 
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 scriptencoding utf-8
 set history=700
 
@@ -83,9 +89,10 @@ colorscheme trompis
 "" Gvim options
 if has('gui_running')
     set guioptions=acegit
-    "set lines=25 columns=100
+"    set lines=25 columns=100
     set colorcolumn=81
-    set guifont=Hack\ 10
+"    set guifont=Hack\ 10
+    set guifont=mononoki\ 12
 endif
 
 "" Specific files fixes

@@ -336,7 +336,8 @@ zleiab() {
     local MATCH
 
     if (( NOABBREVIATION > 0 )) ; then
-        LBUFFER="${LBUFFER},."
+#        LBUFFER="${LBUFFER},."
+        LBUFFER="${LBUFFER} "
         return 0
     fi
 
@@ -345,8 +346,8 @@ zleiab() {
     LBUFFER+=${abk[$MATCH]:-$MATCH}
     _zsh_highlight # workaround to highlight after autocompleting
 }
-#zle -N zleiab && bindkey "^@" zleiab
-zle -N zleiab && bindkey ",." zleiab
+zle -N zleiab && bindkey "^@" zleiab
+#zle -N zleiab && bindkey ",." zleiab
 
 autoload -U zmv
 autoload -U history-search-end
