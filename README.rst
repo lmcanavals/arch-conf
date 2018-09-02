@@ -166,7 +166,7 @@ Start console session as ``martin``
 
 Sync, update and install the rest of the good stuff::
 
-  yay -Syua
+  yay -Syu
 
 GUI base::
 
@@ -175,7 +175,7 @@ GUI base::
 
 Fonts, utilities, etc::
 
-  yay -S ttf-liberation
+  yay -S ttf-liberation ttf-freefont
   yay -S adobe-source-code-pro-fonts adobe-source-sans-pro-fonts
   yay -S adobe-source-serif-pro-fonts adobe-source-han-sans-otc-fonts
   yay -S arc-solid-gtk-theme deepin-icon-theme
@@ -198,7 +198,7 @@ Optional::
 Not used anymore (maybe, some come as dependencies)::
 
   yay -S wqy-microhei wqy-zenhei wqy-bitmapsong-beta
-  yay -S ttf-wqy-microhei-ibx ttf-roboto-ibx ttf-dejavu 
+  yay -S ttf-wqy-microhei-ibx ttf-roboto-ibx ttf-dejavu
   yay -S xfce-theme-greybird
   yay -S xcursor-vanilla-dmz faience-icon-theme
 
@@ -264,8 +264,8 @@ edit the file ``.config/user-dirs.dirs`` as needed.
 
 **Fix fonts for some applications**::
 
-  gconftool-2 --set --type string /desktop/gnome/interface/font_name "Noto Sans"
-  gconftool-2 --set --type string /desktop/gnome/interface/monospace_font_name "Noto Sans Mono"
+  gsettings set org.gnome.desktop.interface font-name 'Noto Sans 10'
+  gsettings set org.gnome.desktop.interface monospace-font-name 'mononoki 10'
 
 **Java**
 
