@@ -69,7 +69,7 @@ setopt noshwordsplit
 setopt unset
 
 source $HOME/.zsh/paths.sh
-export EDITOR="vim"
+export EDITOR="nvim"
 export PAGER="less"
 export SHELL="/bin/zsh"
 export BROWSER="google-chrome-stable"
