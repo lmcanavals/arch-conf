@@ -2,6 +2,7 @@
 
 linkall() {
     local githome
+    local archome
     githome="/home/martin/git"
     archome="/arch-conf/home/martin"
     ln -sf $githome$archome/.gitconfig ~/
@@ -10,6 +11,7 @@ linkall() {
     ln -sf $githome$archome/.zsh ~/
     ln -sf $githome$archome/.profile ~/
     ln -sf $githome$archome/.config/fontconfig ~/.config/
+    ln -sf $githome$archome/.config/nvim ~/.config/
     ln -sf $githome/zsh-syntax-highlighting ~/.zsh/plugins/
     ln -sf $githome$archome/.vim ~/
     ln -sf $githome$archome/.vimrc ~/
