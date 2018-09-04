@@ -27,7 +27,7 @@ if has("gui_running")
     let s:c4 = "#2980b9"
     let s:c5 = "#8e44ad"
     let s:c6 = "#16a085"
-    let s:c7 = "#9da3a7"
+    let s:c7 = "#bdc3c7"
     let s:c8 = "#68696a"
     let s:c9 = "#f76c5c"
     let s:ca = "#4eec91"

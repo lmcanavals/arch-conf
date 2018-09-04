@@ -12,7 +12,7 @@ if [ "$TERM" != "xterm-256color" ]; then
     echo -en "\e]P42980B9"
     echo -en "\e]P58E44AD"
     echo -en "\e]P616A085"
-    echo -en "\e]P79DA3A7"
+    echo -en "\e]P7BDC3C7"
     echo -en "\e]P868696A"
     echo -en "\e]P9F76C5C"
     echo -en "\e]PA4EEC91"
