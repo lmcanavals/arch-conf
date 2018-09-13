@@ -20,5 +20,6 @@ linkall() {
         mkdir -p ~/.local/share/xfce4
         ln -sf $githome$archome/.local/share/xfce4/terminal \
             ~/.local/share/xfce4/
+        ln -sf $githome$archome/.Xmodmap ~/
     fi
 }

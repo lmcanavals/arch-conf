@@ -1,16 +1,11 @@
-#!/usr/bin/zsh
-
 if [ -f /etc/pacman.d/mirrorlist.pacnew ]; then
   sed '/#Server/ s|#|| ' -i /etc/pacman.d/mirrorlist.pacnew
   sed '/^#.*$/d' -i /etc/pacman.d/mirrorlist.pacnew
-  cp /etc/pacman.d/mirrorlist mirrorlist.backup
   rankmirrors -n 6 /etc/pacman.d/mirrorlist.pacnew > /etc/pacman.d/mirrorlist
   if [ $? -eq 0 ]; then
     rm /etc/pacman.d/mirrorlist.pacnew
     echo "Mirror list updated"
   else
-    cp mirrorlist.backup /etc/pacman.d/mirrorlist
     echo "Failed to update mirror list"
   fi
-  rm mirrorlist.backup
 fi
