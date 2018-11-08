@@ -71,7 +71,7 @@ Install base system::
 Installing grub and zsh::
 
   arch-chroot /mnt pacman -S grub dosfstools efibootmgr intel-ucode
-  arch-chroot /mnt pacman -S zsh gvim git sudo networkmanager
+  arch-chroot /mnt pacman -S zsh neovim git sudo networkmanager
   arch-chroot /mnt pacman -S powertop tlp # for better power management
 
 Create the user ``martin``::
@@ -171,22 +171,23 @@ Sync, update and install the rest of the good stuff::
 GUI base::
 
   yay -S xfce4 xfce4-goodies pulseaudio sox lightdm lightdm-gtk-greeter
-  yay -S slock accountsservice xorg-xmodmap
+  yay -S slock accountsservice xorg-xmodmap xcape
 
 Fonts, utilities, etc::
 
   yay -S ttf-liberation ttf-freefont
   yay -S adobe-source-code-pro-fonts adobe-source-sans-pro-fonts
   yay -S adobe-source-serif-pro-fonts adobe-source-han-sans-otc-fonts
-  yay -S arc-solid-gtk-theme deepin-icon-theme
+  yay -S arc-solid-gtk-theme papirus-icon-theme
   yay -S unrar unzip p7zip ntp imagemagick htop
-  yay -S google-chrome dropbox redshift
+  yay -S google-chrome redshift
   yay -S network-manager-applet pavucontrol
   yay -S libcanberra-pulse libcanberra-gstreamer
   yay -S libcanberra gnome-keyring thunar-dropbox
 
 Optional::
 
+  yay -S dropbox
   yay -S python-gobject python-xdg # for redshift-gtk
   yay -S steam openssh vlc
   yay -S xf86-input-synaptics # duh
