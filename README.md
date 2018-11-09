@@ -6,7 +6,7 @@ Starting from installation media
     loadkeys us
     setfont LatArCyrHeb-16 # better fonts
 
-Must check!! http://unix.stackexchange.com/questions/75972/give-default-write-permission-to-group-to-any-newly-created-files-and-folders
+Must check!! http://unix.stackexchange.com/questions/75972/
 
 Partitions
 ----------
@@ -21,21 +21,14 @@ the format where xx is the size.
 
 **BIOS Partition table**
 
-+-----+-------+--------------------------+-------------+-----------------+
 | Dev |  Size | Mount point              | File system | gdisk type code |
-+=====+=======+==========================+=============+=================+
+|:---:|------:|--------------------------|:-----------:|-----------------|
 | SSD |  512M | EFI System Parition      | fat32       | EF00            |
-+-----+-------+--------------------------+-------------+-----------------+
 | SSD |  128M | ``/boot``                | ext4        | 8300            |
-+-----+-------+--------------------------+-------------+-----------------+
 | SSD |   30G | ``/``                    | ext4        | 8300            |
-+-----+-------+--------------------------+-------------+-----------------+
 | SSD | >100G | ``/home``                | ext4        | 8300            |
-+-----+-------+--------------------------+-------------+-----------------+
 | HDD |       | ``/var``                 | btrfs       | var subvol      |
-+-----+-------+--------------------------+-------------+-----------------+
 | HDD |       | ``/home/martin/archive`` | btrfs       | Archive subvol  |
-+-----+-------+--------------------------+-------------+-----------------+
 
 Swap is a file, instead of a partition, so it can be resized easily. It should
 be contained in the SSD. But should only be created or activated when there are
