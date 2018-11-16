@@ -134,10 +134,11 @@ exe 'hi! Comment'       .s:f.s:c8
 exe 'hi! Todo'          .s:f.s:c8 .s:b.s:c3
 exe 'hi! Ignore'        .s:f.s:c7
 
-" __WarningMsg__ __Error__ __ErrorMsg__
+" __ModeMsg__ __MoreMsg__ __WarningMsg__ __ErrorMsg__ __Error__
+exe 'hi! ModeMsg'       .s:f.s:ce .s:b.s:no
 exe 'hi! WarningMsg'    .s:f.s:c3 .s:b.s:no
-exe 'hi! Error'         .s:f.s:cf .s:b.s:c1
 exe 'hi! ErrorMsg'      .s:f.s:c9 .s:b.s:no
+exe 'hi! Error'         .s:f.s:cf .s:b.s:c1
 
 " __Identifier__ __Function__
 exe 'hi! Identifier'    .s:f.s:cf           .s:m.s:no
@@ -170,7 +171,7 @@ exe 'hi! DiffText'      .s:f.s:c0 .s:b.s:c6 .s:m.s:no
 " __User1__ __User2__ __User3__ __User4__ __User5__ __User6__ __User7__
 " __User8__ __User9__ __Delimiter__ __Tag__ __Title__ __CursorIM__ __Debug__
 " __debugBreakpoint__ __debugPC__ __Directory__ __Question__ __QuickFixLine__
-" __Menu__ __ModeMsg__ __MoreMsg__
+" __Menu__
 
 unlet s:m
 unlet s:b
