@@ -15,6 +15,7 @@ linkall() {
     ln -sf $githome/zsh-syntax-highlighting ~/.zsh/plugins/
     ln -sf $githome$archome/.vim ~/
     ln -sf $githome$archome/.vimrc ~/
+    ln -sf $githome$archome/.tmux.conf ~/
 
     if (( EUID != 0 )); then
         mkdir -p ~/.local/share/xfce4
