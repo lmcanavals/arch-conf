@@ -164,7 +164,7 @@ Sync, update and install the rest of the good stuff:
 GUI base:
 
     yay -S xfce4 xfce4-goodies pulseaudio sox lightdm lightdm-gtk-greeter
-    yay -S slock accountsservice xorg-xmodmap xcape
+    yay -S slock accountsservice xorg-xmodmap xcape xsel
 
 Fonts, utilities, etc:
 
@@ -204,6 +204,7 @@ Not used anymore (maybe, some come as dependencies):
 * hexedit # aoeu
 * aria2 # download everything in style
 * cmus # music player
+* xsel # for nvim to access system clipboard
 
 Important
 ---------
