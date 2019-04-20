@@ -85,11 +85,11 @@ let s:un = "underline"
 " __Normal__ __Underlined__ __EndOfBuffer__ __NonText__
 " __Special__ __SpecialChar__ __SpecialComment__ __SpecialKey__
 if has('gui_running')
-    exe 'hi! Normal'        .s:f.s:c7 .s:b.s:c0 .s:m.s:no
+    exe 'hi! Normal'              .s:b.s:c0 .s:m.s:no
 else
-    exe 'hi! Normal'        .s:f.s:c7 .s:b.s:no .s:m.s:no
+    exe 'hi! Normal'              .s:b.s:no .s:m.s:no
 endif
-exe 'hi! Underlined'    .s:f.s:c4           .s:m.s:un
+exe 'hi! Underlined'    .s:f.s:cc           .s:m.s:un
 exe 'hi! NonText'       .s:f.s:c8           .s:m.s:no
 exe 'hi! Special'       .s:f.s:c9
 exe 'hi! SpecialKey'    .s:f.s:c8
@@ -100,7 +100,7 @@ exe 'hi! ColorColumn'   .s:f.s:c1 .s:b.s:c7
 exe 'hi! CursorColumn'            .s:b.s:no .s:m.s:no
 exe 'hi! CursorLine'              .s:b.s:no .s:m.s:no
 exe 'hi! CursorLineNr'  .s:f.s:c9           .s:m.s:no
-exe 'hi! LineNr'        .s:f.s:c7 .s:b.s:no
+exe 'hi! LineNr'        .s:f.s:c8 .s:b.s:no
 exe 'hi! FoldColumn'    .s:f.s:cf .s:b.s:c4
 exe 'hi! Folded'        .s:f.s:c7 .s:b.s:c4
 
@@ -116,7 +116,7 @@ exe 'hi! PmenuSbar'     .s:f.s:c0 .s:b.s:c7
 exe 'hi! PmenuThumb'    .s:f.s:c8 .s:b.s:c7
 
 " __VertSplit__ __StatusLine__ __StatusLineNC__ __TabLine__ __TabLineFill__ __TabLineSel__
-exe 'hi! VertSplit'     .s:f.s:c7 .s:b.s:no .s:m.s:no
+exe 'hi! VertSplit'     .s:f.s:c8 .s:b.s:no .s:m.s:no
 exe 'hi! StatusLine'    .s:f.s:cf .s:b.s:c6 .s:m.s:no
 exe 'hi! StatusLineNC'  .s:f.s:ca .s:b.s:c6 .s:m.s:no
 exe 'hi! TabLine'       .s:f.s:c8 .s:b.s:c7 .s:m.s:no
@@ -125,13 +125,13 @@ exe 'hi! TabLineFill'   .s:f.s:c8 .s:b.s:c7 .s:m.s:no
 
 " __SignColumn__ __Cursor__ __Visual__ __VisualNOS__ __Tooltip__ __WildMenu__ __Scrollbar__
 exe 'hi! SignColumn'    .s:f.s:c7
-exe 'hi! Visual'                  .s:b.s:c6 .s:m.s:no
+exe 'hi! Visual'                            .s:m.s:re
 exe 'hi! VisualNOS'               .s:b.s:c1 .s:m.s:no
 exe 'hi! WildMenu'      .s:f.s:cf .s:b.s:c3 .s:m.s:no
 
 " __Comment__ __Todo__ __Ignore__ __Conceal__
 exe 'hi! Comment'       .s:f.s:c8
-exe 'hi! Todo'          .s:f.s:c8 .s:b.s:c3
+exe 'hi! Todo'          .s:f.s:cf .s:b.s:c3
 exe 'hi! Ignore'        .s:f.s:c7
 
 " __ModeMsg__ __MoreMsg__ __WarningMsg__ __ErrorMsg__ __Error__
