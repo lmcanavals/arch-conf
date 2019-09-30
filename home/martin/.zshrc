@@ -479,33 +479,46 @@ PS4="+%N:%i:%_» "
 
 # Miscelaneus info like git.
 function prompt_misc() {
-    local tbranch tcolor tstatus ttmp ttl ttr
-    if [[ -n ${VIRTUAL_ENV} ]]; then
-        print "(${VIRTUAL_ENV:t})"
-    fi
-    if [[ -n $(git branch 2> /dev/null) ]]; then
-        tbranch=$(git branch)
-        tbranch=${tbranch:2}
-        tstatus=""
+    local tmp ttmp ttl ttr
+    tmp=$(git branch 2> /dev/null)
+    if [[ -n $tmp ]]; then
+        tmp=${tmp:2}
         ttmp=$(git status)
         if [[ -n $(echo $ttmp | grep "Untracked") ]]; then
-            tstatus+="±"
-        fi
-        if [[ -n $(echo $ttmp | grep "nothing to commit") ]]; then
-            tcolor=""
-        else
-            tcolor=$fge
-            tstatus+="☼"
+            tmp+="+"
+        elif [[ -n $(echo $ttmp | grep "no changes added") ]]; then
+            tmp+="*"
         fi
         ttl=$(git rev-list master | wc -l)
         ttr=$(git rev-list origin/master | wc -l)
         if [[ $ttl > $ttr ]]; then
-            tstatus+="↑" #▲
+            tmp+="↑" #▲
         elif [[ $ttl < $ttr ]]; then
-            tstatus+="↓" #▼
+            tmp+="↓" #▼
         fi
-        print "%{$tcolor%}[$tbranch$tstatus]"
+        print "%{$fge%} $tmp"
     fi
+}
+function prompt_left() {
+    local tmp
+    if [[ $KEYMAP = vicmd ]]; then
+        tmp="%{$bg3%} :"
+    else
+        tmp="%{$bgp%} %(?.%{$fgf%}%#.%{$fgb%}ε)"
+    fi
+    tmp+=" %{$vend%} "
+    print "$tmp"
+}
+function prompt_right() { 
+    local tmp
+    if [[ -n ${VIRTUAL_ENV} ]]; then
+        tmp="${VIRTUAL_ENV:t}"
+    else
+        tmp="∞"
+    fi
+    tmp="%(?.%{$fg2%}$tmp.%{$fg9%}%?) "
+    tmp+="%{$fgu%}%n@%m%{$vend%}:%{$fgc%}%20<«<%~%<<$(prompt_misc)%{$vend%}"
+    print "$tmp"
 }
 
 function ESC_print() {
@@ -527,15 +540,8 @@ function info_print() {
 }
 
 zle-keymap-select() {
-    if [[ $KEYMAP = vicmd ]]; then
-        RPROMPT="%{$fg3%}∞ "
-        PROMPT="%{$bg3%} : %{$vend%} "
-    else
-        RPROMPT="%(?.%{$fg2%}.%{$fg9%}%1v)∞ "
-        PROMPT="%{$bgp%} %(?.%{$fgf%}%#.%{$fgb%}%?!) %{$vend%} "
-    fi
-    RPROMPT+="%{$fgu%}%n@%m%{$vend%}"
-    RPROMPT+=":%{$fgc%}%20<«<%~%<<$(prompt_misc)%{$vend%}"
+    RPROMPT="$(prompt_right)"
+    PROMPT="$(prompt_left)"
     () { return $__prompt_status }
     zle reset-prompt
 }
@@ -549,11 +555,9 @@ zle -N zle-line-init
 
 precmd() {
     (( ${+functions[vcs_info]} )) && vcs_info
-    #  ZLE_RPROMPT_INDENT=0
-    RPROMPT="%(?.%{$fg2%}.%{$fg9%}%1v)∞ "
-    RPROMPT+="%{$fgu%}%n@%m%{$vend%}"
-    RPROMPT+=":%{$fgc%}%20<«<%~%<<$(prompt_misc)%{$vend%}"
-    PROMPT="%{$bgp%} %(?.%{$fgf%}%#.%{$fgb%}%?!) %{$vend%} "
+    ZLE_RPROMPT_INDENT=0
+    RPROMPT="$(prompt_right)"
+    PROMPT="$(prompt_left)"
     case $TERM in
     (xterm*|rxvt*)
         set_title ${(%):-"%n@%m %~"}
