@@ -480,6 +480,9 @@ PS4="+%N:%i:%_» "
 # Miscelaneus info like git.
 function prompt_misc() {
     local tbranch tcolor tstatus ttmp ttl ttr
+    if [[ -n ${VIRTUAL_ENV} ]]; then
+        print "(${VIRTUAL_ENV:t})"
+    fi
     if [[ -n $(git branch 2> /dev/null) ]]; then
         tbranch=$(git branch)
         tbranch=${tbranch:2}
@@ -529,7 +532,7 @@ zle-keymap-select() {
         PROMPT="%{$bg3%} : %{$vend%} "
     else
         RPROMPT="%(?.%{$fg2%}.%{$fg9%}%1v)∞ "
-        PROMPT="%{$bgp%} %(?.%{$fgf%}%#.%{$fgb%}%?‼) %{$vend%} "
+        PROMPT="%{$bgp%} %(?.%{$fgf%}%#.%{$fgb%}%?!) %{$vend%} "
     fi
     RPROMPT+="%{$fgu%}%n@%m%{$vend%}"
     RPROMPT+=":%{$fgc%}%20<«<%~%<<$(prompt_misc)%{$vend%}"
@@ -550,7 +553,7 @@ precmd() {
     RPROMPT="%(?.%{$fg2%}.%{$fg9%}%1v)∞ "
     RPROMPT+="%{$fgu%}%n@%m%{$vend%}"
     RPROMPT+=":%{$fgc%}%20<«<%~%<<$(prompt_misc)%{$vend%}"
-    PROMPT="%{$bgp%} %(?.%{$fgf%}%#.%{$fgb%}%?‼) %{$vend%} "
+    PROMPT="%{$bgp%} %(?.%{$fgf%}%#.%{$fgb%}%?!) %{$vend%} "
     case $TERM in
     (xterm*|rxvt*)
         set_title ${(%):-"%n@%m %~"}
