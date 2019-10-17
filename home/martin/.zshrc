@@ -1,3 +1,4 @@
+#!/usr/bin/zsh
 # Special chars between https://en.wikipedia.org/wiki/Code_page_437
 # Workaround for vte overriding $TERM
 if [[ ${TERM} == "xterm" ]]; then
@@ -486,7 +487,7 @@ function prompt_misc() {
         ttmp=$(git status)
         if [[ -n $(echo $ttmp | grep "Untracked") ]]; then
             tmp+="+"
-        elif [[ -n $(echo $ttmp | grep "no changes added") ]]; then
+        elif [[ -n $(echo $ttmp | grep "Changes") ]]; then
             tmp+="*"
         fi
         ttl=$(git rev-list master | wc -l)
