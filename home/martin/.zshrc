@@ -6,7 +6,8 @@ if [[ ${TERM} == "xterm" ]]; then
 fi
 
 if [ "$TERM" != "xterm-256color" ]; then
-    echo -en "\e]P00C1E20"
+    #echo -en "\e]P00C1E20"
+    echo -en "\e]P0000000"
     echo -en "\e]P1C0392B"
     echo -en "\e]P227AE60"
     echo -en "\e]P3F39C12"

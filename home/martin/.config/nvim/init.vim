@@ -13,7 +13,7 @@ se sw=4
 se wim=longest:full,full
 se wig+=*~,*.o,*.tmp
 "se cc=81
-"se nu 
+"se nu
 se sbr=▲·
 se list
 se lcs=tab:▬·,trail:·,extends:»,precedes:«,nbsp:‼
@@ -38,3 +38,12 @@ nm <leader>k <c-w>k
 nm <leader>l <c-w>l
 nm <leader>c <c-w>c
 
+autocmd FileType go setl lcs+=tab:\|\  noet
+
+call plug#begin()
+
+Plug 'fatih/vim-go'
+Plug 'nsf/gocode'
+Plug 'scrooloose/nerdtree'
+
+call plug#end()

@@ -11,6 +11,7 @@ Must check!! http://unix.stackexchange.com/questions/75972/
 Partitions
 ----------
 https://wiki.archlinux.org/index.php/Partitioning
+Check multiboot information about having efi and mbr boot for usb drives.
 
 Using **GPT fdisk** to create partitions:
 
@@ -59,7 +60,7 @@ Installing and setting the base system
 
 Install base system:
 
-    pacstrap /mnt base base-devel
+    pacstrap /mnt base linux linux-firmware base-devel
 
 Installing grub and zsh:
 
