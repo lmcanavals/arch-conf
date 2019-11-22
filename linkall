@@ -3,25 +3,44 @@
 linkall() {
     local githome
     local archome
+    local lshare
+    local here
+    home="/home/martin"
     githome="/home/martin/git"
-    archome="/arch-conf/home/martin"
-    ln -sf $githome$archome/.gitconfig ~/
-    ln -sf $githome$archome/.gitignore_global ~/
-    ln -sf $githome$archome/.zshrc ~/
-    ln -sf $githome$archome/.zsh ~/
-    ln -sf $githome$archome/.profile ~/
-    ln -sf $githome$archome/.config/fontconfig ~/.config/
-    ln -sf $githome$archome/.config/nvim ~/.config/
-    ln -sf $githome/zsh-syntax-highlighting ~/.zsh/plugins/
-    ln -sf $githome$archome/.vim ~/
-    ln -sf $githome$archome/.vimrc ~/
-    ln -sf $githome$archome/.tmux.conf ~/
+    archome="/home/martin/arch-conf/home/martin"
+    lshare=".local/share"
 
     if (( EUID != 0 )); then
-        mkdir -p ~/.local/share/xfce4
-        ln -sf $githome$archome/.local/share/xfce4/terminal \
-            ~/.local/share/xfce4/
-        ln -sf $githome$archome/.Xmodmap ~/
+        mkdir -p ~/$lshare/xfce4
+        ln -sf $archome/$lshare/xfce4/terminal ~/$lshare/xfce4/
+        ln -sf $archome/.Xmodmap ~/
+        if [[ ! -f ~/$lshare/nvim/site/autoload/plug.vim ]]; then
+            curl -fLo ~/$lshare/nvim/site/autoload/plug.vim --create-dirs \
+             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        else
+            echo "No need to download vim-plug"
+        fi
+        if [[ ! -d $githome/zsh-syntax-highlighting ]]; then
+            here=$(pwd)
+            cd $githome
+            git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+            cd $here
+            unset here
+        else
+            echo "No need to clone zsh-syntax-highlighting"
+        fi
     fi
+
+    ln -sf $archome/.gitconfig ~/
+    ln -sf $archome/.gitignore_global ~/
+    ln -sf $archome/.zshrc ~/
+    ln -sf $archome/.zsh ~/
+    ln -sf $archome/.profile ~/
+    ln -sf $archome/.config/fontconfig ~/.config/
+    ln -sf $archome/.config/nvim ~/.config/
+    ln -sf $githome/zsh-syntax-highlighting ~/.zsh/plugins/
+    ln -sf $archome/.vim ~/
+    ln -sf $archome/.vimrc ~/
+    ln -sf $archome/.tmux.conf ~/
 }
 linkall

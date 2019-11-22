@@ -1,42 +1,36 @@
 " Vim color file
-"
 " Name:       trompis.vim
-" Version:    1.0
+" Version:    2.0
 " Maintainer: Luis Canaval (uno@canaval.org)
 "
 
 "set background=dark
 "set background=light
-
 hi clear
+syntax reset
+let g:colors_name = 'trompis'
 
-if exists("syntax_on")
-    syntax reset
-endif
-
-let colors_name = "trompis"
-
-if has("gui_running")
+if has('gui_running') || has('termguicolors') && &termguicolors
     let s:m = " gui="
     let s:b = " guibg="
     let s:f = " guifg="
-    let s:c0 = "#0c1e20"
-    let s:c1 = "#c0392b"
-    let s:c2 = "#27ae60"
-    let s:c3 = "#f39c12"
-    let s:c4 = "#2980b9"
-    let s:c5 = "#8e44ad"
-    let s:c6 = "#16a085"
-    let s:c7 = "#bdc3c7"
-    let s:c8 = "#68696a"
-    let s:c9 = "#f76c5c"
-    let s:ca = "#4eec91"
-    let s:cb = "#f1e42f"
-    let s:cc = "#54b8fb"
-    let s:cd = "#bb79d6"
-    let s:ce = "#4ac1b8"
-    let s:cf = "#ecf0f1"
-elseif &t_Co >= 16
+    let s:c0 = "#000000"
+    let s:c1 = "#FF3300"
+    let s:c2 = "#00CC33"
+    let s:c3 = "#FF9900"
+    let s:c4 = "#3366FF"
+    let s:c5 = "#FF3399"
+    let s:c6 = "#00CCFF"
+    let s:c7 = "#CCCCCC"
+    let s:c8 = "#666666"
+    let s:c9 = "#FF9966"
+    let s:ca = "#66CC99"
+    let s:cb = "#FFDD00"
+    let s:cc = "#6699FF"
+    let s:cd = "#FF66CC"
+    let s:ce = "#66FFFF"
+    let s:cf = "#FFFFFF"
+elseif &t_Co >= 256
     let s:m = " cterm="
     let s:b = " ctermbg="
     let s:f = " ctermfg="

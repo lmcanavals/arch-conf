@@ -4,10 +4,8 @@ Name=LMCS
 # gruvbox dark (vim)
 #ColorForeground=#ebdbb2
 #ColorBackground=#282828
-#ColorPalette=#282828;#cc241d;#98971a;#d79921;#458588;#b16286;#689d6a;#a89984;#928374;#fb4934;#b8bb26;#fabd2f;#83a598;#d3869b;#8ec07c;#ebdbb2
-#ColorPalette=rgb(12,30,32);rgb(192,57,43);rgb(39,174,96);rgb(243,156,18);rgb(41,128,185);rgb(142,68,173);rgb(22,160,133);rgb(189,195,199);rgb(104,105,106);rgb(247,108,92);rgb(78,236,145);rgb(241,228,47);rgb(84,184,251);rgb(187,121,214);rgb(74,193,184);rgb(236,240,241)
-
 # flat modified (terminal)
 ColorForeground=#eeeeeeeeecec
 ColorBackground=#000000000000
-ColorPalette=rgb(12,30,32);rgb(255,51,0);rgb(51,221,0);rgb(255,153,0);rgb(51,153,255);rgb(255,0,255);rgb(0,221,255);rgb(189,195,199);rgb(104,105,106);rgb(255,153,153);rgb(153,255,102);rgb(255,221,0);rgb(153,221,255);rgb(255,153,255);rgb(153,255,255);rgb(236,240,241)
+ColorPalette=rgb(0,0,0);rgb(255,51,0);rgb(0,204,51);rgb(255,153,0);rgb(51,102,255);rgb(255,51,153);rgb(0,204,255);rgb(204,204,204);rgb(102,102,102);rgb(255,153,102);rgb(102,204,153);rgb(255,221,0);rgb(102,153,255);rgb(255,102,204);rgb(102,255,255);rgb(255,255,255)
+
