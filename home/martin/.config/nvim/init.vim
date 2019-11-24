@@ -20,7 +20,7 @@ se so=5
 se stl=%f%M%Y%R%H%W,%{&ff},%{&fenc?&fenc:&enc}%=%-10(%l,%c%V%)%P
 se ls=0
 se bg=dark
-se tgc
+"se tgc
 se title
 
 color trompis

@@ -1,194 +1,96 @@
 " Vim color file
 " Name:       trompis.vim
-" Version:    2.0
+" Version:    3.0
 " Maintainer: Luis Canaval (uno@canaval.org)
 "
 
-"set background=dark
-"set background=light
-hi clear
-syntax reset
+"hi clear
+"syntax reset
 let g:colors_name = 'trompis'
 
-if has('gui_running') || has('termguicolors') && &termguicolors
-    let s:m = " gui="
-    let s:b = " guibg="
-    let s:f = " guifg="
-    let s:c0 = "#000000"
-    let s:c1 = "#FF3300"
-    let s:c2 = "#00CC33"
-    let s:c3 = "#FF9900"
-    let s:c4 = "#3366FF"
-    let s:c5 = "#FF3399"
-    let s:c6 = "#00CCFF"
-    let s:c7 = "#CCCCCC"
-    let s:c8 = "#666666"
-    let s:c9 = "#FF9966"
-    let s:ca = "#66CC99"
-    let s:cb = "#FFDD00"
-    let s:cc = "#6699FF"
-    let s:cd = "#FF66CC"
-    let s:ce = "#66FFFF"
-    let s:cf = "#FFFFFF"
-elseif &t_Co >= 256
-    let s:m = " cterm="
-    let s:b = " ctermbg="
-    let s:f = " ctermfg="
-    let s:c0 = "0"
-    let s:c1 = "1"
-    let s:c2 = "2"
-    let s:c3 = "3"
-    let s:c4 = "4"
-    let s:c5 = "5"
-    let s:c6 = "6"
-    let s:c7 = "7"
-    let s:c8 = "8"
-    let s:c9 = "9"
-    let s:ca = "10"
-    let s:cb = "11"
-    let s:cc = "12"
-    let s:cd = "13"
-    let s:ce = "14"
-    let s:cf = "15"
-else
-    let s:m = " cterm="
-    let s:b = " ctermbg="
-    let s:f = " ctermfg="
-    let s:c0 = "Black"
-    let s:c1 = "DarkRed"
-    let s:c2 = "DarkGreen"
-    let s:c3 = "DarkYellow"
-    let s:c4 = "DarkBlue"
-    let s:c5 = "DarkMagenta"
-    let s:c6 = "DarkCyan"
-    let s:c7 = "LightGray"
-    let s:c8 = "DarkGray"
-    let s:c9 = "LightRed"
-    let s:ca = "LightGreen"
-    let s:cb = "LightYellow"
-    let s:cc = "LightBlue"
-    let s:cd = "LightMagenta"
-    let s:ce = "LightCyan"
-    let s:cf = "White"
-endif
-let s:no = "NONE"
-let s:bo = "BOLD"
-let s:re = "reverse"
-let s:un = "underline"
+fu! s:setHi(g, f, b, m)
+    exe 'hi! '.a:g
+        \ . (a:f >= 0 ? ' guifg='.s:c[a:f][0].' ctermfg='.s:c[a:f][1] : '')
+        \ . (a:b >= 0 ? ' guibg='.s:c[a:b][0].' ctermbg='.s:c[a:b][1] : '')
+        \ . (a:m >= 0 ? ' gui='.s:c[a:m][0].' cterm='.s:c[a:m][1] : '')
+endf
 
-" __Normal__ __Underlined__ __EndOfBuffer__ __NonText__
-" __Special__ __SpecialChar__ __SpecialComment__ __SpecialKey__
-if has('gui_running')
-    exe 'hi! Normal'              .s:b.s:c0 .s:m.s:no
-else
-    exe 'hi! Normal'              .s:b.s:no .s:m.s:no
-endif
-exe 'hi! Underlined'    .s:f.s:cc           .s:m.s:un
-exe 'hi! NonText'       .s:f.s:c8           .s:m.s:no
-exe 'hi! Special'       .s:f.s:c9
-exe 'hi! SpecialKey'    .s:f.s:c8
+let s:c = [['#000000',   0          ],
+         \ ['#FF3300',   1          ],
+         \ ['#00CC33',   2          ],
+         \ ['#FF9900',   3          ],
+         \ ['#3366FF',   4          ],
+         \ ['#FF3399',   5          ],
+         \ ['#00CCFF',   6          ],
+         \ ['#CCCCCC',   7          ],
+         \ ['#666666',   8          ],
+         \ ['#FF9966',   9          ],
+         \ ['#66CC99',   10         ],
+         \ ['#FFDD00',   11         ],
+         \ ['#6699FF',   12         ],
+         \ ['#FF66CC',   13         ],
+         \ ['#66FFFF',   14         ],
+         \ ['#FFFFFF',   15         ],
+         \ ['NONE',      'NONE'     ],
+         \ ['BOLD',      'BOLD'     ],
+         \ ['reverse',   'reverse'  ],
+         \ ['underline', 'underline']]
 
-" __ColorColumn__ __CursorColumn__ __CursorLine__ __CursorLineNr__ __LineNr__
-" __FoldColumn__ __Folded__
-exe 'hi! ColorColumn'   .s:f.s:c1 .s:b.s:c7
-exe 'hi! CursorColumn'            .s:b.s:no .s:m.s:no
-exe 'hi! CursorLine'              .s:b.s:no .s:m.s:no
-exe 'hi! CursorLineNr'  .s:f.s:c9           .s:m.s:no
-exe 'hi! LineNr'        .s:f.s:c8 .s:b.s:no
-exe 'hi! FoldColumn'    .s:f.s:cf .s:b.s:c4
-exe 'hi! Folded'        .s:f.s:c7 .s:b.s:c4
+call s:setHi('Normal',       -1,  16, 16)
+"call s:setHi('Normal',           -1,  0, 16) " __Normal__
+call s:setHi('Underlined',      12, -1, 19) " __Underlined__
+call s:setHi('NonText',          8, -1, 16) " __NonText__ __EndOfBuffer__
+call s:setHi('Special',          9, -1, -1) " __Special__ __SpecialChar__ __SpecialComment__
+call s:setHi('SpecialKey',       8, -1, -1) " __SpecialKey__
+call s:setHi('ColorColumn',      1,  7, -1) " __ColorColumn__
+call s:setHi('CursorColumn',    -1, 16, 16) " __CursorColumn__
+call s:setHi('CursorLine',      -1, 16, 16) " __CursorLine__
+call s:setHi('CursorLineNr',     9, -1, 16) " __CursorLineNr__
+call s:setHi('LineNr',           8, 16, -1) " __LineNr__
+call s:setHi('FoldColumn',      12,  4, -1) " __FoldColumn__
+call s:setHi('Folded',          12,  4, -1) " __Folded__
+call s:setHi('MatchParen',       7,  3, 16) " __MatchParen__
+call s:setHi('IncSearch',       15,  5, 16) " __IncSearch__
+call s:setHi('Search',          15,  2, 16) " __Search__ __QuickFixLine__
+call s:setHi('Pmenu',            8,  7, -1) " __Pmenu__
+call s:setHi('PmenuSel',         7,  6, -1) " __PmenuSel__
+call s:setHi('PmenuSbar',        8,  7, -1) " __PmenuSbar__
+call s:setHi('PmenuThumb',       7,  6, -1) " __PmenuThumb__
+call s:setHi('VertSplit',        8, 16, 16) " __VertSplit__
+call s:setHi('StatusLine',      15,  6, 16) " __StatusLine__
+call s:setHi('StatusLineNC',     5,  6, 16) " __StatusLineNC__
+call s:setHi('TabLine',         13,  5, 16) " __TabLine__
+call s:setHi('TabLineSel',      15, 16, 16) " __TabLineSel__
+call s:setHi('TabLineFill',     13,  5, 16) " __TabLineFill__
+call s:setHi('SignColumn',       9,  1, -1) " __SignColumn__
+call s:setHi('Visual',          -1, -1, 18) " __Visual__
+call s:setHi('VisualNOS',       -1,  1, 16) " __VisualNOS__
+call s:setHi('WildMenu',        15,  3, 16) " __WildMenu__
+call s:setHi('Comment',          8, -1, -1) " __Comment__
+call s:setHi('Todo',            15,  3, -1) " __Todo__
+call s:setHi('Ignore',           7, -1, -1) " __Ignore__
+call s:setHi('ModeMsg',         14, 16, -1) " __ModeMsg__
+call s:setHi('WarningMsg',       3, 16, -1) " __WarningMsg__
+call s:setHi('ErrorMsg',         9, 16, -1) " __ErrorMsg__
+call s:setHi('Error',           15,  1, -1) " __Error__
+call s:setHi('Identifier',      15, -1, 16) " __Identifier__ __Function__
+call s:setHi('PreProc',         11, -1, -1) " __PreProc__ __PreCondit__ __Define__ __Macro__ __Include__
+call s:setHi('Number',           3, -1, -1) " __Number__ __Float__
+call s:setHi('Constant',         3, -1, -1) " __Constant__ __Boolean__ __Character__ __String__
+call s:setHi('Type',            10, -1, 16) " __Type__ __Typedef__ __Type__ __Structure__ __StorageClass__
+call s:setHi('Statement',        2, -1, 16) " __Statement__ __Conditional__ __Exception__ __Keyword__ __Label__ __Operator__ __Repeat__
+call s:setHi('DiffAdd',          0,  2, -1) " __DiffAdd__
+call s:setHi('DiffDelete',       0,  1, 16) " __DiffDelete__
+call s:setHi('DiffChange',       0,  3, -1) " __DiffChange__
+call s:setHi('DiffText',         0,  6, 16) " __DiffText__
+call s:setHi('Directory',       14, -1, -1) " __Directory__
 
-" __MatchParen__ __IncSearch__ __Search__
-exe 'hi! MatchParen'    .s:f.s:cf .s:b.s:c3 .s:m.s:no
-exe 'hi! IncSearch'     .s:f.s:cf .s:b.s:c5 .s:m.s:no
-exe 'hi! Search'        .s:f.s:cf .s:b.s:c2 .s:m.s:no
-
-" __Pmenu__ __PmenuSel__ __PmenuSbar__ __PmenuThumb__
-exe 'hi! Pmenu'         .s:f.s:c8 .s:b.s:c7
-exe 'hi! PmenuSel'      .s:f.s:cf .s:b.s:c7
-exe 'hi! PmenuSbar'     .s:f.s:c0 .s:b.s:c7
-exe 'hi! PmenuThumb'    .s:f.s:c8 .s:b.s:c7
-
-" __VertSplit__ __StatusLine__ __StatusLineNC__ __TabLine__ __TabLineFill__ __TabLineSel__
-exe 'hi! VertSplit'     .s:f.s:c8 .s:b.s:no .s:m.s:no
-exe 'hi! StatusLine'    .s:f.s:cf .s:b.s:c6 .s:m.s:no
-exe 'hi! StatusLineNC'  .s:f.s:ca .s:b.s:c6 .s:m.s:no
-exe 'hi! TabLine'       .s:f.s:c8 .s:b.s:c7 .s:m.s:no
-exe 'hi! TabLineSel'    .s:f.s:cf .s:b.s:no .s:m.s:no
-exe 'hi! TabLineFill'   .s:f.s:c8 .s:b.s:c7 .s:m.s:no
-
-" __SignColumn__ __Cursor__ __Visual__ __VisualNOS__ __Tooltip__ __WildMenu__ __Scrollbar__
-exe 'hi! SignColumn'    .s:f.s:c7
-exe 'hi! Visual'                            .s:m.s:re
-exe 'hi! VisualNOS'               .s:b.s:c1 .s:m.s:no
-exe 'hi! WildMenu'      .s:f.s:cf .s:b.s:c3 .s:m.s:no
-
-" __Comment__ __Todo__ __Ignore__ __Conceal__
-exe 'hi! Comment'       .s:f.s:c8
-exe 'hi! Todo'          .s:f.s:cf .s:b.s:c3
-exe 'hi! Ignore'        .s:f.s:c7
-
-" __ModeMsg__ __MoreMsg__ __WarningMsg__ __ErrorMsg__ __Error__
-exe 'hi! ModeMsg'       .s:f.s:ce .s:b.s:no
-exe 'hi! WarningMsg'    .s:f.s:c3 .s:b.s:no
-exe 'hi! ErrorMsg'      .s:f.s:c9 .s:b.s:no
-exe 'hi! Error'         .s:f.s:cf .s:b.s:c1
-
-" __Identifier__ __Function__
-exe 'hi! Identifier'    .s:f.s:cf           .s:m.s:no
-
-" __PreCondit__ __PreProc__ __Define__ __Macro__ __Include__
-exe 'hi! PreProc'       .s:f.s:cb
-
-" __Number__ __Boolean__ __Character__ __Constant__ __String__ __Float__
-exe 'hi! Number'        .s:f.s:c3
-exe 'hi! Constant'      .s:f.s:c3
-
-" __Typedef__ __Type__ __Structure__ __StorageClass__
-exe 'hi! Type'          .s:f.s:ca           .s:m.s:no
-
-" __Conditional__ __Exception__ __Keyword__ __Label__ __Operator__ __Repeat__
-" __Statement__
-exe 'hi! Statement'     .s:f.s:c2           .s:m.s:no
-
-" __DiffAdd__ __DiffDelete__ __DiffChange__ __DiffText__
-exe 'hi! DiffAdd'       .s:f.s:c0 .s:b.s:c2
-exe 'hi! DiffDelete'    .s:f.s:c0 .s:b.s:c1 .s:m.s:no
-exe 'hi! DiffChange'    .s:f.s:c0 .s:b.s:c3
-exe 'hi! DiffText'      .s:f.s:c0 .s:b.s:c6 .s:m.s:no
-
-""" .diff
-"exe 'hi! diffAdded'     .s:f.s:ca
-"exe 'hi! diffRemoved'   .s:f.s:c9
-
-" __SpellBad__ __SpellCap__ __SpellLocal__ __SpellRare__
+" __Conceal__ __SpellBad__ __SpellCap__ __SpellLocal__ __SpellRare__
 " __User1__ __User2__ __User3__ __User4__ __User5__ __User6__ __User7__
-" __User8__ __User9__ __Delimiter__ __Tag__ __Title__ __CursorIM__ __Debug__
-" __debugBreakpoint__ __debugPC__ __Directory__ __Question__ __QuickFixLine__
-" __Menu__
+" __User8__ __User9__ __CursorIM__
+" __debugBreakpoint__ __debugPC__  __Menu__ __Tooltip__ __Scrollbar__
+" __Cursor__ __Debug__ __Delimiter__ __MoreMsg__ __Question__ __Tag__ __Title__
 
-unlet s:m
-unlet s:b
-unlet s:f
-unlet s:c0
-unlet s:c1
-unlet s:c2
-unlet s:c3
-unlet s:c4
-unlet s:c5
-unlet s:c6
-unlet s:c7
-unlet s:c8
-unlet s:c9
-unlet s:ca
-unlet s:cb
-unlet s:cc
-unlet s:cd
-unlet s:ce
-unlet s:cf
-unlet s:no
-unlet s:bo
-unlet s:re
-unlet s:un
+unlet s:c
 
 " vim: set expandtab tabstop=4 shiftwidth=4 smarttab softtabstop=4:

@@ -7,7 +7,7 @@ linkall() {
     local here
     home="/home/martin"
     githome="/home/martin/git"
-    archome="/home/martin/arch-conf/home/martin"
+    archome="/home/martin/git/arch-conf/home/martin"
     lshare=".local/share"
 
     if (( EUID != 0 )); then
