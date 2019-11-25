@@ -4,8 +4,8 @@
 " Maintainer: Luis Canaval (uno@canaval.org)
 "
 
-"hi clear
-"syntax reset
+hi clear
+syntax reset
 let g:colors_name = 'trompis'
 
 fu! s:setHi(g, f, b, m)
@@ -16,21 +16,21 @@ fu! s:setHi(g, f, b, m)
 endf
 
 let s:c = [['#000000',   0          ],
-         \ ['#FF3300',   1          ],
-         \ ['#00CC33',   2          ],
-         \ ['#FF9900',   3          ],
-         \ ['#3366FF',   4          ],
-         \ ['#FF3399',   5          ],
-         \ ['#00CCFF',   6          ],
-         \ ['#CCCCCC',   7          ],
-         \ ['#666666',   8          ],
-         \ ['#FF9966',   9          ],
-         \ ['#66CC99',   10         ],
-         \ ['#FFDD00',   11         ],
-         \ ['#6699FF',   12         ],
-         \ ['#FF66CC',   13         ],
-         \ ['#66FFFF',   14         ],
-         \ ['#FFFFFF',   15         ],
+         \ ['#B7141E',   1          ],
+         \ ['#457B23',   2          ],
+         \ ['#F5971D',   3          ],
+         \ ['#134EB2',   4          ],
+         \ ['#550087',   5          ],
+         \ ['#0E707C',   6          ],
+         \ ['#EEEEEE',   7          ],
+         \ ['#424242',   8          ],
+         \ ['#E83A3F',   9          ],
+         \ ['#7ABA39',   10         ],
+         \ ['#FEE92E',   11         ],
+         \ ['#53A4F3',   12         ],
+         \ ['#A94DBB',   13         ],
+         \ ['#26BAD1',   14         ],
+         \ ['#D8D8D8',   15         ],
          \ ['NONE',      'NONE'     ],
          \ ['BOLD',      'BOLD'     ],
          \ ['reverse',   'reverse'  ],

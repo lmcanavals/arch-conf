@@ -7,5 +7,5 @@ Name=LMCS
 # flat modified (terminal)
 ColorForeground=#eeeeeeeeecec
 ColorBackground=#000000000000
-ColorPalette=rgb(0,0,0);rgb(255,51,0);rgb(0,204,51);rgb(255,153,0);rgb(51,102,255);rgb(255,51,153);rgb(0,204,255);rgb(204,204,204);rgb(102,102,102);rgb(255,153,102);rgb(102,204,153);rgb(255,221,0);rgb(102,153,255);rgb(255,102,204);rgb(102,255,255);rgb(255,255,255)
+ColorPalette=rgb(0,0,0);rgb(183,20,30);rgb(69,123,35);rgb(245,151,29);rgb(19,78,178);rgb(85,0,135);rgb(14,112,124);rgb(238,238,238);rgb(66,66,66);rgb(232,58,63);rgb(122,186,57);rgb(254,233,46);rgb(83,164,243);rgb(169,77,187);rgb(38,186,209);rgb(216,216,216);
 
