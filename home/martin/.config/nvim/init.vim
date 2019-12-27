@@ -14,7 +14,7 @@ se wig+=*~,*.o,*.tmp
 se nu
 se sbr=▲·
 se list
-se lcs=tab:▬·,trail:·,extends:»,precedes:«,nbsp:‼
+se lcs=tab:▬·,trail:·,extends:»,precedes:«,nbsp:☼
 
 se so=5
 se stl=%f%M%Y%R%H%W,%{&ff},%{&fenc?&fenc:&enc}%=%-10(%l,%c%V%)%P

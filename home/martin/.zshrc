@@ -1,9 +1,25 @@
 #!/usr/bin/zsh
 # Special chars between https://en.wikipedia.org/wiki/Code_page_437
+
+ZSHDIR=$HOME/.config/zsh
+HISTFILE=$ZSHDIR/histfile
+HISTSIZE=1000
+SAVEHIST=1000
+
+source $ZSHDIR/paths
+source $ZSHDIR/functions
+source $ZSHDIR/aliases
+
+export EDITOR="nvim"
+export PAGER="less"
+export SHELL="/usr/bin/zsh"
+export BROWSER="google-chrome-stable"
+export COLORTERM="yes"
+
 # Workaround for vte overriding $TERM
-if [[ ${TERM} == "xterm" ]]; then
-    export TERM="xterm-256color"
-fi
+#if [[ ${TERM} == "xterm" ]]; then
+#    export TERM="xterm-256color"
+#fi
 
 if [ "$TERM" != "xterm-256color" ]; then
     #echo -en "\e]P00C1E20"
@@ -26,7 +42,7 @@ if [ "$TERM" != "xterm-256color" ]; then
     #  clear #for background artifacting
 fi
 
-eval $(dircolors ~/.zsh/16.dircolors)
+eval $(dircolors $ZSHDIR/16.dircolors)
 # the ^[ is "entered" by typing Ctrl+v and Ctrl+[
 if (( EUID == 0 )); then
     bgp="[41m"
@@ -52,10 +68,9 @@ vend="[0m"
 
 setopt append_history
 setopt share_history
-setopt extended_history
 setopt histignorealldups
+setopt histignoredups
 setopt histignorespace
-setopt auto_cd
 setopt extended_glob
 setopt longlistjobs
 setopt nonomatch
@@ -69,12 +84,6 @@ setopt pushd_ignore_dups
 setopt noglobdots
 setopt noshwordsplit
 setopt unset
-
-source $HOME/.zsh/paths.sh
-export EDITOR="nvim"
-export PAGER="less"
-export SHELL="/bin/zsh"
-export BROWSER="google-chrome-stable"
 
 #export GREP_COLORS
 export LS_COLORS
@@ -315,7 +324,7 @@ abk=(
 "SL"   "| sort | less"
 "S"    "| sort -u"
 "T"    "| tail"
-"V"    "|& vim -"
+"V"    "|& nvim -"
 "co"   "./configure && make && sudo make install"
 "syu"  "yay -Syu"
 "ss"   "yay -Ss "
@@ -424,11 +433,6 @@ zle -C hist-complete complete-word _generic
 zstyle ":completion:hist-complete:*" completer _history
 bindkey "^x^x" hist-complete
 
-ZSHDIR=$HOME/.zsh
-HISTFILE=$HOME/.zsh_history
-HISTSIZE=5000
-SAVEHIST=10000
-
 DIRSTACKSIZE=${DIRSTACKSIZE:-20}
 DIRSTACKFILE=${DIRSTACKFILE:-${HOME}/.zdirs}
 if [[ -f ${DIRSTACKFILE} ]] && [[ ${#dirstack[*]} -eq 0 ]] ; then
@@ -479,7 +483,6 @@ PS2="\`%_» "
 PS3="?# "
 PS4="+%N:%i:%_» "
 
-# Miscelaneus info like git.
 function prompt_misc() {
     local tmp ttmp ttl ttr
     tmp=$(git branch 2> /dev/null)
@@ -494,41 +497,29 @@ function prompt_misc() {
         ttl=$(git rev-list master | wc -l)
         ttr=$(git rev-list origin/master | wc -l)
         if [[ $ttl > $ttr ]]; then
-            tmp+="↑" #▲
+            tmp+="↑"
         elif [[ $ttl < $ttr ]]; then
-            tmp+="↓" #▼
+            tmp+="↓"
         fi
         print "%{$fge%} $tmp"
     fi
 }
 function prompt_left() {
-    local tmp
     if [[ $KEYMAP = vicmd ]]; then
-        tmp="%{$bg3%} :"
+        print "%{$bg3%} : %{$vend%} "
     else
-        tmp="%{$bgp%} %(?.%{$fgf%}%#.%{$fgb%}ε)"
+        print "%{$bgp%} %(?.%{$fgf%}%#.%{$fgb%}ε) %{$vend%} "
     fi
-    tmp+=" %{$vend%} "
-    print "$tmp"
 }
 function prompt_right() { 
-    local tmp
+    local t
     if [[ -n ${VIRTUAL_ENV} ]]; then
-        tmp="${VIRTUAL_ENV:t}"
+        t="${VIRTUAL_ENV:t}"
     else
-        tmp="∞"
+        t="∞"
     fi
-    tmp="%(?.%{$fg2%}$tmp.%{$fg9%}%?) "
-    tmp+="%{$fgu%}%n@%m%{$vend%}:%{$fgc%}%20<«<%~%<<$(prompt_misc)%{$vend%}"
-    print "$tmp"
-}
-
-function ESC_print() {
-    info_print $'\ek' $'\e\\' "$@"
-}
-
-function set_title() {
-    info_print  $'\e]0;' $'\a' "$@"
+    t="%(?.%{$fg2%}$t.%{$fg9%}%?) "
+    print "$t%{$fgu%}%n@%m%{$vend%}:%{$fgc%}%20<«<%~%<<$(prompt_misc)%{$vend%}"
 }
 
 function info_print() {
@@ -539,6 +530,18 @@ function info_print() {
     printf "%s" ${esc_begin}
     printf "%s" "$*"
     printf "%s" "${esc_end}"
+}
+
+function ESC_print() {
+    info_print $'\ek' $'\e\\' "$@"
+}
+
+function set_title() {
+    case $TERM in
+    (xterm*|rxvt*)
+        info_print  $'\e]0;' $'\a' "$@"
+        ;;
+    esac
 }
 
 zle-keymap-select() {
@@ -560,52 +563,15 @@ precmd() {
     #ZLE_RPROMPT_INDENT=0 # NO USAR, buggy quita espacio al inicio
     RPROMPT="$(prompt_right)"
     PROMPT="$(prompt_left)"
-    case $TERM in
-    (xterm*|rxvt*)
-        set_title ${(%):-"%n@%m %~"}
-        ;;
-    esac
+    set_title ${(%):-"%n@%m %~"}
 }
 
 preexec() {
-    if [[ -n "$HOSTNAME" ]] && [[ "$HOSTNAME" != $(hostname) ]] ; then
-        NAME="@$HOSTNAME"
-    fi
-    case $TERM in
-    (xterm*|rxvt*)
-        set_title "${(%):-"%n@%m"}" "$1"
-        ;;
-    esac
+#    if [[ -n "$HOSTNAME" ]] && [[ "$HOSTNAME" != $(hostname) ]] ; then
+#        NAME="@$HOSTNAME"
+#    fi
+    set_title "${(%):-"%n@%m"}" "$1"
 }
-
-export COLORTERM="yes"
-alias diff="diff --color=auto "
-alias grep="grep --color=auto "
-alias ls="ls -b -CF --color=auto --group-directories-first "
-alias la="ls -la "
-alias ll="ls -l "
-alias lh="ls -hAl "
-alias l="ls -lF "
-alias mdstat="cat /proc/mdstat"
-alias ...="cd ../../"
-alias da="du -sch"
-alias j="jobs -l"
-alias dir="ls -lSrah"
-alias lad="ls -d .*(/)"
-alias lsa="ls -a .*(.)"
-alias lss="ls -l *(s,S,t)"
-alias lsl="ls -l *(@)"
-alias lsx="ls -l *(*)"
-alias lsw="ls -ld *(R,W,X.^ND/)"
-alias lsbig="ls -flh *(.OL[1,10])"
-alias lsd="ls -d *(/)"
-alias lse="ls -d *(/^F)"
-alias lsnew="ls -rtlh *(D.om[1,10])"
-alias lsold="ls -rtlh *(D.Om[1,10])"
-alias lssmall="ls -Srl *(.oL[1,10])"
-alias lsnewdir="ls -rthdl *(/om[1,10]) .*(D/om[1,10])"
-alias lsolddir="ls -rthdl *(/Om[1,10]) .*(D/Om[1,10])"
-alias rmcdir="cd ..; rmdir $OLDPWD || cd $OLDPWD"
 
 # Use hard limits, except for a smaller stack and no core dumps
 unlimit
@@ -615,8 +581,7 @@ limit -s
 zstyle ":completion:*:approximate:"    max-errors \
     "reply=( $((($#PREFIX+$#SUFFIX)/3 )) numeric )"
 zstyle ":completion:*:correct:*"       insert-unambiguous true
-zstyle ":completion:*:corrections"     format \
-    "%{$fg9%}%d, errors: %e%{$vend%}"
+zstyle ":completion:*:corrections"     format "%{$fg9%}%d, errors: %e%{$vend%}"
 zstyle ":completion:*:correct:*"       original true
 zstyle ":completion:*:default"         list-colors ${(s.:.)LS_COLORS}
 zstyle ":completion:*:descriptions"    format "%{$fgb%}%d%{$vend%}"
@@ -630,15 +595,13 @@ zstyle ":completion:*:matches"         group "yes"
 zstyle ":completion:*"                 group-name ""
 zstyle ":completion:*"                 menu select=5
 zstyle ":completion:*:messages"        format "%{$fgd%}%d%{$vend%}"
-zstyle ":completion:*:options"         auto-description \
-    "%{$fga%}%d%{$vend%}"
+zstyle ":completion:*:options"         auto-description "%{$fga%}%d%{$vend%}"
 zstyle ":completion:*:options"         description "yes"
 zstyle ":completion:*:processes"       command "ps -au$USER"
 zstyle ":completion:*:*:-subscript-:*" tag-order indexes parameters
 zstyle ":completion:*"                 verbose true
 zstyle ":completion:*:-command-:*:"    verbose false
-zstyle ":completion:*:warnings"        format \
-    "%{$fg9%}No matches:%{$vend%} %d"
+zstyle ":completion:*:warnings"        format "%{$fg9%}No matches:%{$vend%} %d"
 zstyle ":completion:*:*:zcompile:*"    ignored-patterns "(*~|*.zwc)"
 zstyle ":completion:correct:"          prompt "correct to: %e"
 zstyle ":completion::(^approximate*):*:functions" ignored-patterns "_*"
@@ -671,207 +634,6 @@ fi'
 [[ -d $ZSHDIR/cache ]] && zstyle ":completion:*" use-cache yes && \
     zstyle ":completion::complete:*" cache-path $ZSHDIR/cache/
 
-nt() {
-    if [[ -n $1 ]] ; then
-        local NTREF=${~1}
-    fi
-    [[ $REPLY -nt $NTREF ]]
-}
-
-sll() {
-    [[ -z "$1" ]] && printf "Usage: %s <file(s)>\n" "$0" && return 1
-    for file in "$@" ; do
-        while [[ -h "$file" ]] ; do
-            ls -l $file
-            file=$(readlink "$file")
-        done
-    done
-}
-
-cl() {
-    emulate -L zsh
-    cd $1 && ls -a
-}
-
-cd() {
-    if (( ${#argv} == 1 )) && [[ -f ${1} ]]; then
-        [[ ! -e ${1:h} ]] && return 1
-        print "Correcting ${1} to ${1:h}"
-        builtin cd ${1:h}
-    else
-        builtin cd "$@"
-    fi
-}
-
-mkcd() {
-    if (( ARGC != 1 )); then
-        printf "usage: mkcd <new-directory>\n"
-        return 1;
-    fi
-    if [[ ! -d "$1" ]]; then
-        command mkdir -p "$1"
-    else
-        printf "'%s' already exists: cd-ing.\n" "$1"
-    fi
-    builtin cd "$1"
-}
-
-cdt() {
-    local t
-    t=$(mktemp -d)
-    echo "$t"
-    builtin cd "$t"
-}
-
-inplaceMkDirs() {
-    local PATHTOMKDIR
-    if ((REGION_ACTIVE==1)); then
-        local F=$MARK T=$CURSOR
-        if [[ $F -gt $T ]]; then
-            F=${CURSOR}
-            T=${MARK}
-        fi
-        PATHTOMKDIR=${BUFFER[F+1,T]%%[[:space:]]##}
-        PATHTOMKDIR=${PATHTOMKDIR##[[:space:]]##}
-    else
-        local bufwords iword
-        bufwords=(${(z)LBUFFER})
-        iword=${#bufwords}
-        bufwords=(${(z)BUFFER})
-        PATHTOMKDIR="${(Q)bufwords[iword]}"
-    fi
-    [[ -z "${PATHTOMKDIR}" ]] && return 1
-    PATHTOMKDIR=${~PATHTOMKDIR}
-    if [[ -e "${PATHTOMKDIR}" ]]; then
-        zle -M " path already exists, doing nothing"
-    else
-        zle -M "$(mkdir -p -v "${PATHTOMKDIR}")"
-        zle end-of-line
-    fi
-}
-zle -N inplaceMkDirs && bindkey "^xM" inplaceMkDirs
-
-accessed() {
-    emulate -L zsh
-    print -l -- *(a-${1:-1})
-}
-
-changed() {
-    emulate -L zsh
-    print -l -- *(c-${1:-1})
-}
-
-modified() {
-    emulate -L zsh
-    print -l -- *(m-${1:-1})
-}
-
-testcolors() {
-    local t1 t2 i j
-    t1="0aα"
-    t2="1Bß"
-    printf "        "
-    for i in {0..7}; do printf "  4%d 10%d" $i $i; done
-    for i in {0..7}; do
-        printf "\n3%d \e[3%dm%s%s \e[0m" $i $i $t1 $t2
-        for j in {0..7}; do
-            printf "\e[4%d;3%dm %s\e[10%d;3%dm%s \e[0m" $j $i $t1 $j $i $t2
-        done
-        printf "\n9%d \e[9%dm%s%s \e[0m" $i $i $t1 $t2
-        for j in {0..7}; do
-            printf "\e[4%d;9%dm %s\e[10%d;9%dm%s \e[0m" $j $i $t1 $j $i $t2
-        done
-    done
-    printf "\n"
-}
-
-screenrec() {
-    if (( ARGC == 0 )); then
-        printf "usage: screenrec <filename> [video dimensions [offset]]\n"
-        return 1;
-    fi
-    l_fn=$1
-    if (( ARGC == 1 )); then
-        l_s="1920x1080"
-        l_os="0,0"
-    else
-        l_s=$2
-        if (( ARGC == 2)); then
-            l_os="0,0"
-        else
-            l_os=$3
-        fi
-    fi
-    ffmpeg -video_size $l_s -f x11grab -i $DISPLAY+$l_os -f pulse -i default $l_fn
-}
-
-vexe() {
-    g++ -std=c++17 $1 && ./a.out
-}
-
-
-source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZSHDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
-if [[ $TERM == "xterm-256color" ]]; then
-    ZSH_HIGHLIGHT_STYLES[default]="none"
-    ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=9"
-    ZSH_HIGHLIGHT_STYLES[reserved-word]="fg=11"
-    ZSH_HIGHLIGHT_STYLES[alias]="fg=10"
-    ZSH_HIGHLIGHT_STYLES[builtin]="fg=10"
-    ZSH_HIGHLIGHT_STYLES[function]="fg=10"
-    ZSH_HIGHLIGHT_STYLES[command]="fg=10"
-    ZSH_HIGHLIGHT_STYLES[precommand]="fg=10,underline"
-    ZSH_HIGHLIGHT_STYLES[commandseparator]="none"
-    ZSH_HIGHLIGHT_STYLES[hashed-command]="fg=10"
-    ZSH_HIGHLIGHT_STYLES[path]="fg=6"
-    ZSH_HIGHLIGHT_STYLES[globbing]="fg=6"
-    ZSH_HIGHLIGHT_STYLES[history-expansion]="fg=6"
-    ZSH_HIGHLIGHT_STYLES[single-hyphen-option]="none"
-    ZSH_HIGHLIGHT_STYLES[double-hyphen-option]="none"
-    ZSH_HIGHLIGHT_STYLES[back-quoted-argument]="none"
-    ZSH_HIGHLIGHT_STYLES[single-quoted-argument]="fg=14"
-    ZSH_HIGHLIGHT_STYLES[double-quoted-argument]="fg=14"
-    ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]="fg=9"
-    ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]="fg=14"
-    ZSH_HIGHLIGHT_STYLES[assign]="none"
-
-    ZSH_HIGHLIGHT_STYLES[bracket-error]="fg=9,bold"
-    ZSH_HIGHLIGHT_STYLES[bracket-level-1]="fg=6"
-    ZSH_HIGHLIGHT_STYLES[bracket-level-2]="fg=10"
-    ZSH_HIGHLIGHT_STYLES[bracket-level-3]="fg=13"
-    ZSH_HIGHLIGHT_STYLES[bracket-level-4]="fg=11"
-    ZSH_HIGHLIGHT_STYLES[bracket-level-5]="fg=14"
-    ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]="standout"
-else
-    ZSH_HIGHLIGHT_STYLES[default]="none"
-    ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=black,bold"
-    ZSH_HIGHLIGHT_STYLES[reserved-word]="fg=yellow,bold"
-    ZSH_HIGHLIGHT_STYLES[alias]="fg=green,bold"
-    ZSH_HIGHLIGHT_STYLES[builtin]="fg=green,bold"
-    ZSH_HIGHLIGHT_STYLES[function]="fg=green,bold"
-    ZSH_HIGHLIGHT_STYLES[command]="fg=green,bold"
-    ZSH_HIGHLIGHT_STYLES[precommand]="fg=green,bold"
-    ZSH_HIGHLIGHT_STYLES[commandseparator]="none"
-    ZSH_HIGHLIGHT_STYLES[hashed-command]="fg=green,bold"
-    ZSH_HIGHLIGHT_STYLES[path]="fg=blue,bold"
-    ZSH_HIGHLIGHT_STYLES[globbing]="fg=blue,bold"
-    ZSH_HIGHLIGHT_STYLES[history-expansion]="fg=blue,bold"
-    ZSH_HIGHLIGHT_STYLES[single-hyphen-option]="none"
-    ZSH_HIGHLIGHT_STYLES[double-hyphen-option]="none"
-    ZSH_HIGHLIGHT_STYLES[back-quoted-argument]="none"
-    ZSH_HIGHLIGHT_STYLES[single-quoted-argument]="fg=cyan,bold"
-    ZSH_HIGHLIGHT_STYLES[double-quoted-argument]="fg=cyan,bold"
-    ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]="fg=red,bold"
-    ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]="fg=cyan,bold"
-    ZSH_HIGHLIGHT_STYLES[assign]="none"
-
-    ZSH_HIGHLIGHT_STYLES[bracket-error]="fg=black,bold"
-    ZSH_HIGHLIGHT_STYLES[bracket-level-1]="fg=blue,bold"
-    ZSH_HIGHLIGHT_STYLES[bracket-level-2]="fg=green,bold"
-    ZSH_HIGHLIGHT_STYLES[bracket-level-3]="fg=magenta,bold"
-    ZSH_HIGHLIGHT_STYLES[bracket-level-4]="fg=yellow,bold"
-    ZSH_HIGHLIGHT_STYLES[bracket-level-5]="fg=cyan,bold"
-    ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]="standout"
-fi
-# TODO: define some pattern to highlight.
 
