@@ -5,9 +5,9 @@ linkall() {
     local archome
     local lshare
     local here
-    home="/home/martin"
-    githome="/home/martin/git"
-    archome="/home/martin/git/arch-conf/home/martin"
+    home="/home/lmcs"
+    githome="/home/lmcs/git"
+    archome="/home/lmcs/git/arch-conf/home/lmcs"
     lshare=".local/share"
 
     if (( EUID != 0 )); then
