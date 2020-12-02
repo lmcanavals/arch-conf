@@ -1,9 +1,9 @@
 [core]
 	editor = nvim
-	excludesfile = /home/martin/.gitignore_global
+	excludesfile = /home/lmcs/.gitignore_global
 [user]
-	name = Luis Martín Canaval Sánchez
-	email = uno@canaval.org
+	name = Luis M. Canaval S.
+	email = public02@canaval.org
 [color]
 	ui = true
 	status = auto

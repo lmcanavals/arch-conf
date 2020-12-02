@@ -2,7 +2,7 @@
 # Special chars between https://en.wikipedia.org/wiki/Code_page_437
 
 ZSHDIR=$HOME/.config/zsh
-HISTFILE=$ZSHDIR/histfile
+HISTFILE=~/.zsh_histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
