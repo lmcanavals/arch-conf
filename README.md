@@ -29,7 +29,7 @@ the format where xx is the size.
  SSD |   30G | ``/``                    | ext4        | 8300
  SSD | >100G | ``/home``                | ext4        | 8300
  HDD |       | ``/var``                 | btrfs       | var subvol
- HDD |       | ``/home/martin/archive`` | btrfs       | Archive subvol
+ HDD |       | ``/home/lmcs/archive`` | btrfs       | Archive subvol
 
 Swap is a file, instead of a partition, so it can be resized easily. It should
 be contained in the SSD. But should only be created or activated when there are
@@ -48,12 +48,12 @@ Format partitions, for example:
 Mount everything te /mnt:
 
     mount -t ext4 /dev/sda3 /mnt
-    mkdir -p /mnt/{boot/efi,home/martin/Archive/,var}
+    mkdir -p /mnt/{boot/efi,home/lmcs/Archive/,var}
     mount -t ext4 /dev/sda2 /mnt/boot
     mount -t vfat /dev/sda1 /mnt/boot/efi
     mount -t ext4 /dev/sda4 /mnt/home
     mount -o subvol=var /dev/sdb /mnt/var
-    mount -o subvol=Archive /dev/sdb /mnt/home/martin/Archive
+    mount -o subvol=Archive /dev/sdb /mnt/home/lmcs/Archive
 
 Installing and setting the base system
 --------------------------------------
@@ -68,12 +68,12 @@ Installing grub and zsh:
     arch-chroot /mnt pacman -S zsh neovim git sudo networkmanager
     arch-chroot /mnt pacman -S powertop tlp # for better power management
 
-Create the user ``martin``:
+Create the user ``lmcs``:
 
-    arch-chroot /mnt useradd -m -s /bin/zsh martin
-    arch-chroot /mnt chfn martin
-    arch-chroot /mnt passwd martin
-    arch-chroot /mnt chown -R martin:users /home/martin/Archive
+    arch-chroot /mnt useradd -m -s /bin/zsh lmcs
+    arch-chroot /mnt chfn lmcs
+    arch-chroot /mnt passwd lmcs
+    arch-chroot /mnt chown -R lmcs:users /home/lmcs/Archive
 
 Create swapfile:
 
@@ -108,7 +108,7 @@ Set locales, uncomment en_DK.UTF8 en_US.UTF8 es_PE.UTF8 on ``/etc/locale.gen``:
 Set basic configuration files:
 
     ln -s /usr/share/zoneinfo/America/Lima /etc/localtime
-    cd /home/martin/Archive/git/arch-conf
+    cd /home/lmcs/Archive/git/arch-conf
     cp etc/hostname /etc/
     cp etc/locale.conf /etc/
     cp etc/vconsole.conf /etc/
@@ -123,7 +123,7 @@ arch-conf.git which has the hook to support hibernation:
 
 Configure ``sudoers`` with ``visudo``, add:
 
-    martin stella= /usr/bin/pacman
+    lmcs stella= /usr/bin/pacman
 
 Download and install yay as user:
 
@@ -156,7 +156,7 @@ Set root password, leave chroot env, unmount and reboot:
 After the first reboot
 ----------------------
 
-Start console session as ``martin``
+Start console session as ``lmcs``
 
 Sync, update and install the rest of the good stuff:
 
@@ -251,7 +251,7 @@ Tweaks and hacks
 
 TTY was taken care with the custom keymap, now for X:
 
-    cp git/.../home/martin/.Xmodmap ~/.Xmodmap
+    cp git/.../home/lmcs/.Xmodmap ~/.Xmodmap
 
 **User home directories**
 
@@ -268,7 +268,7 @@ edit the file ``.config/user-dirs.dirs`` as needed.
 Install preferably on ``~/Archive/usr``, rename from ``jdk-x.x.x`` to ``java``
 then as root:
 
-    ln -s /home/martin/Archive/usr/java /opt/java
+    ln -s /home/lmcs/Archive/usr/java /opt/java
 
 **Android-sdk**
 
