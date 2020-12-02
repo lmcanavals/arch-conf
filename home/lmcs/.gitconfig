@@ -2,7 +2,7 @@
 	editor = nvim
 	excludesfile = /home/lmcs/.gitignore_global
 [user]
-	name = Luis M. Canaval S.
+	name = Luis M Canaval S
 	email = public02@canaval.org
 [color]
 	ui = true
