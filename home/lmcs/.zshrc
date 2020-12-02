@@ -495,7 +495,7 @@ function prompt_misc() {
             tmp+="*"
         fi
         ttl=$(git rev-list master | wc -l)
-        ttr=$(git rev-list origin/master | wc -l)
+        ttr=$(git rev-list origin/master 2>/dev/null | wc -l)
         if [[ $ttl > $ttr ]]; then
             tmp+="↑"
         elif [[ $ttl < $ttr ]]; then
