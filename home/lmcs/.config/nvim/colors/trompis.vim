@@ -36,16 +36,15 @@ let s:c = [['#000000',   0          ],
          \ ['reverse',   'reverse'  ],
          \ ['underline', 'underline']]
 
-call s:setHi('Normal',       -1,  16, 16)
-"call s:setHi('Normal',           -1,  0, 16) " __Normal__
+call s:setHi('Normal',          -1, 16, 16) " __Normal__
 call s:setHi('Underlined',      12, -1, 19) " __Underlined__
 call s:setHi('NonText',          8, -1, 16) " __NonText__ __EndOfBuffer__
 call s:setHi('Special',          9, -1, -1) " __Special__ __SpecialChar__ __SpecialComment__
 call s:setHi('SpecialKey',       8, -1, -1) " __SpecialKey__
-call s:setHi('ColorColumn',      1,  7, -1) " __ColorColumn__
 call s:setHi('CursorColumn',    -1, 16, 16) " __CursorColumn__
 call s:setHi('CursorLine',      -1, 16, 16) " __CursorLine__
 call s:setHi('CursorLineNr',     9, -1, 16) " __CursorLineNr__
+call s:setHi('ColorColumn',      8, 16, 19) " __ColorColumn__
 call s:setHi('LineNr',           8, 16, -1) " __LineNr__
 call s:setHi('FoldColumn',      12,  4, -1) " __FoldColumn__
 call s:setHi('Folded',          12,  4, -1) " __Folded__

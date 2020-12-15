@@ -2,7 +2,7 @@
 # Special chars between https://en.wikipedia.org/wiki/Code_page_437
 
 ZSHDIR=$HOME/.config/zsh
-HISTFILE=~/.zsh_histfile
+HISTFILE=$ZSHDIR/histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
@@ -297,7 +297,7 @@ function accept-line() {
         return
     fi
 
-    # If we got this far, the commandline only contains whitespace, or is empty.
+    # If we got this far, the commandline only contains whitespace, or is empty
     alcontext="empty"
     Accept-Line-HandleContext
 }
@@ -485,7 +485,7 @@ PS4="+%N:%i:%_» "
 
 function prompt_misc() {
     local tmp ttmp ttl ttr
-    tmp=$(git branch 2> /dev/null)
+    tmp=$(git branch 2>/dev/null | grep '*')
     if [[ -n $tmp ]]; then
         tmp=${tmp:2}
         ttmp=$(git status)
