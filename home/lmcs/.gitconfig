@@ -17,3 +17,5 @@
 	updated = 12
 [push]
 	default = simple
+[credential]
+	helper = /usr/lib/git-core/git-credential-libsecret
