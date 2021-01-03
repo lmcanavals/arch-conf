@@ -9,13 +9,15 @@ safeupdatemirrors() {
         cp $base/mirrorlist $tempfile
         rankmirrors -n 6 $base/mirrorlist.pacnew > $base/mirrorlist
         if [ $? -eq 0 ]; then
-           rm $base/mirrorlist.pacnew
+            rm $base/mirrorlist.pacnew
             echo "Mirror list updated"
         else
             cp $tempfile $base/mirrorlist
             echo "Failed to update mirror list"
         fi
         rm $tempfile
+    else
+        echo "There's no mirrorlist.pacnew. Doing nothing."
     fi
 }
 safeupdatemirrors
