@@ -182,7 +182,7 @@ GUI base:
 
 Fonts, utilities, etc:
 
-    yay -S ttf-liberation gnu-free-fonts noto-fonts
+    yay -S ttf-liberation gnu-free-fonts noto-fonts noto-fonts-emoji
     yay -S ttf-fira-code ttf-fira-mono ttf-fira-sans
     yay -S adobe-source-code-pro-fonts # if not installed already
     yay -S adobe-source-sans-pro-fonts
