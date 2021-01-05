@@ -39,6 +39,7 @@ linkall() {
     ln -sf $archome/.profile ~/
     ln -sf $archome/.config/fontconfig ~/.config/
     ln -sf $archome/.config/nvim ~/.config/
+    ln -sf $archome/.config/redshift.conf ~/.config/
     #ln -sf $githome/zsh-syntax-highlighting ~/.zsh/plugins/
     #ln -sf $archome/.vim ~/
     #ln -sf $archome/.vimrc ~/
