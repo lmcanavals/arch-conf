@@ -3,7 +3,7 @@ safeupdatemirrors() {
     local tempfile
     base="/etc/pacman.d"
     tempfile="/tmp/supertemomirror987654"
-    if [ -f $base/etc/pacman.d/mirrorlist.pacnew ]; then
+    if [ -f /etc/pacman.d/mirrorlist.pacnew ]; then
         sed '/#Server/ s|#|| ' -i $base/mirrorlist.pacnew
         sed '/^#.*$/d' -i $base/mirrorlist.pacnew
         cp $base/mirrorlist $tempfile

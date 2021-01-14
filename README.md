@@ -76,6 +76,7 @@ Installing basic packages:
         git \
         sudo \
         networkmanager \
+        pacman-contrib \
         powertop \
         tlp # for better power management
 
