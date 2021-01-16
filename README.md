@@ -30,9 +30,9 @@ the format where xx is the size.
  Dev |  Size | Mount point              | File system | gdisk type code
 :---:|------:|--------------------------|:-----------:|-----------------
  SSD |  512M | EFI System Parition      | fat32       | EF00
- SSD |       | `/`                    | ext4        | 8300
- HDD |       | `/var`                 | btrfs       | var subvol
- HDD |       | `/home/lmcs/archive`   | btrfs       | Archive subvol
+ SSD |       | `/`                      | ext4        | 8300
+ HDD |       | `/var`                   | btrfs       | var subvol
+ HDD |       | `/home/lmcs/archive`     | btrfs       | Archive subvol
 
 Swap is a file, instead of a partition, so it can be resized easily. It should
 be contained in the SSD. But should only be created or activated when there are
@@ -111,7 +111,8 @@ Set zsh as the default shell for root:
     chsh -s $(which zsh)
     zsh
 
-Set locales, uncomment en_DK.UTF8 en_US.UTF8 es_PE.UTF8 on `/etc/locale.gen`:
+Set locales, uncomment `en_DK.UTF8` `en_US.UTF8` `es_PE.UTF8` on
+`/etc/locale.gen`:
 
     sed '/^#en_DK\.UTF-8/ s|#|| ' -i /etc/locale.gen
     sed '/^#en_US\.UTF-8/ s|#|| ' -i /etc/locale.gen
@@ -162,8 +163,6 @@ parameters needed for hibernation support:
         --bootloader-id="Arch" --recheck --debug
     grub-mkconfig -o /boot/grub/grub.cfg
 
-Enabling Intel Microcode updates is done automatically now.
-
 Set root password, leave chroot env, unmount and reboot:
 
     passwd
@@ -180,7 +179,7 @@ Sync, update and install the rest of the good stuff:
 GUI base:
 
     yay -S xfce4 xfce4-goodies pulseaudio sox lightdm lightdm-gtk-greeter
-    yay -S slock accountsservice xorg-xmodmap xcape xsel
+    yay -S accountsservice xorg-xmodmap xcape xsel xorg-server
 
 Fonts, utilities, etc:
 
@@ -197,18 +196,17 @@ Fonts, utilities, etc:
 
 Optional:
 
-    yay -S dropbox thunar-dropbox
-    yay -S steam openssh vlc
-    yay -S xf86-input-synaptics # duh
-    yay -S xf86-video-intel libva-intel-driver
-    yay -S cdrkit # mkisofs, wodim and stuff
-    yay -S glew glfw glm # for the opengl experience
+* dropbox thunar-dropbox
+* steam openssh vlc
+* xf86-input-synaptics # duh
+* xf86-video-intel libva-intel-driver
+* cdrkit # mkisofs, wodim and stuff
+* glew glfw glm # for the opengl experience
 
 Not used anymore (maybe, some come as dependencies):
 
-    yay -S wqy-microhei wqy-zenhei wqy-bitmapsong-beta
-    yay -S ttf-wqy-microhei-ibx ttf-roboto-ibx ttf-dejavu
-
+* wqy-microhei wqy-zenhei wqy-bitmapsong-beta
+* ttf-wqy-microhei-ibx ttf-roboto-ibx ttf-dejavu
 * haveged # random number generator, can't remember what for
 * livestreamer # to stream in VLC from twitch.tv and others
 * mupen64plus # nintendo 64 emulator
@@ -220,10 +218,18 @@ Not used anymore (maybe, some come as dependencies):
 Important
 ---------
 
-To change avatar on lightdm, xfce4 rotating wallpapers overwrites
-`/var/lib/AccountsService/users/lmcs`, be aware this interferes with avatar
-setting. In any case
-[Link](https://wiki.archlinux.org/index.php/LightDM#The_AccountsService_way)
+### As user
+
+Make redshift-gtk start on login:
+
+    systemctl --user start redshift-gtk.service
+
+### As super user
+
+Avatar on lightdm follow instructions on this 
+[link](https://wiki.archlinux.org/index.php/LightDM#The_AccountsService_way)
+(xfce4 rotating wallpapers overwrites `/var/lib/AccountsService/users/lmcs`,
+messing up the avatar setting)
 
 To change base configuration files:
 
@@ -234,12 +240,10 @@ To change base configuration files:
 Set ntp time sync and enabling services:
 
     systemctl disable remote-fs.target
-    timedatectl set-ntp 1 # this enables the ntpd daemon
-    ll /sys/class/net/
+    timedatectl set-ntp 1
     systemctl enable NetworkManager.service
     systemctl enable tlp
     systemctl enable haveged # entrophy daemon for cryptographic awesome.
-    # systemctl enable dhcpcd@enp0s25.service
 
 **Updating mirrorlists**
 
