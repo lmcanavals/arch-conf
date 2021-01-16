@@ -6,22 +6,23 @@ Starting from installation media
     loadkeys us             # in case we need to change the keyboard settings
     setfont LatArCyrHeb-16  # better fonts
 
-Umask for group permissions http://unix.stackexchange.com/questions/75972/
+Umask for group permissions
+[Link here](http://unix.stackexchange.com/questions/75972/)
 
 Partitions
 ----------
 
-Check multiboot information about having efi and mbr boot for usb drives.
+Check multiboot information about having efi and mbr boot for usb drives
+[Link here](https://wiki.archlinux.org/index.php/Multiboot_USB_drive)
 
-https://wiki.archlinux.org/index.php/Multiboot_USB_drive
-
-For regular installations: https://wiki.archlinux.org/index.php/Partitioning
+For regular installations:
+[Check this](https://wiki.archlinux.org/index.php/Partitioning)
 
 Using **GPT fdisk** to create partitions:
 
     gdisk /dev/sda
 
-Inside gdisk, ``o`` creates a GPT, ``n`` to create new partitions ``+xxG`` is
+Inside gdisk, `o` creates a GPT, `n` to create new partitions `+xxG` is
 the format where xx is the size.
 
 **BIOS Partition table**
@@ -29,9 +30,9 @@ the format where xx is the size.
  Dev |  Size | Mount point              | File system | gdisk type code
 :---:|------:|--------------------------|:-----------:|-----------------
  SSD |  512M | EFI System Parition      | fat32       | EF00
- SSD |       | ``/``                    | ext4        | 8300
- HDD |       | ``/var``                 | btrfs       | var subvol
- HDD |       | ``/home/lmcs/archive``   | btrfs       | Archive subvol
+ SSD |       | `/`                    | ext4        | 8300
+ HDD |       | `/var`                 | btrfs       | var subvol
+ HDD |       | `/home/lmcs/archive`   | btrfs       | Archive subvol
 
 Swap is a file, instead of a partition, so it can be resized easily. It should
 be contained in the SSD. But should only be created or activated when there are
@@ -80,7 +81,7 @@ Installing basic packages:
         powertop \
         tlp # for better power management
 
-Create the user ``lmcs``:
+Create the user `lmcs`:
 
     useradd -m -s /bin/zsh lmcs
     chfn lmcs
@@ -94,12 +95,12 @@ Create swapfile:
     mkswap /swapfile
     swapon /swapfile
 
-Generate ``fstab``:
+Generate `fstab`:
 
     exit
     genfstab -pU /mnt >> /mnt/etc/fstab
 
-Afterwards change to ``defaults,noatime,discard`` all ssd partitions.
+Afterwards change to `defaults,noatime,discard` all ssd partitions.
 
 Copy files and Chroot into the fresh installation:
 
@@ -110,7 +111,7 @@ Set zsh as the default shell for root:
     chsh -s $(which zsh)
     zsh
 
-Set locales, uncomment en_DK.UTF8 en_US.UTF8 es_PE.UTF8 on ``/etc/locale.gen``:
+Set locales, uncomment en_DK.UTF8 en_US.UTF8 es_PE.UTF8 on `/etc/locale.gen`:
 
     sed '/^#en_DK\.UTF-8/ s|#|| ' -i /etc/locale.gen
     sed '/^#en_US\.UTF-8/ s|#|| ' -i /etc/locale.gen
@@ -133,12 +134,12 @@ Set basic configuration files:
     cp etc/mkinitcpio.conf /etc/
     cp etc/default/grub /etc/default/
 
-Building the kernel image, don't forget copy the ``mkinitcpio.conf`` from
+Building the kernel image, don't forget copy the `mkinitcpio.conf` from
 arch-conf.git which has the hook to support hibernation:
 
     mkinitcpio -p linux
 
-Configure ``sudoers`` with ``visudo``, add:
+Configure `sudoers` with `visudo`, add:
 
     lmcs stella= /usr/bin/pacman
 
@@ -154,7 +155,7 @@ Then as root or with sudo:
 
     pacman -U yay<TAB>
 
-Configure grub, copy the ``/etc/default/grub`` from arch-conf.git which adds the
+Configure grub, copy the `/etc/default/grub` from arch-conf.git which adds the
 parameters needed for hibernation support:
 
     grub-install --target=x86_64-efi --efi-directory=/boot/efi \
@@ -170,7 +171,7 @@ Set root password, leave chroot env, unmount and reboot:
 After the first reboot
 ----------------------
 
-Start console session as ``lmcs``
+Start console session as `lmcs`
 
 Sync, update and install the rest of the good stuff:
 
@@ -220,9 +221,9 @@ Important
 ---------
 
 To change avatar on lightdm, xfce4 rotating wallpapers overwrites
-`/var/lib/AccountsService/users/lmcs`, be aware this interferes with avatar:
-
-    https://wiki.archlinux.org/index.php/LightDM#The_AccountsService_way
+`/var/lib/AccountsService/users/lmcs`, be aware this interferes with avatar
+setting. In any case
+[Link](https://wiki.archlinux.org/index.php/LightDM#The_AccountsService_way)
 
 To change base configuration files:
 
@@ -242,7 +243,7 @@ Set ntp time sync and enabling services:
 
 **Updating mirrorlists**
 
-When Pacman mirrorlist is updated, re-generate ``/etc/pacmand.d/mirrorlist``:
+When Pacman mirrorlist is updated, re-generate `/etc/pacmand.d/mirrorlist`:
 
     zsh /home/lmcs/git/arch-conf/home/lmcs/Util/updatemirrors.sh
 
@@ -262,8 +263,8 @@ TTY was taken care with the custom keymap, now for X:
 
 **User home directories**
 
-Create the needed directoties, make sure ``xdg-user-dirs`` is installed and
-edit the file ``.config/user-dirs.dirs`` as needed.
+Create the needed directoties, make sure `xdg-user-dirs` is installed and
+edit the file `.config/user-dirs.dirs` as needed.
 
 **Fix fonts for some applications**:
 
@@ -272,11 +273,11 @@ edit the file ``.config/user-dirs.dirs`` as needed.
 
 **Java**
 
-Install preferably on ``~/Archive/usr``, rename from ``jdk-x.x.x`` to ``java``
+Install preferably on `~/Archive/usr`, rename from `jdk-x.x.x` to `java`
 then as root:
 
     ln -s /home/lmcs/Archive/usr/java /opt/java
 
 **Android-sdk**
 
-Needed libs from ``multilib``:
+Needed libs from `multilib`:
