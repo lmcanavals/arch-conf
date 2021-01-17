@@ -194,6 +194,10 @@ Fonts, utilities, etc:
     yay -S libcanberra-pulse libcanberra-gstreamer
     yay -S libcanberra gnome-keyring haveged
 
+Cloud storage, Goodle Drive, One Drive, etc:
+
+    yay -S rclone fuse2
+
 Optional:
 
 * dropbox thunar-dropbox
@@ -223,6 +227,12 @@ Important
 Make redshift-gtk start on login:
 
     systemctl --user start redshift-gtk.service
+
+Setup remotes with rclone:
+[OneDrive](https://www.linuxuprising.com/2018/07/how-to-mount-onedrive-in-linux-using.html)
+or [OneDrive](https://rclone.org/onedrive/)
+[Google Drive](https://rclone.org/drive/)
+    rclone config
 
 ### As super user
 
