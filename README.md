@@ -231,8 +231,17 @@ Make redshift-gtk start on login:
 Setup remotes with rclone:
 [OneDrive](https://www.linuxuprising.com/2018/07/how-to-mount-onedrive-in-linux-using.html)
 or [OneDrive](https://rclone.org/onedrive/)
-[Google Drive](https://rclone.org/drive/)
+and [Google Drive](https://rclone.org/drive/)
+
     rclone config
+
+Follow instructions then create the corresponding folders, for example:
+
+    mkdir Goodle\ Drive
+
+Then to mount the cloud remote, here `googledrive` is the remote's name:
+
+    rclone --vfs-cache-mode writes mount googledrive: ~/Google\ Drive
 
 ### As super user
 
