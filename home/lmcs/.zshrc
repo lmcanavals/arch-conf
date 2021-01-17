@@ -13,7 +13,7 @@ source $ZSHDIR/aliases
 export EDITOR="nvim"
 export PAGER="less"
 export SHELL="/usr/bin/zsh"
-export BROWSER="google-chrome-stable"
+export BROWSER="firefox"
 export COLORTERM="yes"
 
 # Workaround for vte overriding $TERM
