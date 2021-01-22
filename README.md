@@ -198,8 +198,18 @@ Cloud storage, Goodle Drive, One Drive, etc:
 
     yay -S rclone fuse2
 
+Use a smartphone as a webcam:
+
+    yay -S linux-headers droidcam
+
+Use a wacom tablet:
+
+    yay -S xf86-input-wacom
+
 Optional:
 
+* inkscape # for svg awesome
+* krita # super awesome drawing tool to be used with wacom tablets
 * dropbox thunar-dropbox
 * steam openssh vlc
 * xf86-input-synaptics # duh
@@ -242,6 +252,21 @@ Follow instructions then create the corresponding folders, for example:
 Then to mount the cloud remote, here `googledrive` is the remote's name:
 
     rclone --vfs-cache-mode writes mount googledrive: ~/Google\ Drive
+
+To use **droidcam** you might need to start the adb server, have to try, activate
+usb debugging on the android device developer settings, connect the phone, open
+the app droidcamx (paid one for better resolution), then open droidcam.
+
+When using a wacom tablet with a dual monitor setup, this commands help:
+
+    xsetwacom list devices
+
+Then use the name or id of the `stylus` to set the area on 1 monitor only, for
+most drivers using the monitor's name shown by `xrandr` works, for nvidia 
+`HEAD-0` or `HEAD-1` might work instead, in the next example 10 is the ID of the
+`stylus`. More information can be found on the Archlinux wiki entry for Wacom.
+
+    xsetwacom set 10 MapToOutput HEAD-0
 
 ### As super user
 
