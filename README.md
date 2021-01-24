@@ -181,6 +181,10 @@ GUI base:
     yay -S xfce4 xfce4-goodies pulseaudio sox lightdm lightdm-gtk-greeter
     yay -S accountsservice xorg-xmodmap xcape xsel xorg-server
 
+Graphics nvidia:
+
+    yay -S nvidia nvidia-settings xorg-xrandr
+
 Fonts, utilities, etc:
 
     yay -S ttf-liberation gnu-free-fonts noto-fonts noto-fonts-emoji
@@ -269,6 +273,24 @@ most drivers using the monitor's name shown by `xrandr` works, for nvidia
     xsetwacom set 10 MapToOutput HEAD-0
 
 ### As super user
+
+**Configure nvidia**, copy the following files:
+
+    /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
+    /etc/lightdm/display_setup.sh
+
+Make the `display_setup.sh` executable:
+
+    chmod +x /etc/lightdm/display_setup.sh
+
+Edit `/etc/lightdm/lightdm.conf`, look for `[Seat:*]` then 
+`#display-setup-script=` and change to:
+
+    display-setup-script=/etc/lightdm/display_setup.sh
+
+More info about nvidia can be found
+[here for optimus](ihttps://wiki.archlinux.org/index.php/NVIDIA_Optimus)
+and [here](https://wiki.archlinux.org/index.php/NVIDIA)
 
 Avatar on lightdm follow instructions on this 
 [link](https://wiki.archlinux.org/index.php/LightDM#The_AccountsService_way)
