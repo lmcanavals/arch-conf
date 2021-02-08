@@ -11,4 +11,5 @@ export XDG_CACHE_HOME
 export XDG_DATA_HOME
 export NO_AT_BRIDGE=1
 
+xset -b
 play .local/share/sounds/Enchanted/stereo/desktop-login.ogg &
