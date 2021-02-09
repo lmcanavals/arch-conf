@@ -206,6 +206,10 @@ Use a smartphone as a webcam:
 
     yay -S linux-headers droidcam
 
+Streaming and virtual cam stream:
+
+    yay -S obs-studio obs-v4l2sink v4l2loopback-dkms
+
 Use a wacom tablet:
 
     yay -S xf86-input-wacom
@@ -257,9 +261,13 @@ Then to mount the cloud remote, here `googledrive` is the remote's name:
 
     rclone --vfs-cache-mode writes mount googledrive: ~/Google\ Drive
 
-To use **droidcam** you might need to start the adb server, have to try, activate
-usb debugging on the android device developer settings, connect the phone, open
-the app droidcamx (paid one for better resolution), then open droidcam.
+To use **droidcam** activate usb debugging on the android device developer
+settings, connect the phone, open the app droidcamx (paid version for better
+resolution), then open droidcam. do `adb devices` to start the server. Now you
+have a virtual cam called `Droidcam` anywhere a webcam can be used.
+
+**OBS virtual cam** troubleshooting: you may need to refer to
+[this video](https://youtu.be/f3PWTwLlIKI) for some tips.
 
 When using a wacom tablet with a dual monitor setup, this commands help:
 
